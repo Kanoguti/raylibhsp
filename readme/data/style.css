@@ -1,0 +1,43 @@
+body {
+    font-family: "Helvetica Neue",Arial,"Hiragino Kaku Gothic ProN","Hiragino Sans",Meiryo,sans-serif;
+}
+hr {
+    --set_size: 0.3em;
+    border: var(--set_size) solid rgb(127,127,127);
+    border-radius: var(--set_size);
+}
+ul,ol {
+    padding: 0;
+    margin: 0;
+    padding-left: 1em;
+}
+li {
+    line-height: 2em;
+}
+.mark {
+    background-color: rgba(0,255,0,0.4);
+    text-decoration: underline rgb(255,0,0);
+    text-shadow: 0.1em 0.1em 0.1em rgba(0,0,0,0.5);
+}
+.frame {
+    border: solid 0.3em rgb(0,0,0);
+    margin: 0.5em;
+    padding: 0.5em;
+    border-radius: 1em;
+}
+img.image {
+    display: block;
+    margin: auto;
+    width: 80%; height: auto;
+    background-color: rgb(127,127,127);
+    border: solid 0.3em rgb(127,127,127);
+    border-radius: 0.6em;
+}
+iframe.text {
+    display: block;
+    margin: auto;
+    width: 80%; height: 40vmin;
+    background-color: rgb(255,255,255);
+    border: solid 0.3em rgb(127,127,127);
+    border-radius: 0.6em;
+}

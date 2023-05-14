@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+
+        <link rel="stylesheet" href="../style.css">
+        <script src="../scripts.js"></script>
+        <style>
+            body {
+                padding: 1em;
+            }
+        </style>
+    </head>
+    <body>
+        <span style="text-align: center;">
+            <h1>8.「callfuncex_module.hsp」の使い方</h1>
+        </span>
+        <hr>
+        <div class="frame">
+            <p>
+                「data」フォルダに入っている<span class="mark">「callfuncex_module.hsp」ファイルは、dll内の関数を実行する際の面倒な処理を簡易的に行うための命令が入ったHSP3用モジュール</span>です。<span class="mark">「raylib.hsp」を生成する際にこのモジュールの内容は「raylib.hsp」の中にそのまま埋め込まれます</span>が、このモジュールは単体でも使用できます。<span class="mark">64ビット版でこのモジュールを動作させる場合は、inoviaさんが制作した「HSPInt64.dll」のファイル(「hspint64.as」ファイルと「hspint64.dll」ファイル)が必要</span>です。
+            </p>
+            <div class="frame">
+                「HSPInt64.dll」がダウンロードできるinoviaさんのページ
+                <br>
+                <a href="https://hsp.moe/" target="_blank">https://hsp.moe/</a>
+            </div>
+        </div>
+        <div class="frame">
+            <h2>「callfuncex_module.hsp」の命令・関数リファレンス</h2>
+            <div class="frame">
+                <h2><code>val=callfuncex_d2f(p1)</code></h2>
+                <h3><span class="mark">double型の値からfloat型の値に変換</span>します。</h3>
+                <hr>
+                <h3>
+                    val=変換された値(float型)<br>
+                    p1=double型の値
+                </h3>
+                <hr>
+                <p><span class="mark">double型の値からfloat型の値に変換</span>します。<span class="mark">float型に変換された値はHSP3上では整数型(int)として扱われます</span>。</p>
+            </div>
+            <div class="frame">
+                <h2><code>val=callfuncex_f2d(p1)</code></h2>
+                <h3><span class="mark">float型の値からdouble型の値に変換</span>します。</h3>
+                <hr>
+                <h3>
+                    val=変換された値(double型)<br>
+                    p1=float型の値
+                </h3>
+                <hr>
+                <p><span class="mark">float型の値からdouble型の値に変換</span>します。</p>
+            </div>
+            <div class="frame">
+                <h2><code>callfuncex_func p1,p2[,p3]</code></h2>
+                <h3><span class="mark">dll内の関数を実行するための準備を開始</span>します。</h3>
+                <hr>
+                <h3>
+                    p1=関数名(「#func」命令で設定したHSP3上での関数の名前を、「"(ダブルクォーテーション)」で囲まずに入力してください)<br>
+                    p2=関数の返り値の型<br>
+                    p3=関数の返り値のサイズ
+                </h3>
+                <hr>
+                <p><span class="mark">p1で指定した名前の関数を実行するための準備を開始</span>します。<span class="mark">事前に「#func」命令でdll内の関数を使用できるようにしておいてください</span>。ちなみに、HSP3で「#func」命令を使って関数の引数の定義をする際、「#func」命令には引数の情報を通常は記述しますが、<span class="mark">dll内の関数を「callfuncex_module.hsp」の命令を使って実行させる場合は、「#func」に引数の型を表記しなくても大丈夫</span>です。<span class="mark">p2で指定できる返り値の型の値は以下の通り</span>です。</p>
+                <div class="frame">
+                    <p>
+                        <ul>
+                            <li>CALLFUNCEX_RETURN_VOID<br>void型を表します。</li>
+                            <li>CALLFUNCEX_RETURN_INT<br>32ビット以下の整数型を表します。4バイトより小さい整数型(例えば1バイト整数のchar型や2バイト整数のshort型等)の返り値を取得する場合は、p3の値を適切に設定してください。</li>
+                            <li>CALLFUNCEX_RETURN_INT64<br>64ビットの整数型を表します。</li>
+                            <li>CALLFUNCEX_RETURN_FLOAT<br>32ビットの浮動小数点数型を表します。</li>
+                            <li>CALLFUNCEX_RETURN_DOUBLE<br>64ビットの浮動小数点数型を表します。</li>
+                            <li>CALLFUNCEX_RETURN_POINTER<br>ポインタ型を表します。</li>
+                            <li>CALLFUNCEX_RETURN_STRUCT<br>構造体を表します。ただし<span class="mark">HSP3では、dll内の関数の返り値が構造体である場合、関数の最初の引数に変数のポインタを指定し、その変数に返り値が書き込まれます</span>。</li>
+                        </ul>
+                    </p>
+                </div>
+                <p><span class="mark">p3を省略するか、p3の値が0以下の場合は、p3の値はp2の値を基に自動的に設定</span>されます。「callfuncex_module.hsp」を使用して<span class="mark">dll内の関数を1回実行する手順は、まずこのcallfuncex_func命令で関数を実行するための準備を開始し、次にcallfuncex_p命令かcallfuncex_p_value命令で引数を設定し、最後にcallfuncex_call命令で関数を実行する</span>という流れになります。</p>
+            </div>
+            <div class="frame">
+                <h2><code>callfuncex_p p1[,p2]</code></h2>
+                <h3><span class="mark">関数の引数を設定</span>します。</h3>
+                <hr>
+                <h3>
+                    p1=引数のデータが入った変数<br>
+                    p2=引数のデータのサイズ(バイト単位)
+                </h3>
+                <hr>
+                <p><span class="mark">callfuncex_func命令で指定したdll内の関数の引数を設定</span>します。<span class="mark">この命令を繰り返し記述した順番通りに、「第1引数、第2引数、第3引数、…」と引数が設定されます</span>。<span class="mark">p2を省略するか、p2の値が0以下の場合は、p2の値はp1で指定した変数のvarsize関数で取得したサイズ</span>になります。</p>
+            </div>
+            <div class="frame">
+                <h2><code>callfuncex_p_value p1[,p2]</code></h2>
+                <h3><span class="mark">関数の引数を変数を介さずに設定</span>します。</h3>
+                <hr>
+                <h3>
+                    p1=引数のデータ<br>
+                    p2=引数のデータのサイズ(バイト単位)
+                </h3>
+                <hr>
+                <p><span class="mark">callfuncex_p命令とほぼ同じ</span>ですが、<span class="mark">callfuncex_p_value命令ではp1の引数に整数や小数等の値を直接入力することが可能</span>です。<span class="mark">p1の内容が構造体の場合、callfuncex_p命令を使用</span>してください。</p>
+            </div>
+            <div class="frame">
+                <h2><code>callfuncex_call p1</code></h2>
+                <h3><span class="mark">関数を実行し、返り値を取得</span>します。</h3>
+                <hr>
+                <h3>
+                    p1=返り値を代入させる変数
+                </h3>
+                <hr>
+                <p><span class="mark">callfuncex_p命令やcallfuncex_p_value命令で設定した引数を使用</span>し、<span class="mark">callfuncex_func命令で設定したdll内の関数を実行し、返り値を取得</span>します。<span class="mark">この命令が実行された後、callfuncex_p命令やcallfuncex_p_value命令で設定した引数のデータは初期化</span>されます。</p>
+            </div>
+        </div>
+    </body>
+</html>

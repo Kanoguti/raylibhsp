@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+
+        <link rel="stylesheet" href="../style.css">
+        <script src="../scripts.js"></script>
+        <style>
+            body {
+                padding: 1em;
+            }
+        </style>
+    </head>
+    <body>
+        <span style="text-align: center;">
+            <h1>1.「raylibhsp」とは？</h1>
+        </span>
+        <hr>
+        <div class="frame">
+            <p>「raylibhsp」とは、C/C++言語用のゲーム開発ライブラリの「raylib」をHSP3言語で使えるようにすることを目指したファイル集です。</p>
+            <p><span class="mark">ライセンスはMIT License</span>とします。</p>
+        </div>
+        <div class="frame">
+            <p>
+                「raylibhsp」には主に以下のファイルが収録されています。
+                <ul>
+                    <li>
+                        <span class="mark">「readme」フォルダ</span>
+                        <br>
+                        この説明書のデータが入ったフォルダです。
+                    </li>
+                    <li>
+                        <span class="mark">「header_maker.hsp」ファイル</span>
+                        <br>
+                        このファイルをHSP3で<span class="mark">実行させると「raylib.hsp」ファイルを生成</span>する、HSP3言語スクリプトファイルです。
+                    </li>
+                    <li>
+                        <span class="mark">「data」フォルダ</span>
+                        <br>
+                        「header_maker.hsp」ファイルを実行させるために必要なファイルが入っています。
+
+                        <ul>
+                            <li>
+                                <span class="mark">「callfuncex_module.hsp」ファイル</span>
+                                <br>
+                                32ビット版や64ビット版のHSP3でも同じHSP3言語のスクリプトでdllファイル内の関数を実行できるようにするHSP3言語用モジュールです。このモジュールは単体でも使用できます。
+                            </li>
+                            <li>
+                                <span class="mark">「struct_module.hsp」ファイル</span>
+                                <br>
+                                HSP3言語で構造体のような変数を作成すること等ができるようにするHSP3言語用モジュールです。このモジュールは単体でも使用できます。
+                            </li>
+                            <li><span class="mark">「raylib_api.txt」ファイル</span></li>
+                            <li><span class="mark">「raymath_api.txt」ファイル</span></li>
+                            <li><span class="mark">「rlgl_api.txt」ファイル</span>
+                                <br>
+                                この3つのファイルは、raylibに同梱されているC言語のプログラムの「raylib_parser.c」をビルドした際に生成される「raylib_parser.exe」実行ファイルを使用して生成されたもので、「raylib.dll」ファイル内の関数情報等が記述されています。
+                            </li>
+                        </ul>
+                    </li>
+                    <li>
+                        <span class="mark">「raylib.hsp」ファイル</span>
+                        <br>
+                        raylibをHSP3言語で使用できるようにする、HSP3言語スクリプトファイルです。前述した<span class="mark">「callfuncex_module.hsp」ファイルや「struct_module.hsp」ファイルの中身も、「raylib.hsp」ファイルに内蔵</span>されています。
+                    </li>
+                    <li>
+                        <span class="mark">「hello.hsp」ファイル</span>
+                        <br>
+                        32bit版HSP(UTF-8版)で、raylibのウィンドウを作成し、文字列「Hello, raylibhsp!」と表示させるだけの簡易的なサンプルスクリプトです。<span class="mark">このサンプルを実行させるには、「raylib.dll(32bit版)」が必要です</span>。詳しくは、「3.raylibのダウンロード」と「4.「raylib.hsp」を使う前に」を読んでください。
+                    </li>
+                </ul>
+            </p>
+        </div>
+    </body>
+</html>

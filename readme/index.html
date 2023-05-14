@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>raylibhsp 説明書</title>
+
+        <link rel="stylesheet" href="data/style.css">
+
+        <style>
+            html,body {
+                width: 100%;
+                height: 100%;
+            }
+            body {
+                margin: 0;
+                padding: 0;
+            }
+            iframe {
+                vertical-align: bottom;
+                border-width: 0;
+            }
+        </style>
+
+        <script src="data/scripts.js"></script>
+    </head>
+    <body>
+        <iframe name="list" src="data/list.html" style="display: inline; --set_padding: 0.3em; padding: var(--set_padding); width: calc( 25% - ( var(--set_padding) * 2 ) ); height: calc( 100% - ( var(--set_padding) * 2 ) ); background-color: black;"></iframe>
+        <iframe name="contents" src="data/1/index.html" style="display: inline; position: absolute; left: 25%; top: 0%; width: 75%; height: 100%;"></iframe>
+    </body>
+</html>

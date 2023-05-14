@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+
+        <link rel="stylesheet" href="../style.css">
+        <script src="../scripts.js"></script>
+        <style>
+            body {
+                padding: 1em;
+            }
+        </style>
+    </head>
+    <body>
+        <span style="text-align: center;">
+            <h1>6.「raylib.hsp」の使い方の詳細</h1>
+        </span>
+        <hr>
+        <div class="frame">
+            <h2>raylibhspでのraylibの<span class="mark">関数や定数等の名前</span>について</h2>
+            <p>
+                「raylib.hsp」には、「raylib.h」ファイル、「raymath.h」ファイル、「rlgl.h」ファイルの関数や定数等の情報が含まれております。「raylib.hsp」でそれらの<span class="mark">関数や定数等を使用する際、名前の頭に以下の文字が追加されています</span>。
+                <div class="frame">
+                    <ul>
+                        <li>
+                            <span class="mark">「raylib.h」ファイル内の関数や定数等→頭に「rl_」を追加</span>
+                            <br>
+                            例：「InitWindow」関数→「<span class="mark">rl_</span>InitWindow」
+                        </li>
+                        <li>
+                            <span class="mark">「raymath.h」ファイル内の関数や定数等→頭に「raymath_」を追加</span>
+                            <br>
+                            例：「Normalize」関数→「<span class="mark">raymath_</span>Normalize」
+                        </li>
+                        <li>
+                            <span class="mark">「rlgl.h」ファイル内の関数や定数等→頭に「rlgl_」を追加</span>
+                            <br>
+                            例：「rlBegin」関数→「<span class="mark">rlgl_</span>rlBegin」
+                        </li>
+                    </ul>
+                </div>
+            </p>
+        </div>
+        <div class="frame">
+            <p>
+                <h2>raylibhspでの<span class="mark">raylibの関数を呼び出す際の引数の書き方</span></h2>
+                <div class="frame">
+                    <h3>raylibの関数の引数が<span class="mark">「構造体」か「ポインタ」以外の場合</span></h3>
+                    HSP3通常の命令を呼び出す際の<span class="mark">通常の引数の書き方で入力</span>してください。
+                </div>
+                <div class="frame">
+                    <h3>raylibの関数の引数が<span class="mark">「構造体」の場合</span></h3>
+                    「raylib.hsp」に含まれている<span class="mark">「struct_make」命令で構造体の変数を作成</span>し、<span class="mark">「struct_setdata」命令や「struct_setvalue」命令等で構造体のメンバの情報を入力</span>し、その構造体の変数をraylib関数の引数として使用する際は、構造体の変数のポインタを引数として入力するのではなく、その<span class="mark">構造体の変数をそのまま引数として入力</span>してください。例として、raylibの「ClearBackground」関数(raylibhspでは「rl_ClearBackground」命令)を呼び出す際、引数として「Color」構造体(raylibhspでは「rl_Color」構造体)があるので、以下のように入力します。
+                    <div class="frame">
+                        <code>
+                            struct_make rl_Color,color_data<br>
+                            struct_setvalue rl_Color,r,color_data,255<br>
+                            struct_setvalue rl_Color,g,color_data,0<br>
+                            struct_setvalue rl_Color,b,color_data,0<br>
+                            struct_setvalue rl_Color,a,color_data,255<br>
+                            rl_ClearBackground color_data
+                        </code>
+                    </div>
+                </div>
+                <div class="frame">
+                    <h3>raylibの関数の引数が<span class="mark">「ポインタ」の場合</span></h3>
+                    HSP3の<span class="mark">「varptr」関数で取得したアドレスを引数として入力</span>してください。「varptr」関数の使い方はHSP3のリファレンス等を見てください。
+                </div>
+            </p>
+        </div>
+        <div class="frame">
+            <p>
+                <h2>raylibの<span class="mark">関数の使い方</span></h2>
+                <div class="frame">
+                    <h3>関数の<span class="mark">返り値が「構造体」か「ポインタ」か「8バイト整数」ではない場合</span></h3>
+                    <span class="mark">通常のHSP3の命令を実行する際と同じような感覚でraylib関数を実行できます</span>。例として、返り値がvoid(無し)の「InitWindow」関数(raylibhspでは「rl_InitWindow」命令)を呼び出す際は、以下のように入力します。
+                    <div class="frame">
+                        <code>
+                            rl_InitWindow 640,480,0
+                        </code>
+                    </div>
+                    呼び出した関数に<span class="mark">返り値がある場合は、以下のシステム変数に返り値が代入</span>されます。
+                    <div class="frame">
+                        <ul>
+                            <li>返り値が<span class="mark">「double」型</span>の場合→<span class="mark">「refdval」</span>システム変数</li>
+                            <li>返り値が<span class="mark">「float」型</span>の場合→<span class="mark">「stat」</span>システム変数</li>
+                            <li>返り値が<span class="mark">その他の型</span>の場合→<span class="mark">「stat」</span>システム変数</li>
+                        </ul>
+                    </div>
+                    <span class="mark">「float」型の実数はHSP3上では整数扱い</span>になりますが、「raylib.hsp」に含まれている<span class="mark">「callfuncex_f2d」関数で「double」型の実数に変換</span>できます。<span class="mark">「double」型の実数から「float」型の実数(HSP3上では整数)に変換させる場合</span>は<span class="mark">「callfuncex_d2f」関数を使用</span>します。例えば、raylibのGetFrameTime関数(raylibhspでは「rl_GetFrameTime」命令)を呼び出した際の返り値は「float」型実数なので、それを「double」型に変換させてその値を変数「var」に代入させる際は、以下のように入力します。
+                    <div class="frame">
+                        <code>
+                            rl_GetFrameTime<br>
+                            var=callfuncex_f2d(stat)
+                        </code>
+                    </div>
+                </div>
+                <div class="frame">
+                    <h3>関数の<span class="mark">返り値が「構造体」か「ポインタ」か「8バイト整数」の場合</span></h3>
+                    <span class="mark">関数を呼び出す際の最初の引数に指定した変数に返り値が代入</span>されます。<span class="mark">その後ろに続いて本来の引数を入力</span>します。例として、返り値が「Vector2」構造体(raylibhspでは「rl_Vector2」構造体)の「GetMonitorPosition」関数(raylibhspでは「rl_GetMonitorPosition」命令)を呼び出し、変数「vec」に返り値を代入させる場合は、以下のように入力します。
+                    <div class="frame">
+                        <code>
+                            struct_make rl_Vector2,<span class="mark">vec</span><br>
+                            rl_GetMonitorPosition <span class="mark">vec</span>,0
+                        </code>
+                    </div>
+                    raylibの「GetMonitorPosition」関数は以下のように定義されています。
+                    <div class="frame">
+                        <code>
+                            Vector2 GetMonitorPosition(int monitor);
+                        </code>
+                    </div>
+                    この関数の一つ目の「int monitor」引数の前に変数を入力することで、「Vector2」構造体の形の返り値をその変数に代入させることができます。
+                </div>
+            </p>
+        </div>
+    </body>
+</html>

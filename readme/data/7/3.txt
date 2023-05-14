@@ -1,0 +1,18 @@
+//この例を「raylib.hsp」をインクルードしない状態で実行するには、「struct_module.hsp」と「callfuncex_module.hsp」をインクルードしてください。
+#include "struct_module.hsp"
+#include "callfuncex_module.hsp"
+
+//構造体の定義は省略します。
+
+struct_make MySubStruct,sub_struct ;MySubStruct構造体をsub_struct変数として作成。
+struct_setvalue MySubStruct,int_member,sub_struct,123 ;中身がMySubStruct構造体のsub_struct変数の、int_memberメンバの中身を「123」にする。
+struct_setvalue MySubStruct,double_member,sub_struct,456.789 ;同様に、double_memberメンバの中身を「456.789」にする。
+dim float_member_value,2 ;MySubStruct構造体のfloat_memberメンバはfloat型2つ(HSP3ではint型2つ)
+float_member_value(0)=callfuncex_d2f(123.456) ;double型の値をfloat型に変換するため、「callfuncex_d2f」関数を使用。
+float_member_value(1)=callfuncex_d2f(654.321)
+struct_setdata MySubStruct,float_member,sub_struct,float_member_value ;float_memberメンバの中身を「float_member_value」配列変数の中身にする。
+
+struct_make MyNewStruct,new_struct ;MyNewStruct構造体をnew_struct変数として作成。
+struct_setvalue MyNewStruct,int_member,new_struct,321 ;中身がMyNewStruct構造体のnew_struct変数の、int_memberメンバの中身を「321」にする。
+struct_setvalue MyNewStruct,double_member,new_struct,987.654 ;同様に、double_memberメンバの中身を「987.654」にする。
+struct_setdata MyNewStruct,sub_struct_member,new_struct,sub_struct ;sub_struct_memberメンバは「MySubStruct」型(構造体)なので、中身を先ほど作成したsub_struct変数にする。

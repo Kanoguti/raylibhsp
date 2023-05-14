@@ -1,0 +1,116 @@
+#ifndef struct_module
+
+#module struct_module
+
+#defcfunc local struct_fixalignment int p_size,int p_alignment, local temp_return
+    temp_return=0
+    if p_alignment<=0:{
+        temp_return=p_size
+    } else {
+        temp_return=p_alignment
+    }
+    return temp_return
+#defcfunc local struct_checkalignment int p_a,int p_b, local temp_return
+    temp_return=0
+    if p_a<p_b:{
+        temp_return=p_b
+    } else {
+        temp_return=p_a
+    }
+    return temp_return
+#defcfunc local struct_calcoffset int p_current_offset,int p_size,int p_alignment, local temp_return,local temp_alignment
+    temp_return=0
+
+    temp_alignment=struct_fixalignment(p_size,p_alignment)
+    if temp_alignment>0:{
+        if p_current_offset\temp_alignment==0:{
+            temp_return=p_current_offset
+        } else {
+            temp_return=p_current_offset/temp_alignment*temp_alignment+temp_alignment
+        }
+    }
+    return temp_return
+
+#define global struct_init(%1) %1__total@=0:%1__max_alignment@=0
+#define global struct_member(%1,%2,%3,%4=0) %1__%2__size@=%3:%1__%2__alignment@=struct_fixalignment@struct_module(%3,%4):%1__%2__offset@=struct_calcoffset@struct_module(%1__total@,%1__%2__size@,%1__%2__alignment@):%1__total@=%1__%2__offset@+%1__%2__size@:%1__max_alignment@=struct_checkalignment@struct_module(%1__max_alignment@,%1__%2__alignment@)
+#define global struct_done(%1) %1__total@=struct_calcoffset@struct_module(%1__total@,%1__total@,%1__max_alignment@)
+#define global ctype struct_gettotal(%1) (%1__total@)
+#define global ctype struct_getsize(%1,%2) (%1__%2__size@)
+#define global ctype struct_getoffset(%1,%2) (%1__%2__offset@)
+#define global ctype struct_getalignment(%1,%2) (%1__%2__alignment@)
+#define global ctype struct_getmaxalignment(%1) (%1__max_alignment@)
+#define global struct_getdata(%1,%2,%3,%4) memcpy %4,%3,struct_getsize(%1,%2),0,struct_getoffset(%1,%2)
+#define global struct_setdata(%1,%2,%3,%4) memcpy %3,%4,struct_getsize(%1,%2),struct_getoffset(%1,%2),0
+#define global struct_setvalue(%1,%2,%3,%4) dummy@struct_module=%4:struct_setdata %1,%2,%3,dummy@struct_module
+#define global struct_make(%1,%2) sdim %2,%1__total@
+
+#define global ctype struct_typesize(%1) (struct_gettotal(type_%1))
+
+#deffunc struct_module_init
+    ;https://learn.microsoft.com/ja-jp/cpp/cpp/data-type-ranges?view=msvc-170
+
+    struct_init type_unsigned_int:struct_member type_unsigned_int,value,4:struct_done type_unsigned_int
+    struct_init type_unsigned:struct_member type_unsigned,value,4:struct_done type_unsigned
+
+    struct_init type___int8:struct_member type___int8,value,1:struct_done type___int8
+    struct_init type_char:struct_member type_char,value,1:struct_done type_char
+
+    struct_init type_unsigned___int8:struct_member type_unsigned___int8,value,1:struct_done type_unsigned___int8
+    struct_init type_unsigned_char:struct_member type_unsigned_char,value,1:struct_done type_unsigned_char
+
+    struct_init type___int16:struct_member type___int16,value,2:struct_done type___int16
+    struct_init type_short:struct_member type_short,value,2:struct_done type_short
+    struct_init type_short_int:struct_member type_short_int,value,2:struct_done type_short_int
+    struct_init type_signed_short_int:struct_member type_signed_short_int,value,2:struct_done type_signed_short_int
+
+    struct_init type_unsigned___int16:struct_member type_unsigned___int16,value,2:struct_done type_unsigned___int16
+    struct_init type_unsigned_short:struct_member type_unsigned_short,value,2:struct_done type_unsigned_short
+    struct_init type_unsigned_short_int:struct_member type_unsigned_short_int,value,2:struct_done type_unsigned_short_int
+
+    struct_init type___int32:struct_member type___int32,value,4:struct_done type___int32
+    struct_init type_signed:struct_member type_signed,value,4:struct_done type_signed
+    struct_init type_signed_int:struct_member type_signed_int,value,4:struct_done type_signed_int
+    struct_init type_int:struct_member type_int,value,4:struct_done type_int
+
+    struct_init type_unsigned___int32:struct_member type_unsigned___int32,value,4:struct_done type_unsigned___int32
+
+    struct_init type___int64:struct_member type___int64,value,8:struct_done type___int64
+    struct_init type_long_long:struct_member type_long_long,value,8:struct_done type_long_long
+    struct_init type_signed_long_long:struct_member type_signed_long_long,value,8:struct_done type_signed_long_long
+
+    struct_init type_unsigned___int64:struct_member type_unsigned___int64,value,8:struct_done type_unsigned___int64
+    struct_init type_unsigned_long_long:struct_member type_unsigned_long_long,value,8:struct_done type_unsigned_long_long
+
+    struct_init type_bool:struct_member type_bool,value,1:struct_done type_bool
+
+    struct_init type_signed_char:struct_member type_signed_char,value,1:struct_done type_signed_char
+
+    struct_init type_long:struct_member type_long,value,4:struct_done type_long
+    struct_init type_long_int:struct_member type_long_int,value,4:struct_done type_long_int
+    struct_init type_signed_long_int:struct_member type_signed_long_int,value,4:struct_done type_signed_long_int
+
+    struct_init type_unsigned_long:struct_member type_unsigned_long,value,4:struct_done type_unsigned_long
+    struct_init type_unsigned_long_int:struct_member type_unsigned_long_int,value,4:struct_done type_unsigned_long_int
+
+    struct_init type_float:struct_member type_float,value,4:struct_done type_float
+
+    struct_init type_double:struct_member type_double,value,8:struct_done type_double
+
+    struct_init type_long_double:struct_member type_long_double,value,8:struct_done type_long_double
+
+    struct_init type_wchar_t:struct_member type_wchar_t,value,2:struct_done type_wchar_t
+    struct_init type___wchar_t:struct_member type___wchar_t,value,2:struct_done type___wchar_t
+
+    struct_init type_void:struct_member type_void,value,0:struct_done type_void
+
+    #ifdef __hsp64__@
+    struct_init type_pointer:struct_member type_pointer,value,8:struct_done type_pointer
+    #else
+    struct_init type_pointer:struct_member type_pointer,value,4:struct_done type_pointer
+    #endif
+    return
+
+#global
+struct_module_init
+
+#endif

@@ -1,0 +1,203 @@
+#ifndef callfuncex_module
+
+#module callfuncex_module
+
+#ifndef __hsp64__@
+#uselib "kernel32.dll"
+#func VirtualProtect "VirtualProtect" int, int, int, int
+#endif
+
+#enum global CALLFUNCEX_RETURN_VOID = 0
+#enum global CALLFUNCEX_RETURN_INT
+#enum global CALLFUNCEX_RETURN_INT64
+#enum global CALLFUNCEX_RETURN_DOUBLE
+#enum global CALLFUNCEX_RETURN_FLOAT
+#enum global CALLFUNCEX_RETURN_POINTER
+#enum global CALLFUNCEX_RETURN_STRUCT
+
+#deffunc callfuncex_init
+    #ifdef __hsp64__@
+    sys_pointer=int64(0)
+    #else
+    sys_pointer=int(0)
+    sys_getdouble_code=$0424448b,$04c218dd,$00000000
+    sys_getdouble_res=0
+    #endif
+    sys_param_size=0
+    sdim sys_param_data
+    sys_return_type=-1
+    sys_return_size=0
+    return
+
+#ifndef __hsp64__@
+#deffunc local getdouble local fret,local prm
+    VirtualProtect varptr(sys_getdouble_code), length(sys_getdouble_code)*4, $40, varptr(sys_getdouble_res)
+    fret=0.0
+	prm = varptr(fret)
+	sys_getdouble_res = callfunc(prm, varptr(sys_getdouble_code), 1)
+	return fret
+#endif
+
+#defcfunc callfuncex_d2f double p1, local temp
+    temp = p1
+    return lpeek(temp)>>29&7|(p1<0)<<31|lpeek(temp,4)-(p1!0)*0x38000000<<3
+
+#defcfunc callfuncex_f2d int p1, local temp
+    temp = 0.0
+    lpoke temp, 4, (p1 & 0x80000000) | (((p1 & 0x7fffffff) >> 3) + ((p1 & 0x7fffffff) ! 0) * 0x38000000)
+    lpoke temp, 0, p1 << 29
+    return temp
+
+#deffunc local callfuncex_func var p_pointer,int p_return_type,int p_return_size
+#ifdef __hsp64__@
+#define global callfuncex_func(%1,%2=CALLFUNCEX_RETURN_VOID@,%3=0) dummy@callfuncex_module=varptr64(%1):callfuncex_func@callfuncex_module dummy@callfuncex_module,%2,%3
+#else
+#define global callfuncex_func(%1,%2=CALLFUNCEX_RETURN_VOID@,%3=0) dummy@callfuncex_module=varptr(%1):callfuncex_func@callfuncex_module dummy@callfuncex_module,%2,%3
+#endif
+#define global callfuncex_func_void(%1,%2=0) callfuncex_func@ %1,CALLFUNCEX_RETURN_VOID@,%2
+#define global callfuncex_func_int(%1,%2=0) callfuncex_func@ %1,CALLFUNCEX_RETURN_INT@,%2
+#define global callfuncex_func_int64(%1,%2=0) callfuncex_func@ %1,CALLFUNCEX_RETURN_INT64@,%2
+#define global callfuncex_func_double(%1,%2=0) callfuncex_func@ %1,CALLFUNCEX_RETURN_DOUBLE@,%2
+#define global callfuncex_func_float(%1,%2=0) callfuncex_func@ %1,CALLFUNCEX_RETURN_FLOAT@,%2
+#define global callfuncex_func_pointer(%1,%2=0) callfuncex_func@ %1,CALLFUNCEX_RETURN_POINTER@,%2
+#define global callfuncex_func_struct(%1,%2=0) callfuncex_func@ %1,CALLFUNCEX_RETURN_STRUCT@,%2
+    callfuncex_init
+    #ifdef __hsp64__@
+    sys_pointer=int64(p_pointer)
+    #else
+    sys_pointer=int(p_pointer)
+    #endif
+    sys_return_type=p_return_type
+    sys_return_size=p_return_size
+    if sys_return_size<=0:{
+        switch sys_return_type
+        case CALLFUNCEX_RETURN_VOID@:sys_return_size=0:swbreak
+        case CALLFUNCEX_RETURN_INT@:sys_return_size=4:swbreak
+        case CALLFUNCEX_RETURN_INT64@:sys_return_size=8:swbreak
+        case CALLFUNCEX_RETURN_DOUBLE@:sys_return_size=8:swbreak
+        case CALLFUNCEX_RETURN_FLOAT@:sys_return_size=4:swbreak
+        #ifdef __hsp64__@
+        case CALLFUNCEX_RETURN_POINTER@:sys_return_size=8:swbreak
+        #else
+        case CALLFUNCEX_RETURN_POINTER@:sys_return_size=4:swbreak
+        #endif
+        case CALLFUNCEX_RETURN_STRUCT@:sys_return_size=-1:swbreak
+        default:sys_return_size=0:swbreak
+        swend
+    }
+    return
+
+#deffunc local callfuncex_p var p_data,int p_size, local temp_size,local temp_pointer
+#define global callfuncex_p(%1,%2=0) callfuncex_p@callfuncex_module %1,%2
+#define global callfuncex_p_value(%1,%2=0) dummy@callfuncex_module=%1:callfuncex_p@callfuncex_module dummy@callfuncex_module,%2
+    temp_size=0
+    if p_size<=0:{
+        temp_size=varsize(p_data)
+    } else {
+        temp_size=p_size
+    }
+    #ifdef __hsp64__@
+    memexpand sys_param_data,sys_param_size+8
+    if temp_size==1 || temp_size==2 || temp_size==4 || temp_size==8:{
+        memcpy sys_param_data,p_data,temp_size,sys_param_size,0
+    } else {
+        temp_pointer=varptr64(p_data)
+        memcpy sys_param_data,temp_pointer,8,sys_param_size,0
+    }
+    sys_param_size+=8
+    #else
+    memexpand sys_param_data,sys_param_size+temp_size
+    memcpy sys_param_data,p_data,temp_size,sys_param_size,0
+    if (temp_size\4)==0:{
+        sys_param_size+=temp_size
+    } else {
+        sys_param_size+=temp_size/4*4+4
+    }
+    #endif
+    return
+
+#deffunc callfuncex_call var p_return, local temp_return,local temp_count,local temp_param,local temp_param_with_struct
+    temp_return=0
+    #ifdef __hsp64__@
+    if sys_pointer!=int64(0):{
+        temp_count=sys_param_size/8
+        if (sys_param_size\8)!=0:temp_count+=1
+        dim64 temp_param,temp_count+1
+        memcpy temp_param,sys_param_data,sys_param_size,0,0
+
+        switch sys_return_type
+        case CALLFUNCEX_RETURN_VOID@
+        case CALLFUNCEX_RETURN_INT@
+        case CALLFUNCEX_RETURN_INT64@
+        case CALLFUNCEX_RETURN_POINTER@
+        case CALLFUNCEX_RETURN_STRUCT@
+        temp_return=callfunc64i(temp_param,sys_pointer,temp_count)
+        if sys_return_type!=CALLFUNCEX_RETURN_INT64@ && sys_return_type!=CALLFUNCEX_RETURN_POINTER@:{
+            temp_return=int(temp_return)
+        }
+        if sys_return_type==CALLFUNCEX_RETURN_VOID@:temp_return=0
+        swbreak
+        case CALLFUNCEX_RETURN_FLOAT@
+        temp_return=int(callfunc64f(temp_param,sys_pointer,temp_count))
+        swbreak
+        case CALLFUNCEX_RETURN_DOUBLE@
+        temp_return=callfunc64d(temp_param,sys_pointer,temp_count)
+        swbreak
+        swend
+    }
+    #else
+    if sys_pointer!=0:{
+        temp_count=sys_param_size/4
+        if (sys_param_size\4)!=0:temp_count+=1
+        dim temp_param,temp_count
+        memcpy temp_param,sys_param_data,sys_param_size,0,0
+
+        switch sys_return_type
+        case CALLFUNCEX_RETURN_VOID@
+        case CALLFUNCEX_RETURN_INT@
+        case CALLFUNCEX_RETURN_INT64@
+        case CALLFUNCEX_RETURN_POINTER@
+        case CALLFUNCEX_RETURN_STRUCT@
+        temp_return=callfunc(temp_param,sys_pointer,temp_count)
+        if sys_return_type==CALLFUNCEX_RETURN_VOID@:temp_return=0
+        swbreak
+        case CALLFUNCEX_RETURN_DOUBLE@
+        case CALLFUNCEX_RETURN_FLOAT@
+        temp_return=callfunc(temp_param,sys_pointer,temp_count)
+        getdouble
+        temp_return=refdval
+        if sys_return_type==CALLFUNCEX_RETURN_FLOAT@:temp_return=callfuncex_d2f(temp_return)
+        swbreak
+        swend
+    }
+    #endif
+
+    switch sys_return_type
+    case CALLFUNCEX_RETURN_VOID@
+    p_return=0
+    swbreak
+    case CALLFUNCEX_RETURN_DOUBLE@
+    case CALLFUNCEX_RETURN_FLOAT@
+    case CALLFUNCEX_RETURN_POINTER@
+    case CALLFUNCEX_RETURN_STRUCT@
+    p_return=temp_return
+    swbreak
+    default
+        switch sys_return_size
+        case 1:p_return=peek(temp_return,0):swbreak
+        case 2:p_return=wpeek(temp_return,0):swbreak
+        case 4:p_return=temp_return:swbreak
+        #ifdef __hsp64__@
+        case 8:p_return=int64(temp_return):swbreak
+        #endif
+        default:p_return=temp_return:swbreak
+        swend
+    swend
+
+    callfuncex_init
+    return
+
+#global
+callfuncex_init
+
+#endif

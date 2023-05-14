@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+
+        <link rel="stylesheet" href="../style.css">
+        <script src="../scripts.js"></script>
+        <style>
+            body {
+                padding: 1em;
+            }
+        </style>
+    </head>
+    <body>
+        <span style="text-align: center;">
+            <h1>7.「struct_module.hsp」の使い方</h1>
+        </span>
+        <hr>
+        <div class="frame">
+            <p>
+                「data」フォルダに入っている<span class="mark">「struct_module.hsp」ファイルは、構造体のような変数の作成や編集を行う命令が入ったHSP3用モジュール</span>です。<span class="mark">「raylib.hsp」を生成する際にこのモジュールの内容は「raylib.hsp」の中にそのまま埋め込まれます</span>が、このモジュールは単体でも使用できます。このモジュールでは、<span class="mark">「プリミティブ型の名前」と「構造体の名前」と「構造体のメンバの名前」を入力する際、ダブルクォーテーションで囲った文字列を入力しないで</span>ください。<span class="mark">名前をダブルクォーテーションで囲まずに直接入力</span>してください。
+                <div class="frame">
+                    <ul>
+                        <li>間違いの例：<span class="mark">"</span>MyNewStruct<span class="mark">"</span></li>
+                        <li>正しい例：MyNewStruct</li>
+                    </ul>
+                </div>
+            </p>
+        </div>
+        <div class="frame">
+            <p>
+                <span class="mark">「struct_module.hsp」に定義されているプリミティブ型は以下の通り</span>です。
+                <ul>
+                    <li>unsigned_int,unsigned</li>
+                    <li>__int8,char</li>
+                    <li>unsigned___int8,unsigned_char</li>
+                    <li>__int16,short,short_int,signed_short_int</li>
+                    <li>unsigned___int16,unsigned_short,unsigned_short_int</li>
+                    <li>__int32,signed,signed_int,int</li>
+                    <li>unsigned___int32</li>
+                    <li>__int64,long_long,signed_long_long</li>
+                    <li>unsigned___int64,unsigned_long_long</li>
+                    <li>bool</li>
+                    <li>signed_char</li>
+                    <li>long,long_int,signed_long_int</li>
+                    <li>unsigned_long,unsigned_long_int</li>
+                    <li>float</li>
+                    <li>double,long_double</li>
+                    <li>wchar_t,__wchar_t</li>
+                    <li>void</li>
+                    <li>pointer(ポインタ)</li>
+                </ul>
+            </p>
+        </div>
+        <div class="frame">
+            <p>
+                C言語の構造体の定義の書き方を「struct_module.hsp」の命令で置き換えた際の例はこのような感じになります。
+                <div class="frame">
+                    <span style="text-align: center;"><p>(C言語での構造体の定義)</p></span>
+                    <img src="1.png" class="image" style="width: 40%;">
+                    <br>
+                    <span style="text-align: center;"><p>(「struct_module.hsp」の命令で構造体を定義した場合の例)</p></span>
+                    <img src="2.png" class="image">
+                    <iframe src="2.txt" class="text"></iframe>
+                </div>
+                次に、この２つの構造体を変数として作成し、構造体のメンバの中身を書き換える例はこんな感じになります。
+                <div class="frame">
+                    <img src="3.png" class="image">
+                    <iframe src="3.txt" class="text"></iframe>
+                </div>
+            </p>
+        </div>
+        <div class="frame">
+            <h2>「struct_module.hsp」の命令・関数リファレンス</h2>
+            <div class="frame">
+                <h2><code>struct_init p1</code></h2>
+                <h3><span class="mark">新しい構造体の定義を開始</span>します。</h3>
+                <hr>
+                <h3>
+                    p1=構造体の名前
+                </h3>
+                <hr>
+                <p>p1で指定した名前の構造体の定義を開始します。この<span class="mark">「struct_init」命令で構造体の定義を開始後、「struct_member」命令で構造体のメンバの定義をし、最後に「struct_done」命令を入力することで構造体の定義が完了</span>します。</p>
+                <hr>
+                <h3>サンプルスクリプト</h3>
+                <p>(「struct_done」の欄をご覧ください。)</p>
+            </div>
+            <div class="frame">
+                <h2><code>struct_member p1,p2,p3[,p4]</code></h2>
+                <h3><span class="mark">構造体のメンバの定義</span>を行います。</h3>
+                <hr>
+                <h3>
+                    p1=構造体の名前<br>
+                    p2=構造体のメンバの名前<br>
+                    p3=構造体のメンバのサイズ(バイト単位)<br>
+                    p4=構造体のメンバのアライメントのサイズ(バイト単位)(省略した場合はp3の値と同じになります)
+                </h3>
+                <hr>
+                <p>p1で指定した名前の<span class="mark">構造体のメンバを定義</span>します。</p>
+                <hr>
+                <h3>サンプルスクリプト</h3>
+                <p>(「struct_done」の欄をご覧ください。)</p>
+            </div>
+            <div class="frame">
+                <h2><code>struct_done p1</code></h2>
+                <h3><span class="mark">構造体の定義を終了</span>します。</h3>
+                <hr>
+                <h3>
+                    p1=構造体の名前
+                </h3>
+                <hr>
+                <p>p1で指定した名前の<span class="mark">構造体のメンバの定義を終了</span>します。</p>
+                <hr>
+                <h3>サンプルスクリプト</h3>
+                <p>「MySubStruct」構造体と「MyNewStruct」構造体の定義を行う例です。</p>
+                <div class="frame">
+                    <p>
+                        「MySubStruct」構造体と「MyNewStruct」構造体のそれぞれの中身は以下の通りです。
+                        <ul>
+                            <li>
+                                「MySubStruct」構造体
+                                <ul>
+                                    <li>「int_member」メンバ(int型)</li>
+                                    <li>「double_member」メンバ(double型)</li>
+                                    <li>「float_member」メンバ(float型(配列数は2))</li>
+                                </ul>
+                            </li>
+                            <li>
+                                「MyNewStruct」構造体
+                                <ul>
+                                    <li>「int_member」メンバ(int型)</li>
+                                    <li>「double_member」メンバ(double型)</li>
+                                    <li>「sub_struct_member」メンバ(MySubStruct型(構造体))</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </p>
+                </div>
+                <img src="2.png" class="image">
+                <iframe src="2.txt" class="text"></iframe>
+            </div>
+            <div class="frame">
+                <h2><code>struct_make p1,p2</code></h2>
+                <h3><span class="mark">定義済みの構造体のサイズと同じサイズの、中身が空の変数を作成します</span>。</h3>
+                <hr>
+                <h3>
+                    p1=構造体の名前<br>
+                    p2=作成する変数名
+                </h3>
+                <hr>
+                <p>既に<span class="mark">定義されている構造体のサイズと同じサイズの、中身が空の変数を作成</span>します。<span class="mark">作成する変数は文字列型</span>のデータとなります。<span class="mark">内部でsdim命令を使っています</span>。<span class="mark">構造体の正確なサイズを取得する際には、struct_gettotal関数を使用</span>してください。</p>
+            </div>
+            <div class="frame">
+                <h2><code>val=struct_gettotal(p1)</code></h2>
+                <h3><span class="mark">定義済みの構造体のバイト単位の合計サイズを取得</span>します。</h3>
+                <hr>
+                <h3>
+                    val=構造体のサイズ(バイト単位)<br>
+                    p1=構造体の名前
+                </h3>
+                <hr>
+                <p>p1で指定した名前の<span class="mark">構造体のバイト単位の合計サイズを取得</span>します。<span class="mark">プリミティブ型のサイズを取得する場合はstruct_typesize関数を使用</span>してください。</p>
+            </div>
+            <div class="frame">
+                <h2><code>val=struct_getsize(p1,p2)</code></h2>
+                <h3><span class="mark">定義済みの構造体のメンバのバイト単位のサイズを取得</span>します。</h3>
+                <hr>
+                <h3>
+                    val=構造体のメンバのサイズ(バイト単位)<br>
+                    p1=構造体の名前<br>
+                    p2=構造体のメンバの名前
+                </h3>
+                <hr>
+                <p>p1で指定した構造体の名前、p2で指定したメンバ名の<span class="mark">構造体のメンバのバイト単位のサイズを取得</span>します。</p>
+            </div>
+            <div class="frame">
+                <h2><code>val=struct_getoffset(p1,p2)</code></h2>
+                <h3><span class="mark">定義済みの構造体のメンバのバイト単位の位置を取得</span>します。</h3>
+                <hr>
+                <h3>
+                    val=構造体のメンバの位置(バイト単位)<br>
+                    p1=構造体の名前<br>
+                    p2=構造体のメンバの名前
+                </h3>
+                <hr>
+                <p>p1で指定した構造体の名前、p2で指定したメンバ名の<span class="mark">構造体のメンバのバイト単位の位置を取得</span>します。</p>
+            </div>
+            <div class="frame">
+                <h2><code>val=struct_getalignment(p1,p2)</code></h2>
+                <h3><span class="mark">定義済みの構造体のメンバのアライメントのサイズを取得</span>します。</h3>
+                <hr>
+                <h3>
+                    val=構造体のメンバのアライメントのサイズ(バイト単位)<br>
+                    p1=構造体の名前<br>
+                    p2=構造体のメンバの名前
+                </h3>
+                <hr>
+                <p>p1で指定した構造体の名前、p2で指定したメンバ名の<span class="mark">構造体のメンバのアライメントのサイズを取得</span>します。</p>
+            </div>
+            <div class="frame">
+                <h2><code>val=struct_getmaxalignment(p1)</code></h2>
+                <h3><span class="mark">定義済みの構造体自体のアライメントのサイズを取得</span>します。</h3>
+                <hr>
+                <h3>
+                    val=構造体自体のアライメントのサイズ(バイト単位)<br>
+                    p1=構造体の名前
+                </h3>
+                <hr>
+                <p>p1で指定した名前の<span class="mark">構造体自体のアライメントのサイズを取得</span>します。つまり、<span class="mark">指定した構造体のメンバ全ての中から一番大きいアライメントのサイズが返されます</span>。</p>
+            </div>
+            <div class="frame">
+                <h2><code>struct_getdata p1,p2,p3,p4</code></h2>
+                <h3><span class="mark">構造体のデータが入った変数から、メンバのデータを取得</span>します。</h3>
+                <hr>
+                <h3>
+                    p1=構造体の名前<br>
+                    p2=構造体のメンバの名前<br>
+                    p3=構造体のデータが入った変数<br>
+                    p4=取得した構造体のメンバのデータを代入させる変数
+                </h3>
+                <hr>
+                <p>指定した<span class="mark">構造体のデータが入った変数から、指定したメンバのデータを取得</span>します。<span class="mark">p4で指定する変数のサイズは、この命令を実行する前までに手動で確保しておいてください</span>。</p>
+            </div>
+            <div class="frame">
+                <h2><code>struct_setdata p1,p2,p3,p4</code></h2>
+                <h3><span class="mark">構造体のデータが入った変数の、メンバのデータを書き換えます</span>。</h3>
+                <hr>
+                <h3>
+                    p1=構造体の名前<br>
+                    p2=構造体のメンバの名前<br>
+                    p3=構造体のデータが入った変数<br>
+                    p4=構造体のデータを書き換えるデータが入った変数
+                </h3>
+                <hr>
+                <p>指定した<span class="mark">構造体のデータが入った変数から、指定したメンバのデータを書き換えます</span>。</p>
+            </div>
+            <div class="frame">
+                <h2><code>struct_setvalue p1,p2,p3,p4</code></h2>
+                <h3><span class="mark">構造体のデータが入った変数の、メンバのデータを変数を介さずに書き換えます</span>。</h3>
+                <hr>
+                <h3>
+                    p1=構造体の名前<br>
+                    p2=構造体のメンバの名前<br>
+                    p3=構造体のデータが入った変数<br>
+                    p4=構造体のデータを書き換えるデータ
+                </h3>
+                <hr>
+                <p>struct_setdata命令と似てますが、指定した<span class="mark">構造体のデータが入った変数から、指定したメンバのデータを変数を介さずに書き換えます</span>。</p>
+            </div>
+            <div class="frame">
+                <h2>val=struct_typesize(p1)</h2>
+                <h3><span class="mark">プリミティブ型のバイト単位のサイズを取得</span>します。</h3>
+                <hr>
+                <h3>
+                    val=プリミティブ型のサイズ<br>
+                    p1=プリミティブ型の名前
+                </h3>
+                <hr>
+                <p>指定した<span class="mark">プリミティブ型のバイト単位のサイズを取得</span>します。<span class="mark">構造体のサイズを取得する場合は、struct_gettotal関数を使用</span>してください。</p>
+            </div>
+        </div>
+    </body>
+</html>

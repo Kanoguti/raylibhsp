@@ -1,0 +1,53 @@
+/*
+
+32bit版HSP3(UTF-8版)で、raylibのウィンドウを作成し、文字列「Hello, raylib!」と表示させるサンプルスクリプト。
+
+*/
+
+#include "hsp3utf.as"
+
+#include "raylib.hsp"
+
+#module
+    #deffunc setcolor var p_color,int p_red,int p_green,int p_blue,int p_alpha
+        memset p_color,0,struct_gettotal(rl_Color),0
+        poke p_color,struct_getoffset(rl_Color,r),p_red
+        poke p_color,struct_getoffset(rl_Color,g),p_green
+        poke p_color,struct_getoffset(rl_Color,b),p_blue
+        poke p_color,struct_getoffset(rl_Color,a),p_alpha
+        return
+#global
+
+gsel 0,-1
+
+text="Hello, raylibhsp!"
+rl_InitWindow 640,480,varptr(text)
+
+rl_SetTargetFPS 60
+
+while
+    rl_WindowShouldClose
+    if stat==1:_break
+
+    rl_BeginDrawing
+
+    setcolor col,255,255,255,255
+    rl_ClearBackground col
+
+    setcolor col,255,63,63,255
+    rl_GetFPS
+    text="FPS="+ stat +""
+    rl_DrawText varptr(text), 5,5, 18, col
+
+    setcolor col,63,63,63,255
+    text="Hello, raylibhsp!"
+    rl_DrawText varptr(text), 20,40, 50, col
+
+    rl_EndDrawing
+wend
+
+goto *owari
+
+*owari
+    rl_CloseWindow
+    end

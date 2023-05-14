@@ -1,0 +1,13 @@
+#include "struct_module.hsp"
+
+struct_init MySubStruct
+struct_member MySubStruct,int_member,struct_typesize(int)
+struct_member MySubStruct,double_member,struct_typesize(double)
+struct_member MySubStruct,float_member,struct_typesize(float)*2,struct_typesize(float)
+struct_done MySubStruct
+
+struct_init MyNewStruct
+struct_member MyNewStruct,int_member,struct_typesize(int)
+struct_member MyNewStruct,double_member,struct_typesize(double)
+struct_member MyNewStruct,sub_struct_member,struct_gettotal(MySubStruct),struct_getmaxalignment(MySubStruct)
+struct_done MyNewStruct

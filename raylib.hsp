@@ -8475,7 +8475,7 @@ return
 #deffunc __raymath_Vector3Length var p_v,local return_value
 #define global raymath_Vector3Length(%1) __raymath_Vector3Length %1
 callfuncex_func _raymath_Vector3Length@,CALLFUNCEX_RETURN_FLOAT@,struct_typesize(float)
-callfuncex_p p_v,struct_gettotal(raymath_const_Vector3)
+callfuncex_p p_v,struct_gettotal(raymath_Vector3)
 callfuncex_call return_value
 return return_value
 
@@ -8483,7 +8483,7 @@ return return_value
 #deffunc __raymath_Vector3LengthSqr var p_v,local return_value
 #define global raymath_Vector3LengthSqr(%1) __raymath_Vector3LengthSqr %1
 callfuncex_func _raymath_Vector3LengthSqr@,CALLFUNCEX_RETURN_FLOAT@,struct_typesize(float)
-callfuncex_p p_v,struct_gettotal(raymath_const_Vector3)
+callfuncex_p p_v,struct_gettotal(raymath_Vector3)
 callfuncex_call return_value
 return return_value
 

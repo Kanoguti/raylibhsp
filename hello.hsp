@@ -1,6 +1,6 @@
 /*
 
-32bit版HSP3(UTF-8版)で、raylibのウィンドウを作成し、文字列「Hello, raylib!」と表示させるサンプルスクリプト。
+32bit版HSP3(UTF-8版)で、raylibのウィンドウを作成し、文字列「Hello, raylibhsp!」と表示させるサンプルスクリプト。
 
 */
 

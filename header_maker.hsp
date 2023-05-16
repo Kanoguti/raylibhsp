@@ -331,6 +331,12 @@ repeat length(parser_txt_path)
     notesel parser_txt_original
     noteload parser_txt_path(cnt)
     noteunsel
+    sdim temp_cr,2
+    sdim temp_lf,2
+    poke temp_cr,0,0x0D
+    poke temp_lf,0,0x0A
+    strrep parser_txt_original,temp_cr,temp_lf
+    strrep parser_txt_original,temp_lf,"\n"
     strrep parser_txt_original,"\n",""
 
     temp_string_flag=0

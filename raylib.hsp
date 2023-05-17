@@ -335,7 +335,36 @@ struct_module_init
 #define global rl_RAYLIB_VERSION_MINOR 5
 #define global rl_RAYLIB_VERSION_PATCH 0
 #define global rl_RAYLIB_VERSION "4.5"
+#define global rl_RLAPI rl___declspec(rl_dllexport)
 #define global rl_PI 3.14159265358979323846
+#define global rl_DEG2RAD (rl_PI/180.0f)
+#define global rl_RAD2DEG (180.0f/rl_PI)
+#define global rl_LIGHTGRAY rl_CLITERAL(rl_Color){ 200, 200, 200, 255 }
+#define global rl_GRAY rl_CLITERAL(rl_Color){ 130, 130, 130, 255 }
+#define global rl_DARKGRAY rl_CLITERAL(rl_Color){ 80, 80, 80, 255 }
+#define global rl_YELLOW rl_CLITERAL(rl_Color){ 253, 249, 0, 255 }
+#define global rl_GOLD rl_CLITERAL(rl_Color){ 255, 203, 0, 255 }
+#define global rl_ORANGE rl_CLITERAL(rl_Color){ 255, 161, 0, 255 }
+#define global rl_PINK rl_CLITERAL(rl_Color){ 255, 109, 194, 255 }
+#define global rl_RED rl_CLITERAL(rl_Color){ 230, 41, 55, 255 }
+#define global rl_MAROON rl_CLITERAL(rl_Color){ 190, 33, 55, 255 }
+#define global rl_GREEN rl_CLITERAL(rl_Color){ 0, 228, 48, 255 }
+#define global rl_LIME rl_CLITERAL(rl_Color){ 0, 158, 47, 255 }
+#define global rl_DARKGREEN rl_CLITERAL(rl_Color){ 0, 117, 44, 255 }
+#define global rl_SKYBLUE rl_CLITERAL(rl_Color){ 102, 191, 255, 255 }
+#define global rl_BLUE rl_CLITERAL(rl_Color){ 0, 121, 241, 255 }
+#define global rl_DARKBLUE rl_CLITERAL(rl_Color){ 0, 82, 172, 255 }
+#define global rl_PURPLE rl_CLITERAL(rl_Color){ 200, 122, 255, 255 }
+#define global rl_VIOLET rl_CLITERAL(rl_Color){ 135, 60, 190, 255 }
+#define global rl_DARKPURPLE rl_CLITERAL(rl_Color){ 112, 31, 126, 255 }
+#define global rl_BEIGE rl_CLITERAL(rl_Color){ 211, 176, 131, 255 }
+#define global rl_BROWN rl_CLITERAL(rl_Color){ 127, 106, 79, 255 }
+#define global rl_DARKBROWN rl_CLITERAL(rl_Color){ 76, 63, 47, 255 }
+#define global rl_WHITE rl_CLITERAL(rl_Color){ 255, 255, 255, 255 }
+#define global rl_BLACK rl_CLITERAL(rl_Color){ 0, 0, 0, 255 }
+#define global rl_BLANK rl_CLITERAL(rl_Color){ 0, 0, 0, 0 }
+#define global rl_MAGENTA rl_CLITERAL(rl_Color){ 255, 0, 255, 255 }
+#define global rl_RAYWHITE rl_CLITERAL(rl_Color){ 245, 245, 245, 255 }
 #define global rl_MOUSE_LEFT_BUTTON rl_MOUSE_BUTTON_LEFT
 #define global rl_MOUSE_RIGHT_BUTTON rl_MOUSE_BUTTON_RIGHT
 #define global rl_MOUSE_MIDDLE_BUTTON rl_MOUSE_BUTTON_MIDDLE
@@ -344,6 +373,7 @@ struct_module_init
 #define global rl_SHADER_LOC_MAP_DIFFUSE rl_SHADER_LOC_MAP_ALBEDO
 #define global rl_SHADER_LOC_MAP_SPECULAR rl_SHADER_LOC_MAP_METALNESS
 #define global rlgl_RLGL_VERSION "4.5"
+#define global rlgl_RLAPI rlgl___declspec(rlgl_dllexport)
 #define global rlgl_RL_DEFAULT_BATCH_BUFFER_ELEMENTS 8192
 #define global rlgl_RL_DEFAULT_BATCH_BUFFERS 1
 #define global rlgl_RL_DEFAULT_BATCH_DRAWCALLS 256
@@ -418,8 +448,11 @@ struct_module_init
 #define global rlgl_RL_BLEND_COLOR 32773
 #define global rlgl_RL_SHADER_LOC_MAP_DIFFUSE rlgl_RL_SHADER_LOC_MAP_ALBEDO
 #define global rlgl_RL_SHADER_LOC_MAP_SPECULAR rlgl_RL_SHADER_LOC_MAP_METALNESS
+#define global raymath_RMAPI raymath___declspec(raymath_dllexport) raymath_extern raymath_inline
 #define global raymath_PI 3.14159265358979323846
 #define global raymath_EPSILON 0.000001
+#define global raymath_DEG2RAD (raymath_PI/180.0f)
+#define global raymath_RAD2DEG (180.0f/raymath_PI)
 
 /* enums */
 

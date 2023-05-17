@@ -257,6 +257,8 @@ return temp_return
 
 #global
 
+title "raylibhsp - Header maker - 2023 Kanoguti"
+
 cls 3
 
 color 255,255,255
@@ -459,7 +461,7 @@ repeat length(parser_txt_path)
             switch parser_txt_array(1)
             case "\"defines\":"
             if parser_txt_brackets_array_index==3:{
-                if parser_defines_type(parser_defines_count)!="GUARD" && string_check(parser_defines_name(parser_defines_count),"(){},")==0 && string_check(parser_defines_value(parser_defines_count),"(){},")==0:{
+                if parser_defines_type(parser_defines_count)!="GUARD" && string_check(parser_defines_name(parser_defines_count),"(){},")==0:{
                     parser_defines_count++
                 }
 
@@ -621,14 +623,62 @@ repeat length(parser_txt_path)
                 strrep parser_defines_type(parser_defines_count),"\"",""
                 swbreak
                 case "\"value\""
-                parser_defines_value(parser_defines_count)=temp_value(1)
-                if parser_defines_type(parser_defines_count)=="UNKNOWN":{
-                    parser_defines_value(parser_defines_count)=""+ parser_txt_current_head +""+ parser_defines_value(parser_defines_count) +""
-                }
+                temp_value=temp_value(1)
 
                 if parser_defines_type(parser_defines_count)!="STRING":{
-                    strrep parser_defines_value(parser_defines_count),"\"",""
+                    strrep temp_value,"\"",""
                 }
+
+                temp_number_flag=0
+                temp_alphabet_flag=0
+                temp_string_flag=0
+                repeat strlen(temp_value)
+                    sdim temp,2
+                    getstr temp,temp_value,cnt,0,1
+                    if string_check(temp,"\"")==1:{
+                        temp_string_flag=1
+                    } else {
+                        temp_string_flag=0
+                    }
+                    if temp_string_flag==0:{
+                        if string_number_check(temp)==1:{
+                            if temp_number_flag==0:{
+                                temp_number_flag=1
+                            }
+                            temp_alphabet_flag=0
+                        } else {
+                            if string_alphabet_check(temp)==1 || string_check(temp,"_")==1:{
+                                if string_check(temp,"f")==1:{
+                                    if temp_number_flag==0:{
+                                        if temp_alphabet_flag==0:{
+                                            temp_alphabet_flag=1
+                                            parser_defines_value(parser_defines_count)+=""+ parser_txt_current_head +""
+                                        }
+                                    } else {
+                                        temp_number_flag=0
+                                    }
+                                } else {
+                                    if temp_alphabet_flag==0:{
+                                        temp_alphabet_flag=1
+                                        parser_defines_value(parser_defines_count)+=""+ parser_txt_current_head +""
+                                    }
+                                    if temp_number_flag==1:{
+                                        temp_number_flag=0
+                                    }
+                                }
+                            } else {
+                                if string_check(temp,".")==1:{
+                                    if temp_number_flag==0:{
+                                        temp_alphabet_flag=0
+                                    }
+                                } else {
+                                    temp_alphabet_flag=0
+                                }
+                            }
+                        }
+                    }
+                    parser_defines_value(parser_defines_count)+=""+ temp +""
+                loop
                 swbreak
                 swend
             }

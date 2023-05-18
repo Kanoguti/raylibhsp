@@ -740,9 +740,10 @@ repeat length(parser_txt_path)
                     strrep temp," *","*"
                     strrep temp,"* ","*"
                 wend
-                if instr(temp,0,"const ")==0:{
-                    temp=strmid(temp,strlen("const "),strlen(temp)-strlen("const "))
-                }
+                while (instr(temp,0," const")!=-1 || instr(temp,0,"const ")!=-1)
+                    strrep temp," const",""
+                    strrep temp,"const ",""
+                wend
                 if instr(temp,0,"*")!=-1 || string_check(temp,".")==1:{
                     temp="pointer"
                     if instr(temp_value(1),0,"[")!=-1:{
@@ -807,9 +808,10 @@ repeat length(parser_txt_path)
                     strrep parser_functions_return(parser_functions_count)," *","*"
                     strrep parser_functions_return(parser_functions_count),"* ","*"
                 wend
-                if instr(parser_functions_return(parser_functions_count),0,"const ")==0:{
-                    parser_functions_return(parser_functions_count)=strmid(parser_functions_return(parser_functions_count),strlen("const "),strlen(parser_functions_return(parser_functions_count))-strlen("const "))
-                }
+                while (instr(parser_functions_return(parser_functions_count),0," const")!=-1 || instr(parser_functions_return(parser_functions_count),0,"const ")!=-1)
+                    strrep parser_functions_return(parser_functions_count)," const",""
+                    strrep parser_functions_return(parser_functions_count),"const ",""
+                wend
                 if instr(parser_functions_return(parser_functions_count),0,"*")!=-1 || string_check(parser_functions_return(parser_functions_count),".")==1:{
                     parser_functions_return(parser_functions_count)="pointer"
                     if instr(temp_value(1),0,"[")!=-1:{
@@ -835,9 +837,10 @@ repeat length(parser_txt_path)
                     strrep temp," *","*"
                     strrep temp,"* ","*"
                 wend
-                if instr(temp,0,"const ")==0:{
-                    temp=strmid(temp,strlen("const "),strlen(temp)-strlen("const "))
-                }
+                while (instr(temp,0," const")!=-1 || instr(temp,0,"const ")!=-1)
+                    strrep temp," const",""
+                    strrep temp,"const ",""
+                wend
                 if instr(temp,0,"*")!=-1 || string_check(temp,".")==1:{
                     temp="pointer"
                     if instr(temp_value(1),0,"[")!=-1:{

@@ -41,6 +41,11 @@
 #define global ctype struct_getmaxalignment(%1) (%1__max_alignment@)
 #define global struct_getdata(%1,%2,%3,%4) memcpy %4,%3,struct_getsize(%1,%2),0,struct_getoffset(%1,%2)
 #define global struct_setdata(%1,%2,%3,%4) memcpy %3,%4,struct_getsize(%1,%2),struct_getoffset(%1,%2),0
+#ifdef __hsp64__@
+#define global struct_dupdata(%1,%2,%3,%4,%5="str") dupptr64 %4,varptr64(%3)+struct_getoffset(%1,%2),struct_getsize(%1,%2),vartype(%5)
+#else
+#define global struct_dupdata(%1,%2,%3,%4,%5="str") dupptr %4,varptr(%3)+struct_getoffset(%1,%2),struct_getsize(%1,%2),vartype(%5)
+#endif
 #define global struct_setvalue(%1,%2,%3,%4) dummy@struct_module=%4:struct_setdata %1,%2,%3,dummy@struct_module
 #define global struct_make(%1,%2) sdim %2,%1__total@
 

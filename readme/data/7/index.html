@@ -235,6 +235,20 @@
                 <p>指定した<span class="mark">構造体のデータが入った変数から、指定したメンバのデータを書き換えます</span>。</p>
             </div>
             <div class="frame">
+                <h2><code>struct_dupdata p1,p2,p3,p4[,p5]</code></h2>
+                <h3><span class="mark">構造体のデータが入った変数の、メンバのデータのクローン変数を作成します</span>。</h3>
+                <hr>
+                <h3>
+                    p1=構造体の名前<br>
+                    p2=構造体のメンバの名前<br>
+                    p3=構造体のデータが入った変数<br>
+                    p4=構造体のメンバのデータから作成するクローン変数名<br>
+                    p5=作成するクローン変数の型(HSP3の標準命令のvartype関数で指定できる値を入力してください)(省略すると「"str"」になります)
+                </h3>
+                <hr>
+                <p>指定した<span class="mark">構造体のデータが入った変数から、指定したメンバのデータのクローン変数を作成します</span>。</p>
+            </div>
+            <div class="frame">
                 <h2><code>struct_setvalue p1,p2,p3,p4</code></h2>
                 <h3><span class="mark">構造体のデータが入った変数の、メンバのデータを変数を介さずに書き換えます</span>。</h3>
                 <hr>

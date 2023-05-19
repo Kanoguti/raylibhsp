@@ -1156,6 +1156,7 @@ repeat parser_functions_count
         }
     }
     export_txt+="\n"
+    export_txt+="return_value=0"+"\n"
     export_txt+="callfuncex_func _"+ parser_functions_name(cnt) +"@raylibhsp,"
     if primitive_manager_isprimitive(temp_return_type)==1:{
         switch temp_return_type_real
@@ -1189,7 +1190,7 @@ repeat parser_functions_count
             export_txt+="#ifndef __hsp64__@"+"\n"
             export_txt+="callfuncex_p_value varptr(return_var),struct_typesize(pointer)"+"\n"
             export_txt+="#else"+"\n"
-            export_txt+="callfuncex_p_value varptr64(return_var),struct_typesize(pointer)"+"\n"
+            export_txt+="if struct_gettotal("+ temp_return_type +")>8:callfuncex_p_value varptr64(return_var),struct_typesize(pointer)"+"\n"
             export_txt+="#endif"+"\n"
         }
     }
@@ -1216,8 +1217,21 @@ repeat parser_functions_count
         export_txt+="callfuncex_call return_var"+"\n"
         export_txt+="return"+"\n"
     } else {
-        export_txt+="callfuncex_call return_value"+"\n"
-        export_txt+="return return_value"+"\n"
+        if temp_return_flag==1 && primitive_manager_isprimitive(temp_return_type)==0:{
+            export_txt+="#ifndef __hsp64__@"+"\n"
+            export_txt+="callfuncex_call return_value"+"\n"
+            export_txt+="#else"+"\n"
+            export_txt+="if struct_gettotal("+ temp_return_type +")>8:{"+"\n"
+            export_txt+="\tcallfuncex_call return_value"+"\n"
+            export_txt+="} else {"+"\n"
+            export_txt+="\tcallfuncex_call return_var"+"\n"
+            export_txt+="}"+"\n"
+            export_txt+="#endif"+"\n"
+            export_txt+="return return_value"+"\n"
+        } else {
+            export_txt+="callfuncex_call return_value"+"\n"
+            export_txt+="return return_value"+"\n"
+        }
     }
     export_txt+="\n"
 loop

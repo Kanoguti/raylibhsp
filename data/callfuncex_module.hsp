@@ -132,7 +132,7 @@
         case CALLFUNCEX_RETURN_POINTER@
         case CALLFUNCEX_RETURN_STRUCT@
         temp_return=callfunc64i(temp_param,sys_pointer,temp_count)
-        if sys_return_type!=CALLFUNCEX_RETURN_INT64@ && sys_return_type!=CALLFUNCEX_RETURN_POINTER@:{
+        if sys_return_type!=CALLFUNCEX_RETURN_INT64@ && sys_return_type!=CALLFUNCEX_RETURN_POINTER@ && sys_return_type!=CALLFUNCEX_RETURN_STRUCT@:{
             temp_return=int(temp_return)
         }
         if sys_return_type==CALLFUNCEX_RETURN_VOID@:temp_return=0
@@ -157,12 +157,12 @@
         case CALLFUNCEX_RETURN_INT@
         case CALLFUNCEX_RETURN_INT64@
         case CALLFUNCEX_RETURN_POINTER@
-        case CALLFUNCEX_RETURN_STRUCT@
         temp_return=callfunc(temp_param,sys_pointer,temp_count)
         if sys_return_type==CALLFUNCEX_RETURN_VOID@:temp_return=0
         swbreak
         case CALLFUNCEX_RETURN_DOUBLE@
         case CALLFUNCEX_RETURN_FLOAT@
+        case CALLFUNCEX_RETURN_STRUCT@
         temp_return=callfunc(temp_param,sys_pointer,temp_count)
         getdouble
         temp_return=refdval
@@ -179,8 +179,14 @@
     case CALLFUNCEX_RETURN_DOUBLE@
     case CALLFUNCEX_RETURN_FLOAT@
     case CALLFUNCEX_RETURN_POINTER@
-    case CALLFUNCEX_RETURN_STRUCT@
     p_return=temp_return
+    swbreak
+    case CALLFUNCEX_RETURN_STRUCT@
+    p_return=""
+    memexpand p_return,sys_return_size
+    if sys_return_size<=8:{
+        memcpy p_return,temp_return,sys_return_size,0,0
+    }
     swbreak
     default
         switch sys_return_size

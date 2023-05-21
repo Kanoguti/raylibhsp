@@ -22,18 +22,18 @@
                 <div class="frame">
                     <ul>
                         <li>
-                            <span class="mark">32ビット版</span>の場合
+                            <span class="mark">64ビット版</span>の場合
                             <br>
-                            <span class="mark">UTF-8版HSP3を使用する</span>ことを推奨します。<span class="mark">「hsp3utf.as」をインクルードした後に「raylib.hsp」をインクルード</span>してください。
+                            64ビット版HSP3を使用するように<span class="mark">「hsp3_64.as」をインクルード</span>、それに続いて「HSPInt64.dll」を使用できるように<span class="mark">「hspint64.as」をインクルード</span>し、その後に<span class="mark">「raylib.hsp」をインクルード</span>してください。
                             <div class="frame">
                                 <img src="1.png" class="image" style="width: 50%;">
                                 <iframe src="1.txt" class="text" style="width: 50%;"></iframe>
                             </div>
                         </li>
                         <li>
-                            <span class="mark">64ビット版</span>の場合
+                            32ビット版の場合(<span class="mark">非推奨です</span>)
                             <br>
-                            64ビット版HSP3を使用するように<span class="mark">「hsp3_64.as」をインクルード</span>、それに続いて「HSPInt64.dll」を使用できるように<span class="mark">「hspint64.as」をインクルード</span>し、その後に<span class="mark">「raylib.hsp」をインクルード</span>してください。
+                            UTF-8版HSP3を使用してください。「hsp3utf.as」をインクルードした後に「raylib.hsp」をインクルードしてください。
                             <div class="frame">
                                 <img src="2.png" class="image" style="width: 50%;">
                                 <iframe src="2.txt" class="text" style="width: 50%;"></iframe>
@@ -41,7 +41,7 @@
                         </li>
                     </ul>
                 </div>
-                <span class="mark"></span>ここから先の作業は32ビット版と64ビット版両方とも同じ作業です。ここまで入力したスクリプトは、ここからは省略させていただきます。
+                <span class="mark"></span>ここから先の作業は64ビット版と32ビット版両方とも同じ作業です。ここまで入力したスクリプトは、ここからは省略させていただきます。
                 このまま実行しても何も表示されませんので、<span class="mark">例としてraylibのウィンドウを表示させてからそのウィンドウ内に「Hello, world!」と文字を描画</span>させてみます。以下のスクリプトを入力してください。もちろんコメントの部分は入力しなくても大丈夫です。
                 <div class="frame">
                     <img src="3.png" class="image">

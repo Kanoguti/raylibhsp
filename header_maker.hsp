@@ -1066,7 +1066,7 @@ repeat parser_functions_count
         loop
         export_txt+=","
     }
-    export_txt+="local return_value"+"\n"
+    export_txt+="local return_value,local return_size"+"\n"
     export_txt+="#define global "+ parser_functions_name(cnt) +""
     if temp_return_flag==0 && temp_params_flag==0:{
         export_txt+=" __"+ parser_functions_name(cnt) +"@raylibhsp"
@@ -1157,6 +1157,11 @@ repeat parser_functions_count
     }
     export_txt+="\n"
     export_txt+="return_value=0"+"\n"
+    if primitive_manager_isprimitive(temp_return_type)==1:{
+        export_txt+="return_size=struct_typesize("+ temp_return_type +")"+"\n"
+    } else {
+        export_txt+="return_size=struct_gettotal("+ temp_return_type +")"+"\n"
+    }
     export_txt+="callfuncex_func _"+ parser_functions_name(cnt) +"@raylibhsp,"
     if primitive_manager_isprimitive(temp_return_type)==1:{
         switch temp_return_type_real
@@ -1179,19 +1184,20 @@ repeat parser_functions_count
         export_txt+="CALLFUNCEX_RETURN_INT64"
         swbreak
         swend
-        export_txt+=",struct_typesize("+ temp_return_type +")"
     } else {
         export_txt+="CALLFUNCEX_RETURN_STRUCT"
-        export_txt+=",struct_gettotal("+ temp_return_type +")"
     }
+    export_txt+=",return_size"
     export_txt+="\n"
     if temp_return_flag==1:{
         if primitive_manager_isprimitive(temp_return_type)==0:{
-            export_txt+="#ifndef __hsp64__@"+"\n"
-            export_txt+="callfuncex_p_value varptr(return_var),struct_typesize(pointer)"+"\n"
-            export_txt+="#else"+"\n"
-            export_txt+="if struct_gettotal("+ temp_return_type +")>8:callfuncex_p_value varptr64(return_var),struct_typesize(pointer)"+"\n"
-            export_txt+="#endif"+"\n"
+            export_txt+="if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{"+"\n"
+            export_txt+="\t#ifndef __hsp64__@"+"\n"
+            export_txt+="\tcallfuncex_p_value varptr(return_var),struct_typesize(pointer)"+"\n"
+            export_txt+="\t#else"+"\n"
+            export_txt+="\tcallfuncex_p_value varptr64(return_var),struct_typesize(pointer)"+"\n"
+            export_txt+="\t#endif"+"\n"
+            export_txt+="}"+"\n"
         }
     }
     if temp_params_flag==1:{
@@ -1217,17 +1223,13 @@ repeat parser_functions_count
         export_txt+="callfuncex_call return_var"+"\n"
         export_txt+="return"+"\n"
     } else {
-        if temp_return_flag==1 && primitive_manager_isprimitive(temp_return_type)==0:{
-            export_txt+="#ifndef __hsp64__@"+"\n"
-            export_txt+="callfuncex_call return_value"+"\n"
-            export_txt+="#else"+"\n"
-            export_txt+="if struct_gettotal("+ temp_return_type +")>8:{"+"\n"
+        if temp_return_flag==1:{
+            export_txt+="if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{"+"\n"
             export_txt+="\tcallfuncex_call return_value"+"\n"
             export_txt+="} else {"+"\n"
             export_txt+="\tcallfuncex_call return_var"+"\n"
             export_txt+="}"+"\n"
-            export_txt+="#endif"+"\n"
-            export_txt+="return return_value"+"\n"
+            export_txt+="return"+"\n"
         } else {
             export_txt+="callfuncex_call return_value"+"\n"
             export_txt+="return return_value"+"\n"

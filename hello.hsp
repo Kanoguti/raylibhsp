@@ -1,10 +1,11 @@
 /*
 
-32bit版HSP3(UTF-8版)で、raylibのウィンドウを作成し、文字列「Hello, raylibhsp!」と表示させるサンプルスクリプト。
+64bit版HSP3で、raylibのウィンドウを作成し、文字列「Hello, raylibhsp!」と表示させるサンプルスクリプト。
 
 */
 
-#include "hsp3utf.as"
+#include "hsp3_64.as"
+#include "hspint64.as"
 
 #include "raylib.hsp"
 

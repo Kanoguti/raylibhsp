@@ -1,3 +1,2 @@
-#include "hsp3_64.as"
-#include "hspint64.as"
+#include "hsp3utf.as"
 #include "raylib.hsp"

@@ -10,12 +10,12 @@
 #include "raylib.hsp"
 
 #module
-    #deffunc setcolor var p_color,int p_red,int p_green,int p_blue,int p_alpha
-        memset p_color,0,struct_gettotal(rl_Color),0
-        poke p_color,struct_getoffset(rl_Color,r),p_red
-        poke p_color,struct_getoffset(rl_Color,g),p_green
-        poke p_color,struct_getoffset(rl_Color,b),p_blue
-        poke p_color,struct_getoffset(rl_Color,a),p_alpha
+    #deffunc makecolor var p_color,int p_red,int p_green,int p_blue,int p_alpha
+        struct_make rl_Color,p_color
+        struct_setvalue rl_Color,r,p_color,p_red
+        struct_setvalue rl_Color,g,p_color,p_green
+        struct_setvalue rl_Color,b,p_color,p_blue
+        struct_setvalue rl_Color,a,p_color,p_alpha
         return
 #global
 
@@ -32,15 +32,15 @@ while
 
     rl_BeginDrawing
 
-    setcolor col,255,255,255,255
+    makecolor col,255,255,255,255
     rl_ClearBackground col
 
-    setcolor col,255,63,63,255
+    makecolor col,255,63,63,255
     rl_GetFPS
     text="FPS="+ stat +""
     rl_DrawText varptr(text), 5,5, 18, col
 
-    setcolor col,63,63,63,255
+    makecolor col,63,63,63,255
     text="Hello, raylibhsp!"
     rl_DrawText varptr(text), 20,40, 50, col
 

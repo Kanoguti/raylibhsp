@@ -38,15 +38,28 @@
 	return fret
 #endif
 
-#defcfunc callfuncex_d2f double p1, local temp
-    temp = p1
-    return lpeek(temp)>>29&7|(p1<0)<<31|lpeek(temp,4)-(p1!0)*0x38000000<<3
+#defcfunc callfuncex_d2f double p1, local temp,local temp_return
+	#ifndef __hsp64__@
+	temp=p1
+	temp_return=lpeek(temp)>>29&7|(p1<0)<<31|lpeek(temp,4)-(p1!0)*0x38000000<<3
+	#else
+	temp=float(p1)
+	temp_return=0
+	memcpy temp_return,temp,4,0,0
+	#endif
+    return temp_return
 
-#defcfunc callfuncex_f2d int p1, local temp
-    temp = 0.0
-    lpoke temp, 4, (p1 & 0x80000000) | (((p1 & 0x7fffffff) >> 3) + ((p1 & 0x7fffffff) ! 0) * 0x38000000)
-    lpoke temp, 0, p1 << 29
-    return temp
+#defcfunc callfuncex_f2d int p1, local temp,local temp_return
+	#ifndef __hsp64__@
+	temp_return = 0.0
+    lpoke temp_return, 4, (p1 & 0x80000000) | (((p1 & 0x7fffffff) >> 3) + ((p1 & 0x7fffffff) ! 0) * 0x38000000)
+    lpoke temp_return, 0, p1 << 29
+	#else
+	temp=float(0)
+	lpoke temp,0,p1
+	temp_return=double(temp)
+	#endif
+    return temp_return
 
 #deffunc local callfuncex_func var p_pointer,int p_return_type,int p_return_size
 #ifdef __hsp64__@

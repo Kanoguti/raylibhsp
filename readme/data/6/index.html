@@ -19,7 +19,7 @@
         <div class="frame">
             <h2>raylibhspでのraylibの<span class="mark">関数や定数等の名前</span>について</h2>
             <p>
-                「raylib.hsp」には、「raylib.h」ファイル、「raymath.h」ファイル、「rlgl.h」ファイルの関数や定数等の情報が含まれております。「raylib.hsp」でそれらの<span class="mark">関数や定数等を使用する際、名前の頭に以下の文字が追加されています</span>。
+                「raylib.hsp」には、「raylib.h」ファイル、「rlgl.h」ファイル、「raymath.h」ファイル、「rcamera.h」ファイルの関数や定数等の情報が含まれております。「raylib.hsp」でそれらの<span class="mark">関数や定数等を使用する際、名前の頭に以下の文字が追加されています</span>。
                 <div class="frame">
                     <ul>
                         <li>
@@ -28,14 +28,19 @@
                             例：「InitWindow」関数→「<span class="mark">rl_</span>InitWindow」
                         </li>
                         <li>
+                            <span class="mark">「rlgl.h」ファイル内の関数や定数等→頭に「rlgl_」を追加</span>
+                            <br>
+                            例：「rlBegin」関数→「<span class="mark">rlgl_</span>rlBegin」
+                        </li>
+                        <li>
                             <span class="mark">「raymath.h」ファイル内の関数や定数等→頭に「raymath_」を追加</span>
                             <br>
                             例：「Normalize」関数→「<span class="mark">raymath_</span>Normalize」
                         </li>
                         <li>
-                            <span class="mark">「rlgl.h」ファイル内の関数や定数等→頭に「rlgl_」を追加</span>
+                            <span class="mark">「rcamera.h」ファイル内の関数や定数等→頭に「rcamera_」を追加</span>
                             <br>
-                            例：「rlBegin」関数→「<span class="mark">rlgl_</span>rlBegin」
+                            例：「GetCameraForward」関数→「<span class="mark">rcamera_</span>GetCameraForward」
                         </li>
                     </ul>
                 </div>

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+
+        <link rel="stylesheet" href="../style.css">
+        <script src="../scripts.js"></script>
+        <style>
+            body {
+                padding: 1em;
+            }
+        </style>
+    </head>
+    <body>
+        <span style="text-align: center;">
+            <h1>9.「raylib_parser.exe」を使って「*_api.json」ファイルを生成する方法</h1>
+        </span>
+        <hr>
+        <div class="frame">
+            <p>
+                raylibのファイル群には<span class="mark">「raylib_parser.c」</span>というファイルがあります。例えば、<span class="mark">コマンドプロンプト</span>で<span class="mark">以下のコマンドのようにgccを用いて「raylib_parser.exe」ファイルを生成</span>することができます。
+            </p>
+            <div class="frame">
+                <p><code>gcc -o raylib_parser.exe raylib_parser.c</code></p>
+            </div>
+            <p>
+                この<span class="mark">「raylib_parser.exe」実行ファイルを使用</span>することで、raylibのファイル群に存在する<span class="mark">以下のファイル…</span>
+            </p>
+            <div class="frame">
+                <p>
+                    <ul>
+                        <li>raylib.h</li>
+                        <li>rlgl.h</li>
+                        <li>raymath.h</li>
+                        <li>rcamera.h</li>
+                    </ul>
+                </p>
+            </div>
+            <p>
+                <span class="mark">…これらのファイルから、raylibの関数や定数等の情報を抽出し、さらに以下のコマンドを実行する</span>ことで、抽出した情報を<span class="mark">JSONファイルとして出力</span>できます。
+            </p>
+            <div class="frame">
+                <p><code>
+                    <ul>
+                        <li>raylib_parser.exe -i raylib.h -o raylib_api.json -f JSON -d RLAPI</li>
+                        <li>raylib_parser.exe -i rlgl.h -o rlgl_api.json -f JSON -d RLAPI -t "RLGL IMPLEMENTATION"</li>
+                        <li>raylib_parser.exe -i raymath.h -o raymath_api.json -f JSON -d RMAPI</li>
+                        <li>raylib_parser.exe -i rcamera.h -o rcamera_api.json -f JSON -d RLAPI</li>
+                    </ul>
+                </code></p>
+            </div>
+            <div class="frame">
+                <p>
+                    <span class="mark">尚、少なくともraylibのバージョン4.5では、「rlgl.h」をそのまま使用して出力した「rlgl_api.json」ファイルを使用し、raylibhspの「header_maker.hsp」で「raylib.hsp」を生成すると、恐らく問題が発生します。この点の回避策に関しては、「2.注意事項」をご覧ください。</span>
+                </p>
+            </div>
+            <p>
+                生成された<span class="mark">「*_api.json」ファイル</span>は、<span class="mark">raylibhspの「data」フォルダに入れ、「header_maker.hsp」を実行する</span>ことで<span class="mark">「raylib.hsp」ファイルを生成することができます</span>。
+            </p>
+        </div>
+    </body>
+</html>

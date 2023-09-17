@@ -265,8 +265,12 @@ color 255,255,255
 pos 5,5
 mes "Now generating..."
 
-parser_txt_path="data/raylib_api.json","data/rlgl_api.json","data/raymath_api.json","data/rcamera_api.json"
-parser_txt_head="rl_","rlgl_","raymath_","rcamera_"
+sdim parser_txt_path
+sdim parser_txt_head
+parser_txt_path(0)="data/raylib_api.json":parser_txt_head(0)="rl_"
+parser_txt_path(1)="data/rlgl_api.json":parser_txt_head(1)="rlgl_"
+parser_txt_path(2)="data/raymath_api.json":parser_txt_head(2)="raymath_"
+parser_txt_path(3)="data/rcamera_api.json":parser_txt_head(3)="rcamera_"
 
 sdim export_txt
 
@@ -332,7 +336,8 @@ repeat length(parser_txt_path)
     sdim parser_txt
     sdim parser_txt_original
     notesel parser_txt_original
-    noteload parser_txt_path(cnt)
+    exist ""+ parser_txt_path(cnt) +""
+    if strsize!=-1:noteload parser_txt_path(cnt)
     noteunsel
     sdim temp_cr,2
     sdim temp_lf,2

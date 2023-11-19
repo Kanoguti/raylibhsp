@@ -362,10 +362,10 @@ struct_module_init
 
 /* defines */
 
-#define global rl_RAYLIB_VERSION_MAJOR 5
-#define global rl_RAYLIB_VERSION_MINOR 0
+#define global rl_RAYLIB_VERSION_MAJOR 4
+#define global rl_RAYLIB_VERSION_MINOR 5
 #define global rl_RAYLIB_VERSION_PATCH 0
-#define global rl_RAYLIB_VERSION "5.0"
+#define global rl_RAYLIB_VERSION "4.5"
 #define global rl_RLAPI rl___declspec(rl_dllexport)
 #define global rl_PI 3.14159265358979323846
 #define global rl_DEG2RAD (rl_PI/180.0f)
@@ -484,12 +484,10 @@ struct_module_init
 #define global raymath_EPSILON 0.000001
 #define global raymath_DEG2RAD (raymath_PI/180.0f)
 #define global raymath_RAD2DEG (180.0f/raymath_PI)
-#define global rcamera_RLAPI rcamera___declspec(rcamera_dllexport)
 #define global rcamera_CAMERA_CULL_DISTANCE_NEAR 0.01
 #define global rcamera_CAMERA_CULL_DISTANCE_FAR 1000.0
 #define global rcamera_CAMERA_MOVE_SPEED 0.09
 #define global rcamera_CAMERA_ROTATION_SPEED 0.03
-#define global rcamera_CAMERA_PAN_SPEED 0.2
 #define global rcamera_CAMERA_MOUSE_MOVE_SENSITIVITY 0.003
 #define global rcamera_CAMERA_MOUSE_SCROLL_SENSITIVITY 1.5
 #define global rcamera_CAMERA_ORBITAL_SPEED 0.5
@@ -516,7 +514,6 @@ struct_done rl_ConfigFlags
 #enum global rl_FLAG_WINDOW_TRANSPARENT = 16
 #enum global rl_FLAG_WINDOW_HIGHDPI = 8192
 #enum global rl_FLAG_WINDOW_MOUSE_PASSTHROUGH = 16384
-#enum global rl_FLAG_BORDERLESS_WINDOWED_MODE = 32768
 #enum global rl_FLAG_MSAA_4X_HINT = 32
 #enum global rl_FLAG_INTERLACED_HINT = 65536
 
@@ -783,20 +780,17 @@ struct_done rl_PixelFormat
 #enum global rl_PIXELFORMAT_UNCOMPRESSED_R32 = 8
 #enum global rl_PIXELFORMAT_UNCOMPRESSED_R32G32B32 = 9
 #enum global rl_PIXELFORMAT_UNCOMPRESSED_R32G32B32A32 = 10
-#enum global rl_PIXELFORMAT_UNCOMPRESSED_R16 = 11
-#enum global rl_PIXELFORMAT_UNCOMPRESSED_R16G16B16 = 12
-#enum global rl_PIXELFORMAT_UNCOMPRESSED_R16G16B16A16 = 13
-#enum global rl_PIXELFORMAT_COMPRESSED_DXT1_RGB = 14
-#enum global rl_PIXELFORMAT_COMPRESSED_DXT1_RGBA = 15
-#enum global rl_PIXELFORMAT_COMPRESSED_DXT3_RGBA = 16
-#enum global rl_PIXELFORMAT_COMPRESSED_DXT5_RGBA = 17
-#enum global rl_PIXELFORMAT_COMPRESSED_ETC1_RGB = 18
-#enum global rl_PIXELFORMAT_COMPRESSED_ETC2_RGB = 19
-#enum global rl_PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 20
-#enum global rl_PIXELFORMAT_COMPRESSED_PVRT_RGB = 21
-#enum global rl_PIXELFORMAT_COMPRESSED_PVRT_RGBA = 22
-#enum global rl_PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 23
-#enum global rl_PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 24
+#enum global rl_PIXELFORMAT_COMPRESSED_DXT1_RGB = 11
+#enum global rl_PIXELFORMAT_COMPRESSED_DXT1_RGBA = 12
+#enum global rl_PIXELFORMAT_COMPRESSED_DXT3_RGBA = 13
+#enum global rl_PIXELFORMAT_COMPRESSED_DXT5_RGBA = 14
+#enum global rl_PIXELFORMAT_COMPRESSED_ETC1_RGB = 15
+#enum global rl_PIXELFORMAT_COMPRESSED_ETC2_RGB = 16
+#enum global rl_PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 17
+#enum global rl_PIXELFORMAT_COMPRESSED_PVRT_RGB = 18
+#enum global rl_PIXELFORMAT_COMPRESSED_PVRT_RGBA = 19
+#enum global rl_PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20
+#enum global rl_PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 21
 
 struct_init rl_TextureFilter
 struct_member rl_TextureFilter,value,struct_typesize(int)
@@ -890,7 +884,6 @@ struct_done rlgl_rlGlVersion
 #enum global rlgl_RL_OPENGL_33 = 3
 #enum global rlgl_RL_OPENGL_43 = 4
 #enum global rlgl_RL_OPENGL_ES_20 = 5
-#enum global rlgl_RL_OPENGL_ES_30 = 6
 
 struct_init rlgl_rlTraceLogLevel
 struct_member rlgl_rlTraceLogLevel,value,struct_typesize(int)
@@ -917,20 +910,17 @@ struct_done rlgl_rlPixelFormat
 #enum global rlgl_RL_PIXELFORMAT_UNCOMPRESSED_R32 = 8
 #enum global rlgl_RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32 = 9
 #enum global rlgl_RL_PIXELFORMAT_UNCOMPRESSED_R32G32B32A32 = 10
-#enum global rlgl_RL_PIXELFORMAT_UNCOMPRESSED_R16 = 11
-#enum global rlgl_RL_PIXELFORMAT_UNCOMPRESSED_R16G16B16 = 12
-#enum global rlgl_RL_PIXELFORMAT_UNCOMPRESSED_R16G16B16A16 = 13
-#enum global rlgl_RL_PIXELFORMAT_COMPRESSED_DXT1_RGB = 14
-#enum global rlgl_RL_PIXELFORMAT_COMPRESSED_DXT1_RGBA = 15
-#enum global rlgl_RL_PIXELFORMAT_COMPRESSED_DXT3_RGBA = 16
-#enum global rlgl_RL_PIXELFORMAT_COMPRESSED_DXT5_RGBA = 17
-#enum global rlgl_RL_PIXELFORMAT_COMPRESSED_ETC1_RGB = 18
-#enum global rlgl_RL_PIXELFORMAT_COMPRESSED_ETC2_RGB = 19
-#enum global rlgl_RL_PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 20
-#enum global rlgl_RL_PIXELFORMAT_COMPRESSED_PVRT_RGB = 21
-#enum global rlgl_RL_PIXELFORMAT_COMPRESSED_PVRT_RGBA = 22
-#enum global rlgl_RL_PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 23
-#enum global rlgl_RL_PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 24
+#enum global rlgl_RL_PIXELFORMAT_COMPRESSED_DXT1_RGB = 11
+#enum global rlgl_RL_PIXELFORMAT_COMPRESSED_DXT1_RGBA = 12
+#enum global rlgl_RL_PIXELFORMAT_COMPRESSED_DXT3_RGBA = 13
+#enum global rlgl_RL_PIXELFORMAT_COMPRESSED_DXT5_RGBA = 14
+#enum global rlgl_RL_PIXELFORMAT_COMPRESSED_ETC1_RGB = 15
+#enum global rlgl_RL_PIXELFORMAT_COMPRESSED_ETC2_RGB = 16
+#enum global rlgl_RL_PIXELFORMAT_COMPRESSED_ETC2_EAC_RGBA = 17
+#enum global rlgl_RL_PIXELFORMAT_COMPRESSED_PVRT_RGB = 18
+#enum global rlgl_RL_PIXELFORMAT_COMPRESSED_PVRT_RGBA = 19
+#enum global rlgl_RL_PIXELFORMAT_COMPRESSED_ASTC_4x4_RGBA = 20
+#enum global rlgl_RL_PIXELFORMAT_COMPRESSED_ASTC_8x8_RGBA = 21
 
 struct_init rlgl_rlTextureFilter
 struct_member rlgl_rlTextureFilter,value,struct_typesize(int)
@@ -1258,7 +1248,6 @@ struct_member rl_ModelAnimation,boneCount,struct_typesize(int)*1,struct_typesize
 struct_member rl_ModelAnimation,frameCount,struct_typesize(int)*1,struct_typesize(int)
 struct_member rl_ModelAnimation,bones,struct_typesize(pointer)*1,struct_typesize(pointer)
 struct_member rl_ModelAnimation,framePoses,struct_typesize(pointer)*1,struct_typesize(pointer)
-struct_member rl_ModelAnimation,name,struct_typesize(char)*32,struct_typesize(char)
 struct_done rl_ModelAnimation
 
 struct_init rl_Ray
@@ -1336,18 +1325,6 @@ struct_member rl_FilePathList,capacity,struct_typesize(unsigned_int)*1,struct_ty
 struct_member rl_FilePathList,count,struct_typesize(unsigned_int)*1,struct_typesize(unsigned_int)
 struct_member rl_FilePathList,paths,struct_typesize(pointer)*1,struct_typesize(pointer)
 struct_done rl_FilePathList
-
-struct_init rl_AutomationEvent
-struct_member rl_AutomationEvent,frame,struct_typesize(unsigned_int)*1,struct_typesize(unsigned_int)
-struct_member rl_AutomationEvent,type,struct_typesize(unsigned_int)*1,struct_typesize(unsigned_int)
-struct_member rl_AutomationEvent,params,struct_typesize(int)*4,struct_typesize(int)
-struct_done rl_AutomationEvent
-
-struct_init rl_AutomationEventList
-struct_member rl_AutomationEventList,capacity,struct_typesize(unsigned_int)*1,struct_typesize(unsigned_int)
-struct_member rl_AutomationEventList,count,struct_typesize(unsigned_int)*1,struct_typesize(unsigned_int)
-struct_member rl_AutomationEventList,events,struct_typesize(pointer)*1,struct_typesize(pointer)
-struct_done rl_AutomationEventList
 
 struct_init rlgl_Matrix
 struct_member rlgl_Matrix,m0,struct_typesize(float)*1,struct_typesize(float)
@@ -1456,25 +1433,6 @@ struct_member rcamera_Vector3,y,struct_typesize(float)*1,struct_typesize(float)
 struct_member rcamera_Vector3,z,struct_typesize(float)*1,struct_typesize(float)
 struct_done rcamera_Vector3
 
-struct_init rcamera_Matrix
-struct_member rcamera_Matrix,m0,struct_typesize(float)*1,struct_typesize(float)
-struct_member rcamera_Matrix,m4,struct_typesize(float)*1,struct_typesize(float)
-struct_member rcamera_Matrix,m8,struct_typesize(float)*1,struct_typesize(float)
-struct_member rcamera_Matrix,m12,struct_typesize(float)*1,struct_typesize(float)
-struct_member rcamera_Matrix,m1,struct_typesize(float)*1,struct_typesize(float)
-struct_member rcamera_Matrix,m5,struct_typesize(float)*1,struct_typesize(float)
-struct_member rcamera_Matrix,m9,struct_typesize(float)*1,struct_typesize(float)
-struct_member rcamera_Matrix,m13,struct_typesize(float)*1,struct_typesize(float)
-struct_member rcamera_Matrix,m2,struct_typesize(float)*1,struct_typesize(float)
-struct_member rcamera_Matrix,m6,struct_typesize(float)*1,struct_typesize(float)
-struct_member rcamera_Matrix,m10,struct_typesize(float)*1,struct_typesize(float)
-struct_member rcamera_Matrix,m14,struct_typesize(float)*1,struct_typesize(float)
-struct_member rcamera_Matrix,m3,struct_typesize(float)*1,struct_typesize(float)
-struct_member rcamera_Matrix,m7,struct_typesize(float)*1,struct_typesize(float)
-struct_member rcamera_Matrix,m11,struct_typesize(float)*1,struct_typesize(float)
-struct_member rcamera_Matrix,m15,struct_typesize(float)*1,struct_typesize(float)
-struct_done rcamera_Matrix
-
 struct_init rcamera_Camera3D
 struct_member rcamera_Camera3D,position,struct_gettotal(rcamera_Vector3)*1,struct_getmaxalignment(rcamera_Vector3)
 struct_member rcamera_Camera3D,target,struct_gettotal(rcamera_Vector3)*1,struct_getmaxalignment(rcamera_Vector3)
@@ -1509,21 +1467,21 @@ callfuncex_p_value p_title,struct_typesize(pointer)*1
 callfuncex_call return_value
 return return_value
 
-#func _rl_CloseWindow "CloseWindow"
-#deffunc local __rl_CloseWindow local return_value,local return_size
-#define global rl_CloseWindow __rl_CloseWindow@raylibhsp
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_CloseWindow@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_call return_value
-return return_value
-
 #func _rl_WindowShouldClose "WindowShouldClose"
 #deffunc local __rl_WindowShouldClose local return_value,local return_size
 #define global rl_WindowShouldClose __rl_WindowShouldClose@raylibhsp
 return_value=0
 return_size=struct_typesize(bool)
 callfuncex_func _rl_WindowShouldClose@raylibhsp,CALLFUNCEX_RETURN_INT,return_size
+callfuncex_call return_value
+return return_value
+
+#func _rl_CloseWindow "CloseWindow"
+#deffunc local __rl_CloseWindow local return_value,local return_size
+#define global rl_CloseWindow __rl_CloseWindow@raylibhsp
+return_value=0
+return_size=struct_typesize(void)
+callfuncex_func _rl_CloseWindow@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
 callfuncex_call return_value
 return return_value
 
@@ -1629,15 +1587,6 @@ callfuncex_func _rl_ToggleFullscreen@raylibhsp,CALLFUNCEX_RETURN_VOID,return_siz
 callfuncex_call return_value
 return return_value
 
-#func _rl_ToggleBorderlessWindowed "ToggleBorderlessWindowed"
-#deffunc local __rl_ToggleBorderlessWindowed local return_value,local return_size
-#define global rl_ToggleBorderlessWindowed __rl_ToggleBorderlessWindowed@raylibhsp
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_ToggleBorderlessWindowed@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_call return_value
-return return_value
-
 #func _rl_MaximizeWindow "MaximizeWindow"
 #deffunc local __rl_MaximizeWindow local return_value,local return_size
 #define global rl_MaximizeWindow __rl_MaximizeWindow@raylibhsp
@@ -1728,17 +1677,6 @@ callfuncex_p_value p_height,struct_typesize(int)*1
 callfuncex_call return_value
 return return_value
 
-#func _rl_SetWindowMaxSize "SetWindowMaxSize"
-#deffunc local __rl_SetWindowMaxSize var p_width,var p_height,local return_value,local return_size
-#define global rl_SetWindowMaxSize(%1,%2) dummy_p1@raylibhsp=%1:dummy_p2@raylibhsp=%2:__rl_SetWindowMaxSize@raylibhsp dummy_p1@raylibhsp,dummy_p2@raylibhsp
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_SetWindowMaxSize@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_p_value p_width,struct_typesize(int)*1
-callfuncex_p_value p_height,struct_typesize(int)*1
-callfuncex_call return_value
-return return_value
-
 #func _rl_SetWindowSize "SetWindowSize"
 #deffunc local __rl_SetWindowSize var p_width,var p_height,local return_value,local return_size
 #define global rl_SetWindowSize(%1,%2) dummy_p1@raylibhsp=%1:dummy_p2@raylibhsp=%2:__rl_SetWindowSize@raylibhsp dummy_p1@raylibhsp,dummy_p2@raylibhsp
@@ -1757,15 +1695,6 @@ return_value=0
 return_size=struct_typesize(void)
 callfuncex_func _rl_SetWindowOpacity@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
 callfuncex_p_value p_opacity,struct_typesize(float)*1
-callfuncex_call return_value
-return return_value
-
-#func _rl_SetWindowFocused "SetWindowFocused"
-#deffunc local __rl_SetWindowFocused local return_value,local return_size
-#define global rl_SetWindowFocused __rl_SetWindowFocused@raylibhsp
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_SetWindowFocused@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
 callfuncex_call return_value
 return return_value
 
@@ -1987,6 +1916,34 @@ return return_value
 return_value=0
 return_size=struct_typesize(void)
 callfuncex_func _rl_DisableEventWaiting@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
+callfuncex_call return_value
+return return_value
+
+#func _rl_SwapScreenBuffer "SwapScreenBuffer"
+#deffunc local __rl_SwapScreenBuffer local return_value,local return_size
+#define global rl_SwapScreenBuffer __rl_SwapScreenBuffer@raylibhsp
+return_value=0
+return_size=struct_typesize(void)
+callfuncex_func _rl_SwapScreenBuffer@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
+callfuncex_call return_value
+return return_value
+
+#func _rl_PollInputEvents "PollInputEvents"
+#deffunc local __rl_PollInputEvents local return_value,local return_size
+#define global rl_PollInputEvents __rl_PollInputEvents@raylibhsp
+return_value=0
+return_size=struct_typesize(void)
+callfuncex_func _rl_PollInputEvents@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
+callfuncex_call return_value
+return return_value
+
+#func _rl_WaitTime "WaitTime"
+#deffunc local __rl_WaitTime var p_seconds,local return_value,local return_size
+#define global rl_WaitTime(%1) dummy_p1@raylibhsp=%1:__rl_WaitTime@raylibhsp dummy_p1@raylibhsp
+return_value=0
+return_size=struct_typesize(void)
+callfuncex_func _rl_WaitTime@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
+callfuncex_p_value p_seconds,struct_typesize(double)*1
 callfuncex_call return_value
 return return_value
 
@@ -2540,6 +2497,15 @@ callfuncex_p_value p_fps,struct_typesize(int)*1
 callfuncex_call return_value
 return return_value
 
+#func _rl_GetFPS "GetFPS"
+#deffunc local __rl_GetFPS local return_value,local return_size
+#define global rl_GetFPS __rl_GetFPS@raylibhsp
+return_value=0
+return_size=struct_typesize(int)
+callfuncex_func _rl_GetFPS@raylibhsp,CALLFUNCEX_RETURN_INT,return_size
+callfuncex_call return_value
+return return_value
+
 #func _rl_GetFrameTime "GetFrameTime"
 #deffunc local __rl_GetFrameTime local return_value,local return_size
 #define global rl_GetFrameTime __rl_GetFrameTime@raylibhsp
@@ -2558,53 +2524,6 @@ callfuncex_func _rl_GetTime@raylibhsp,CALLFUNCEX_RETURN_DOUBLE,return_size
 callfuncex_call return_value
 return return_value
 
-#func _rl_GetFPS "GetFPS"
-#deffunc local __rl_GetFPS local return_value,local return_size
-#define global rl_GetFPS __rl_GetFPS@raylibhsp
-return_value=0
-return_size=struct_typesize(int)
-callfuncex_func _rl_GetFPS@raylibhsp,CALLFUNCEX_RETURN_INT,return_size
-callfuncex_call return_value
-return return_value
-
-#func _rl_SwapScreenBuffer "SwapScreenBuffer"
-#deffunc local __rl_SwapScreenBuffer local return_value,local return_size
-#define global rl_SwapScreenBuffer __rl_SwapScreenBuffer@raylibhsp
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_SwapScreenBuffer@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_call return_value
-return return_value
-
-#func _rl_PollInputEvents "PollInputEvents"
-#deffunc local __rl_PollInputEvents local return_value,local return_size
-#define global rl_PollInputEvents __rl_PollInputEvents@raylibhsp
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_PollInputEvents@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_call return_value
-return return_value
-
-#func _rl_WaitTime "WaitTime"
-#deffunc local __rl_WaitTime var p_seconds,local return_value,local return_size
-#define global rl_WaitTime(%1) dummy_p1@raylibhsp=%1:__rl_WaitTime@raylibhsp dummy_p1@raylibhsp
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_WaitTime@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_p_value p_seconds,struct_typesize(double)*1
-callfuncex_call return_value
-return return_value
-
-#func _rl_SetRandomSeed "SetRandomSeed"
-#deffunc local __rl_SetRandomSeed var p_seed,local return_value,local return_size
-#define global rl_SetRandomSeed(%1) dummy_p1@raylibhsp=%1:__rl_SetRandomSeed@raylibhsp dummy_p1@raylibhsp
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_SetRandomSeed@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_p_value p_seed,struct_typesize(unsigned_int)*1
-callfuncex_call return_value
-return return_value
-
 #func _rl_GetRandomValue "GetRandomValue"
 #deffunc local __rl_GetRandomValue var p_min,var p_max,local return_value,local return_size
 #define global rl_GetRandomValue(%1,%2) dummy_p1@raylibhsp=%1:dummy_p2@raylibhsp=%2:__rl_GetRandomValue@raylibhsp dummy_p1@raylibhsp,dummy_p2@raylibhsp
@@ -2616,25 +2535,13 @@ callfuncex_p_value p_max,struct_typesize(int)*1
 callfuncex_call return_value
 return return_value
 
-#func _rl_LoadRandomSequence "LoadRandomSequence"
-#deffunc local __rl_LoadRandomSequence var return_var,var p_count,var p_min,var p_max,local return_value,local return_size
-#define global rl_LoadRandomSequence(%1,%2,%3,%4) dummy_p2@raylibhsp=%2:dummy_p3@raylibhsp=%3:dummy_p4@raylibhsp=%4:__rl_LoadRandomSequence@raylibhsp %1,dummy_p2@raylibhsp,dummy_p3@raylibhsp,dummy_p4@raylibhsp
-return_value=0
-return_size=struct_typesize(pointer)
-callfuncex_func _rl_LoadRandomSequence@raylibhsp,CALLFUNCEX_RETURN_POINTER,return_size
-callfuncex_p_value p_count,struct_typesize(unsigned_int)*1
-callfuncex_p_value p_min,struct_typesize(int)*1
-callfuncex_p_value p_max,struct_typesize(int)*1
-callfuncex_call return_var
-return
-
-#func _rl_UnloadRandomSequence "UnloadRandomSequence"
-#deffunc local __rl_UnloadRandomSequence var p_sequence,local return_value,local return_size
-#define global rl_UnloadRandomSequence(%1) dummy_p1@raylibhsp=%1:__rl_UnloadRandomSequence@raylibhsp dummy_p1@raylibhsp
+#func _rl_SetRandomSeed "SetRandomSeed"
+#deffunc local __rl_SetRandomSeed var p_seed,local return_value,local return_size
+#define global rl_SetRandomSeed(%1) dummy_p1@raylibhsp=%1:__rl_SetRandomSeed@raylibhsp dummy_p1@raylibhsp
 return_value=0
 return_size=struct_typesize(void)
-callfuncex_func _rl_UnloadRandomSequence@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_p_value p_sequence,struct_typesize(pointer)*1
+callfuncex_func _rl_SetRandomSeed@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
+callfuncex_p_value p_seed,struct_typesize(unsigned_int)*1
 callfuncex_call return_value
 return return_value
 
@@ -2655,16 +2562,6 @@ return_value=0
 return_size=struct_typesize(void)
 callfuncex_func _rl_SetConfigFlags@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
 callfuncex_p_value p_flags,struct_typesize(unsigned_int)*1
-callfuncex_call return_value
-return return_value
-
-#func _rl_OpenURL "OpenURL"
-#deffunc local __rl_OpenURL var p_url,local return_value,local return_size
-#define global rl_OpenURL(%1) dummy_p1@raylibhsp=%1:__rl_OpenURL@raylibhsp dummy_p1@raylibhsp
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_OpenURL@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_p_value p_url,struct_typesize(pointer)*1
 callfuncex_call return_value
 return return_value
 
@@ -2721,6 +2618,16 @@ callfuncex_p_value p_ptr,struct_typesize(pointer)*1
 callfuncex_call return_value
 return return_value
 
+#func _rl_OpenURL "OpenURL"
+#deffunc local __rl_OpenURL var p_url,local return_value,local return_size
+#define global rl_OpenURL(%1) dummy_p1@raylibhsp=%1:__rl_OpenURL@raylibhsp dummy_p1@raylibhsp
+return_value=0
+return_size=struct_typesize(void)
+callfuncex_func _rl_OpenURL@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
+callfuncex_p_value p_url,struct_typesize(pointer)*1
+callfuncex_call return_value
+return return_value
+
 #func _rl_SetTraceLogCallback "SetTraceLogCallback"
 #deffunc local __rl_SetTraceLogCallback var p_callback,local return_value,local return_size
 #define global rl_SetTraceLogCallback(%1) __rl_SetTraceLogCallback@raylibhsp %1
@@ -2772,13 +2679,13 @@ callfuncex_call return_value
 return return_value
 
 #func _rl_LoadFileData "LoadFileData"
-#deffunc local __rl_LoadFileData var return_var,var p_fileName,var p_dataSize,local return_value,local return_size
+#deffunc local __rl_LoadFileData var return_var,var p_fileName,var p_bytesRead,local return_value,local return_size
 #define global rl_LoadFileData(%1,%2,%3) dummy_p2@raylibhsp=%2:dummy_p3@raylibhsp=%3:__rl_LoadFileData@raylibhsp %1,dummy_p2@raylibhsp,dummy_p3@raylibhsp
 return_value=0
 return_size=struct_typesize(pointer)
 callfuncex_func _rl_LoadFileData@raylibhsp,CALLFUNCEX_RETURN_POINTER,return_size
 callfuncex_p_value p_fileName,struct_typesize(pointer)*1
-callfuncex_p_value p_dataSize,struct_typesize(pointer)*1
+callfuncex_p_value p_bytesRead,struct_typesize(pointer)*1
 callfuncex_call return_var
 return
 
@@ -2793,25 +2700,25 @@ callfuncex_call return_value
 return return_value
 
 #func _rl_SaveFileData "SaveFileData"
-#deffunc local __rl_SaveFileData var p_fileName,var p_data,var p_dataSize,local return_value,local return_size
+#deffunc local __rl_SaveFileData var p_fileName,var p_data,var p_bytesToWrite,local return_value,local return_size
 #define global rl_SaveFileData(%1,%2,%3) dummy_p1@raylibhsp=%1:dummy_p2@raylibhsp=%2:dummy_p3@raylibhsp=%3:__rl_SaveFileData@raylibhsp dummy_p1@raylibhsp,dummy_p2@raylibhsp,dummy_p3@raylibhsp
 return_value=0
 return_size=struct_typesize(bool)
 callfuncex_func _rl_SaveFileData@raylibhsp,CALLFUNCEX_RETURN_INT,return_size
 callfuncex_p_value p_fileName,struct_typesize(pointer)*1
 callfuncex_p_value p_data,struct_typesize(pointer)*1
-callfuncex_p_value p_dataSize,struct_typesize(int)*1
+callfuncex_p_value p_bytesToWrite,struct_typesize(unsigned_int)*1
 callfuncex_call return_value
 return return_value
 
 #func _rl_ExportDataAsCode "ExportDataAsCode"
-#deffunc local __rl_ExportDataAsCode var p_data,var p_dataSize,var p_fileName,local return_value,local return_size
+#deffunc local __rl_ExportDataAsCode var p_data,var p_size,var p_fileName,local return_value,local return_size
 #define global rl_ExportDataAsCode(%1,%2,%3) dummy_p1@raylibhsp=%1:dummy_p2@raylibhsp=%2:dummy_p3@raylibhsp=%3:__rl_ExportDataAsCode@raylibhsp dummy_p1@raylibhsp,dummy_p2@raylibhsp,dummy_p3@raylibhsp
 return_value=0
 return_size=struct_typesize(bool)
 callfuncex_func _rl_ExportDataAsCode@raylibhsp,CALLFUNCEX_RETURN_INT,return_size
 callfuncex_p_value p_data,struct_typesize(pointer)*1
-callfuncex_p_value p_dataSize,struct_typesize(int)*1
+callfuncex_p_value p_size,struct_typesize(unsigned_int)*1
 callfuncex_p_value p_fileName,struct_typesize(pointer)*1
 callfuncex_call return_value
 return return_value
@@ -3126,112 +3033,12 @@ callfuncex_p_value p_outputSize,struct_typesize(pointer)*1
 callfuncex_call return_var
 return
 
-#func _rl_LoadAutomationEventList "LoadAutomationEventList"
-#deffunc local __rl_LoadAutomationEventList var return_var,var p_fileName,local return_value,local return_size
-#define global rl_LoadAutomationEventList(%1,%2) dummy_p2@raylibhsp=%2:__rl_LoadAutomationEventList@raylibhsp %1,dummy_p2@raylibhsp
-return_value=0
-return_size=struct_gettotal(rl_AutomationEventList)
-callfuncex_func _rl_LoadAutomationEventList@raylibhsp,CALLFUNCEX_RETURN_STRUCT,return_size
-if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
-	#ifndef __hsp64__@
-	callfuncex_p_value varptr(return_var),struct_typesize(pointer)
-	#else
-	callfuncex_p_value varptr64(return_var),struct_typesize(pointer)
-	#endif
-}
-callfuncex_p_value p_fileName,struct_typesize(pointer)*1
-if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
-	callfuncex_call return_value
-} else {
-	callfuncex_call return_var
-}
-return
-
-#func _rl_UnloadAutomationEventList "UnloadAutomationEventList"
-#deffunc local __rl_UnloadAutomationEventList var p_list,local return_value,local return_size
-#define global rl_UnloadAutomationEventList(%1) dummy_p1@raylibhsp=%1:__rl_UnloadAutomationEventList@raylibhsp dummy_p1@raylibhsp
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_UnloadAutomationEventList@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_p_value p_list,struct_typesize(pointer)*1
-callfuncex_call return_value
-return return_value
-
-#func _rl_ExportAutomationEventList "ExportAutomationEventList"
-#deffunc local __rl_ExportAutomationEventList var p_list,var p_fileName,local return_value,local return_size
-#define global rl_ExportAutomationEventList(%1,%2) dummy_p2@raylibhsp=%2:__rl_ExportAutomationEventList@raylibhsp %1,dummy_p2@raylibhsp
-return_value=0
-return_size=struct_typesize(bool)
-callfuncex_func _rl_ExportAutomationEventList@raylibhsp,CALLFUNCEX_RETURN_INT,return_size
-callfuncex_p p_list,struct_gettotal(rl_AutomationEventList)*1
-callfuncex_p_value p_fileName,struct_typesize(pointer)*1
-callfuncex_call return_value
-return return_value
-
-#func _rl_SetAutomationEventList "SetAutomationEventList"
-#deffunc local __rl_SetAutomationEventList var p_list,local return_value,local return_size
-#define global rl_SetAutomationEventList(%1) dummy_p1@raylibhsp=%1:__rl_SetAutomationEventList@raylibhsp dummy_p1@raylibhsp
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_SetAutomationEventList@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_p_value p_list,struct_typesize(pointer)*1
-callfuncex_call return_value
-return return_value
-
-#func _rl_SetAutomationEventBaseFrame "SetAutomationEventBaseFrame"
-#deffunc local __rl_SetAutomationEventBaseFrame var p_frame,local return_value,local return_size
-#define global rl_SetAutomationEventBaseFrame(%1) dummy_p1@raylibhsp=%1:__rl_SetAutomationEventBaseFrame@raylibhsp dummy_p1@raylibhsp
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_SetAutomationEventBaseFrame@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_p_value p_frame,struct_typesize(int)*1
-callfuncex_call return_value
-return return_value
-
-#func _rl_StartAutomationEventRecording "StartAutomationEventRecording"
-#deffunc local __rl_StartAutomationEventRecording local return_value,local return_size
-#define global rl_StartAutomationEventRecording __rl_StartAutomationEventRecording@raylibhsp
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_StartAutomationEventRecording@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_call return_value
-return return_value
-
-#func _rl_StopAutomationEventRecording "StopAutomationEventRecording"
-#deffunc local __rl_StopAutomationEventRecording local return_value,local return_size
-#define global rl_StopAutomationEventRecording __rl_StopAutomationEventRecording@raylibhsp
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_StopAutomationEventRecording@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_call return_value
-return return_value
-
-#func _rl_PlayAutomationEvent "PlayAutomationEvent"
-#deffunc local __rl_PlayAutomationEvent var p_event,local return_value,local return_size
-#define global rl_PlayAutomationEvent(%1) __rl_PlayAutomationEvent@raylibhsp %1
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_PlayAutomationEvent@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_p p_event,struct_gettotal(rl_AutomationEvent)*1
-callfuncex_call return_value
-return return_value
-
 #func _rl_IsKeyPressed "IsKeyPressed"
 #deffunc local __rl_IsKeyPressed var p_key,local return_value,local return_size
 #define global rl_IsKeyPressed(%1) dummy_p1@raylibhsp=%1:__rl_IsKeyPressed@raylibhsp dummy_p1@raylibhsp
 return_value=0
 return_size=struct_typesize(bool)
 callfuncex_func _rl_IsKeyPressed@raylibhsp,CALLFUNCEX_RETURN_INT,return_size
-callfuncex_p_value p_key,struct_typesize(int)*1
-callfuncex_call return_value
-return return_value
-
-#func _rl_IsKeyPressedRepeat "IsKeyPressedRepeat"
-#deffunc local __rl_IsKeyPressedRepeat var p_key,local return_value,local return_size
-#define global rl_IsKeyPressedRepeat(%1) dummy_p1@raylibhsp=%1:__rl_IsKeyPressedRepeat@raylibhsp dummy_p1@raylibhsp
-return_value=0
-return_size=struct_typesize(bool)
-callfuncex_func _rl_IsKeyPressedRepeat@raylibhsp,CALLFUNCEX_RETURN_INT,return_size
 callfuncex_p_value p_key,struct_typesize(int)*1
 callfuncex_call return_value
 return return_value
@@ -3266,6 +3073,16 @@ callfuncex_p_value p_key,struct_typesize(int)*1
 callfuncex_call return_value
 return return_value
 
+#func _rl_SetExitKey "SetExitKey"
+#deffunc local __rl_SetExitKey var p_key,local return_value,local return_size
+#define global rl_SetExitKey(%1) dummy_p1@raylibhsp=%1:__rl_SetExitKey@raylibhsp dummy_p1@raylibhsp
+return_value=0
+return_size=struct_typesize(void)
+callfuncex_func _rl_SetExitKey@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
+callfuncex_p_value p_key,struct_typesize(int)*1
+callfuncex_call return_value
+return return_value
+
 #func _rl_GetKeyPressed "GetKeyPressed"
 #deffunc local __rl_GetKeyPressed local return_value,local return_size
 #define global rl_GetKeyPressed __rl_GetKeyPressed@raylibhsp
@@ -3281,16 +3098,6 @@ return return_value
 return_value=0
 return_size=struct_typesize(int)
 callfuncex_func _rl_GetCharPressed@raylibhsp,CALLFUNCEX_RETURN_INT,return_size
-callfuncex_call return_value
-return return_value
-
-#func _rl_SetExitKey "SetExitKey"
-#deffunc local __rl_SetExitKey var p_key,local return_value,local return_size
-#define global rl_SetExitKey(%1) dummy_p1@raylibhsp=%1:__rl_SetExitKey@raylibhsp dummy_p1@raylibhsp
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_SetExitKey@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_p_value p_key,struct_typesize(int)*1
 callfuncex_call return_value
 return return_value
 
@@ -3642,7 +3449,7 @@ return return_value
 return_value=0
 return_size=struct_typesize(bool)
 callfuncex_func _rl_IsGestureDetected@raylibhsp,CALLFUNCEX_RETURN_INT,return_size
-callfuncex_p_value p_gesture,struct_typesize(unsigned_int)*1
+callfuncex_p_value p_gesture,struct_typesize(int)*1
 callfuncex_call return_value
 return return_value
 
@@ -3819,18 +3626,6 @@ callfuncex_p p_color,struct_gettotal(rl_Color)*1
 callfuncex_call return_value
 return return_value
 
-#func _rl_DrawLineStrip "DrawLineStrip"
-#deffunc local __rl_DrawLineStrip var p_points,var p_pointCount,var p_color,local return_value,local return_size
-#define global rl_DrawLineStrip(%1,%2,%3) dummy_p1@raylibhsp=%1:dummy_p2@raylibhsp=%2:__rl_DrawLineStrip@raylibhsp dummy_p1@raylibhsp,dummy_p2@raylibhsp,%3
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_DrawLineStrip@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_p_value p_points,struct_typesize(pointer)*1
-callfuncex_p_value p_pointCount,struct_typesize(int)*1
-callfuncex_p p_color,struct_gettotal(rl_Color)*1
-callfuncex_call return_value
-return return_value
-
 #func _rl_DrawLineBezier "DrawLineBezier"
 #deffunc local __rl_DrawLineBezier var p_startPos,var p_endPos,var p_thick,var p_color,local return_value,local return_size
 #define global rl_DrawLineBezier(%1,%2,%3,%4) dummy_p3@raylibhsp=%3:__rl_DrawLineBezier@raylibhsp %1,%2,dummy_p3@raylibhsp,%4
@@ -3840,6 +3635,47 @@ callfuncex_func _rl_DrawLineBezier@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
 callfuncex_p p_startPos,struct_gettotal(rl_Vector2)*1
 callfuncex_p p_endPos,struct_gettotal(rl_Vector2)*1
 callfuncex_p_value p_thick,struct_typesize(float)*1
+callfuncex_p p_color,struct_gettotal(rl_Color)*1
+callfuncex_call return_value
+return return_value
+
+#func _rl_DrawLineBezierQuad "DrawLineBezierQuad"
+#deffunc local __rl_DrawLineBezierQuad var p_startPos,var p_endPos,var p_controlPos,var p_thick,var p_color,local return_value,local return_size
+#define global rl_DrawLineBezierQuad(%1,%2,%3,%4,%5) dummy_p4@raylibhsp=%4:__rl_DrawLineBezierQuad@raylibhsp %1,%2,%3,dummy_p4@raylibhsp,%5
+return_value=0
+return_size=struct_typesize(void)
+callfuncex_func _rl_DrawLineBezierQuad@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
+callfuncex_p p_startPos,struct_gettotal(rl_Vector2)*1
+callfuncex_p p_endPos,struct_gettotal(rl_Vector2)*1
+callfuncex_p p_controlPos,struct_gettotal(rl_Vector2)*1
+callfuncex_p_value p_thick,struct_typesize(float)*1
+callfuncex_p p_color,struct_gettotal(rl_Color)*1
+callfuncex_call return_value
+return return_value
+
+#func _rl_DrawLineBezierCubic "DrawLineBezierCubic"
+#deffunc local __rl_DrawLineBezierCubic var p_startPos,var p_endPos,var p_startControlPos,var p_endControlPos,var p_thick,var p_color,local return_value,local return_size
+#define global rl_DrawLineBezierCubic(%1,%2,%3,%4,%5,%6) dummy_p5@raylibhsp=%5:__rl_DrawLineBezierCubic@raylibhsp %1,%2,%3,%4,dummy_p5@raylibhsp,%6
+return_value=0
+return_size=struct_typesize(void)
+callfuncex_func _rl_DrawLineBezierCubic@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
+callfuncex_p p_startPos,struct_gettotal(rl_Vector2)*1
+callfuncex_p p_endPos,struct_gettotal(rl_Vector2)*1
+callfuncex_p p_startControlPos,struct_gettotal(rl_Vector2)*1
+callfuncex_p p_endControlPos,struct_gettotal(rl_Vector2)*1
+callfuncex_p_value p_thick,struct_typesize(float)*1
+callfuncex_p p_color,struct_gettotal(rl_Color)*1
+callfuncex_call return_value
+return return_value
+
+#func _rl_DrawLineStrip "DrawLineStrip"
+#deffunc local __rl_DrawLineStrip var p_points,var p_pointCount,var p_color,local return_value,local return_size
+#define global rl_DrawLineStrip(%1,%2,%3) dummy_p1@raylibhsp=%1:dummy_p2@raylibhsp=%2:__rl_DrawLineStrip@raylibhsp dummy_p1@raylibhsp,dummy_p2@raylibhsp,%3
+return_value=0
+return_size=struct_typesize(void)
+callfuncex_func _rl_DrawLineStrip@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
+callfuncex_p_value p_points,struct_typesize(pointer)*1
+callfuncex_p_value p_pointCount,struct_typesize(int)*1
 callfuncex_p p_color,struct_gettotal(rl_Color)*1
 callfuncex_call return_value
 return return_value
@@ -3921,18 +3757,6 @@ return_size=struct_typesize(void)
 callfuncex_func _rl_DrawCircleLines@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
 callfuncex_p_value p_centerX,struct_typesize(int)*1
 callfuncex_p_value p_centerY,struct_typesize(int)*1
-callfuncex_p_value p_radius,struct_typesize(float)*1
-callfuncex_p p_color,struct_gettotal(rl_Color)*1
-callfuncex_call return_value
-return return_value
-
-#func _rl_DrawCircleLinesV "DrawCircleLinesV"
-#deffunc local __rl_DrawCircleLinesV var p_center,var p_radius,var p_color,local return_value,local return_size
-#define global rl_DrawCircleLinesV(%1,%2,%3) dummy_p2@raylibhsp=%2:__rl_DrawCircleLinesV@raylibhsp %1,dummy_p2@raylibhsp,%3
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_DrawCircleLinesV@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_p p_center,struct_gettotal(rl_Vector2)*1
 callfuncex_p_value p_radius,struct_typesize(float)*1
 callfuncex_p p_color,struct_gettotal(rl_Color)*1
 callfuncex_call return_value
@@ -4238,265 +4062,6 @@ callfuncex_p p_color,struct_gettotal(rl_Color)*1
 callfuncex_call return_value
 return return_value
 
-#func _rl_DrawSplineLinear "DrawSplineLinear"
-#deffunc local __rl_DrawSplineLinear var p_points,var p_pointCount,var p_thick,var p_color,local return_value,local return_size
-#define global rl_DrawSplineLinear(%1,%2,%3,%4) dummy_p1@raylibhsp=%1:dummy_p2@raylibhsp=%2:dummy_p3@raylibhsp=%3:__rl_DrawSplineLinear@raylibhsp dummy_p1@raylibhsp,dummy_p2@raylibhsp,dummy_p3@raylibhsp,%4
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_DrawSplineLinear@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_p_value p_points,struct_typesize(pointer)*1
-callfuncex_p_value p_pointCount,struct_typesize(int)*1
-callfuncex_p_value p_thick,struct_typesize(float)*1
-callfuncex_p p_color,struct_gettotal(rl_Color)*1
-callfuncex_call return_value
-return return_value
-
-#func _rl_DrawSplineBasis "DrawSplineBasis"
-#deffunc local __rl_DrawSplineBasis var p_points,var p_pointCount,var p_thick,var p_color,local return_value,local return_size
-#define global rl_DrawSplineBasis(%1,%2,%3,%4) dummy_p1@raylibhsp=%1:dummy_p2@raylibhsp=%2:dummy_p3@raylibhsp=%3:__rl_DrawSplineBasis@raylibhsp dummy_p1@raylibhsp,dummy_p2@raylibhsp,dummy_p3@raylibhsp,%4
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_DrawSplineBasis@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_p_value p_points,struct_typesize(pointer)*1
-callfuncex_p_value p_pointCount,struct_typesize(int)*1
-callfuncex_p_value p_thick,struct_typesize(float)*1
-callfuncex_p p_color,struct_gettotal(rl_Color)*1
-callfuncex_call return_value
-return return_value
-
-#func _rl_DrawSplineCatmullRom "DrawSplineCatmullRom"
-#deffunc local __rl_DrawSplineCatmullRom var p_points,var p_pointCount,var p_thick,var p_color,local return_value,local return_size
-#define global rl_DrawSplineCatmullRom(%1,%2,%3,%4) dummy_p1@raylibhsp=%1:dummy_p2@raylibhsp=%2:dummy_p3@raylibhsp=%3:__rl_DrawSplineCatmullRom@raylibhsp dummy_p1@raylibhsp,dummy_p2@raylibhsp,dummy_p3@raylibhsp,%4
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_DrawSplineCatmullRom@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_p_value p_points,struct_typesize(pointer)*1
-callfuncex_p_value p_pointCount,struct_typesize(int)*1
-callfuncex_p_value p_thick,struct_typesize(float)*1
-callfuncex_p p_color,struct_gettotal(rl_Color)*1
-callfuncex_call return_value
-return return_value
-
-#func _rl_DrawSplineBezierQuadratic "DrawSplineBezierQuadratic"
-#deffunc local __rl_DrawSplineBezierQuadratic var p_points,var p_pointCount,var p_thick,var p_color,local return_value,local return_size
-#define global rl_DrawSplineBezierQuadratic(%1,%2,%3,%4) dummy_p1@raylibhsp=%1:dummy_p2@raylibhsp=%2:dummy_p3@raylibhsp=%3:__rl_DrawSplineBezierQuadratic@raylibhsp dummy_p1@raylibhsp,dummy_p2@raylibhsp,dummy_p3@raylibhsp,%4
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_DrawSplineBezierQuadratic@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_p_value p_points,struct_typesize(pointer)*1
-callfuncex_p_value p_pointCount,struct_typesize(int)*1
-callfuncex_p_value p_thick,struct_typesize(float)*1
-callfuncex_p p_color,struct_gettotal(rl_Color)*1
-callfuncex_call return_value
-return return_value
-
-#func _rl_DrawSplineBezierCubic "DrawSplineBezierCubic"
-#deffunc local __rl_DrawSplineBezierCubic var p_points,var p_pointCount,var p_thick,var p_color,local return_value,local return_size
-#define global rl_DrawSplineBezierCubic(%1,%2,%3,%4) dummy_p1@raylibhsp=%1:dummy_p2@raylibhsp=%2:dummy_p3@raylibhsp=%3:__rl_DrawSplineBezierCubic@raylibhsp dummy_p1@raylibhsp,dummy_p2@raylibhsp,dummy_p3@raylibhsp,%4
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_DrawSplineBezierCubic@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_p_value p_points,struct_typesize(pointer)*1
-callfuncex_p_value p_pointCount,struct_typesize(int)*1
-callfuncex_p_value p_thick,struct_typesize(float)*1
-callfuncex_p p_color,struct_gettotal(rl_Color)*1
-callfuncex_call return_value
-return return_value
-
-#func _rl_DrawSplineSegmentLinear "DrawSplineSegmentLinear"
-#deffunc local __rl_DrawSplineSegmentLinear var p_p1,var p_p2,var p_thick,var p_color,local return_value,local return_size
-#define global rl_DrawSplineSegmentLinear(%1,%2,%3,%4) dummy_p3@raylibhsp=%3:__rl_DrawSplineSegmentLinear@raylibhsp %1,%2,dummy_p3@raylibhsp,%4
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_DrawSplineSegmentLinear@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_p p_p1,struct_gettotal(rl_Vector2)*1
-callfuncex_p p_p2,struct_gettotal(rl_Vector2)*1
-callfuncex_p_value p_thick,struct_typesize(float)*1
-callfuncex_p p_color,struct_gettotal(rl_Color)*1
-callfuncex_call return_value
-return return_value
-
-#func _rl_DrawSplineSegmentBasis "DrawSplineSegmentBasis"
-#deffunc local __rl_DrawSplineSegmentBasis var p_p1,var p_p2,var p_p3,var p_p4,var p_thick,var p_color,local return_value,local return_size
-#define global rl_DrawSplineSegmentBasis(%1,%2,%3,%4,%5,%6) dummy_p5@raylibhsp=%5:__rl_DrawSplineSegmentBasis@raylibhsp %1,%2,%3,%4,dummy_p5@raylibhsp,%6
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_DrawSplineSegmentBasis@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_p p_p1,struct_gettotal(rl_Vector2)*1
-callfuncex_p p_p2,struct_gettotal(rl_Vector2)*1
-callfuncex_p p_p3,struct_gettotal(rl_Vector2)*1
-callfuncex_p p_p4,struct_gettotal(rl_Vector2)*1
-callfuncex_p_value p_thick,struct_typesize(float)*1
-callfuncex_p p_color,struct_gettotal(rl_Color)*1
-callfuncex_call return_value
-return return_value
-
-#func _rl_DrawSplineSegmentCatmullRom "DrawSplineSegmentCatmullRom"
-#deffunc local __rl_DrawSplineSegmentCatmullRom var p_p1,var p_p2,var p_p3,var p_p4,var p_thick,var p_color,local return_value,local return_size
-#define global rl_DrawSplineSegmentCatmullRom(%1,%2,%3,%4,%5,%6) dummy_p5@raylibhsp=%5:__rl_DrawSplineSegmentCatmullRom@raylibhsp %1,%2,%3,%4,dummy_p5@raylibhsp,%6
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_DrawSplineSegmentCatmullRom@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_p p_p1,struct_gettotal(rl_Vector2)*1
-callfuncex_p p_p2,struct_gettotal(rl_Vector2)*1
-callfuncex_p p_p3,struct_gettotal(rl_Vector2)*1
-callfuncex_p p_p4,struct_gettotal(rl_Vector2)*1
-callfuncex_p_value p_thick,struct_typesize(float)*1
-callfuncex_p p_color,struct_gettotal(rl_Color)*1
-callfuncex_call return_value
-return return_value
-
-#func _rl_DrawSplineSegmentBezierQuadratic "DrawSplineSegmentBezierQuadratic"
-#deffunc local __rl_DrawSplineSegmentBezierQuadratic var p_p1,var p_c2,var p_p3,var p_thick,var p_color,local return_value,local return_size
-#define global rl_DrawSplineSegmentBezierQuadratic(%1,%2,%3,%4,%5) dummy_p4@raylibhsp=%4:__rl_DrawSplineSegmentBezierQuadratic@raylibhsp %1,%2,%3,dummy_p4@raylibhsp,%5
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_DrawSplineSegmentBezierQuadratic@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_p p_p1,struct_gettotal(rl_Vector2)*1
-callfuncex_p p_c2,struct_gettotal(rl_Vector2)*1
-callfuncex_p p_p3,struct_gettotal(rl_Vector2)*1
-callfuncex_p_value p_thick,struct_typesize(float)*1
-callfuncex_p p_color,struct_gettotal(rl_Color)*1
-callfuncex_call return_value
-return return_value
-
-#func _rl_DrawSplineSegmentBezierCubic "DrawSplineSegmentBezierCubic"
-#deffunc local __rl_DrawSplineSegmentBezierCubic var p_p1,var p_c2,var p_c3,var p_p4,var p_thick,var p_color,local return_value,local return_size
-#define global rl_DrawSplineSegmentBezierCubic(%1,%2,%3,%4,%5,%6) dummy_p5@raylibhsp=%5:__rl_DrawSplineSegmentBezierCubic@raylibhsp %1,%2,%3,%4,dummy_p5@raylibhsp,%6
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_DrawSplineSegmentBezierCubic@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_p p_p1,struct_gettotal(rl_Vector2)*1
-callfuncex_p p_c2,struct_gettotal(rl_Vector2)*1
-callfuncex_p p_c3,struct_gettotal(rl_Vector2)*1
-callfuncex_p p_p4,struct_gettotal(rl_Vector2)*1
-callfuncex_p_value p_thick,struct_typesize(float)*1
-callfuncex_p p_color,struct_gettotal(rl_Color)*1
-callfuncex_call return_value
-return return_value
-
-#func _rl_GetSplinePointLinear "GetSplinePointLinear"
-#deffunc local __rl_GetSplinePointLinear var return_var,var p_startPos,var p_endPos,var p_t,local return_value,local return_size
-#define global rl_GetSplinePointLinear(%1,%2,%3,%4) dummy_p4@raylibhsp=%4:__rl_GetSplinePointLinear@raylibhsp %1,%2,%3,dummy_p4@raylibhsp
-return_value=0
-return_size=struct_gettotal(rl_Vector2)
-callfuncex_func _rl_GetSplinePointLinear@raylibhsp,CALLFUNCEX_RETURN_STRUCT,return_size
-if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
-	#ifndef __hsp64__@
-	callfuncex_p_value varptr(return_var),struct_typesize(pointer)
-	#else
-	callfuncex_p_value varptr64(return_var),struct_typesize(pointer)
-	#endif
-}
-callfuncex_p p_startPos,struct_gettotal(rl_Vector2)*1
-callfuncex_p p_endPos,struct_gettotal(rl_Vector2)*1
-callfuncex_p_value p_t,struct_typesize(float)*1
-if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
-	callfuncex_call return_value
-} else {
-	callfuncex_call return_var
-}
-return
-
-#func _rl_GetSplinePointBasis "GetSplinePointBasis"
-#deffunc local __rl_GetSplinePointBasis var return_var,var p_p1,var p_p2,var p_p3,var p_p4,var p_t,local return_value,local return_size
-#define global rl_GetSplinePointBasis(%1,%2,%3,%4,%5,%6) dummy_p6@raylibhsp=%6:__rl_GetSplinePointBasis@raylibhsp %1,%2,%3,%4,%5,dummy_p6@raylibhsp
-return_value=0
-return_size=struct_gettotal(rl_Vector2)
-callfuncex_func _rl_GetSplinePointBasis@raylibhsp,CALLFUNCEX_RETURN_STRUCT,return_size
-if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
-	#ifndef __hsp64__@
-	callfuncex_p_value varptr(return_var),struct_typesize(pointer)
-	#else
-	callfuncex_p_value varptr64(return_var),struct_typesize(pointer)
-	#endif
-}
-callfuncex_p p_p1,struct_gettotal(rl_Vector2)*1
-callfuncex_p p_p2,struct_gettotal(rl_Vector2)*1
-callfuncex_p p_p3,struct_gettotal(rl_Vector2)*1
-callfuncex_p p_p4,struct_gettotal(rl_Vector2)*1
-callfuncex_p_value p_t,struct_typesize(float)*1
-if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
-	callfuncex_call return_value
-} else {
-	callfuncex_call return_var
-}
-return
-
-#func _rl_GetSplinePointCatmullRom "GetSplinePointCatmullRom"
-#deffunc local __rl_GetSplinePointCatmullRom var return_var,var p_p1,var p_p2,var p_p3,var p_p4,var p_t,local return_value,local return_size
-#define global rl_GetSplinePointCatmullRom(%1,%2,%3,%4,%5,%6) dummy_p6@raylibhsp=%6:__rl_GetSplinePointCatmullRom@raylibhsp %1,%2,%3,%4,%5,dummy_p6@raylibhsp
-return_value=0
-return_size=struct_gettotal(rl_Vector2)
-callfuncex_func _rl_GetSplinePointCatmullRom@raylibhsp,CALLFUNCEX_RETURN_STRUCT,return_size
-if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
-	#ifndef __hsp64__@
-	callfuncex_p_value varptr(return_var),struct_typesize(pointer)
-	#else
-	callfuncex_p_value varptr64(return_var),struct_typesize(pointer)
-	#endif
-}
-callfuncex_p p_p1,struct_gettotal(rl_Vector2)*1
-callfuncex_p p_p2,struct_gettotal(rl_Vector2)*1
-callfuncex_p p_p3,struct_gettotal(rl_Vector2)*1
-callfuncex_p p_p4,struct_gettotal(rl_Vector2)*1
-callfuncex_p_value p_t,struct_typesize(float)*1
-if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
-	callfuncex_call return_value
-} else {
-	callfuncex_call return_var
-}
-return
-
-#func _rl_GetSplinePointBezierQuad "GetSplinePointBezierQuad"
-#deffunc local __rl_GetSplinePointBezierQuad var return_var,var p_p1,var p_c2,var p_p3,var p_t,local return_value,local return_size
-#define global rl_GetSplinePointBezierQuad(%1,%2,%3,%4,%5) dummy_p5@raylibhsp=%5:__rl_GetSplinePointBezierQuad@raylibhsp %1,%2,%3,%4,dummy_p5@raylibhsp
-return_value=0
-return_size=struct_gettotal(rl_Vector2)
-callfuncex_func _rl_GetSplinePointBezierQuad@raylibhsp,CALLFUNCEX_RETURN_STRUCT,return_size
-if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
-	#ifndef __hsp64__@
-	callfuncex_p_value varptr(return_var),struct_typesize(pointer)
-	#else
-	callfuncex_p_value varptr64(return_var),struct_typesize(pointer)
-	#endif
-}
-callfuncex_p p_p1,struct_gettotal(rl_Vector2)*1
-callfuncex_p p_c2,struct_gettotal(rl_Vector2)*1
-callfuncex_p p_p3,struct_gettotal(rl_Vector2)*1
-callfuncex_p_value p_t,struct_typesize(float)*1
-if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
-	callfuncex_call return_value
-} else {
-	callfuncex_call return_var
-}
-return
-
-#func _rl_GetSplinePointBezierCubic "GetSplinePointBezierCubic"
-#deffunc local __rl_GetSplinePointBezierCubic var return_var,var p_p1,var p_c2,var p_c3,var p_p4,var p_t,local return_value,local return_size
-#define global rl_GetSplinePointBezierCubic(%1,%2,%3,%4,%5,%6) dummy_p6@raylibhsp=%6:__rl_GetSplinePointBezierCubic@raylibhsp %1,%2,%3,%4,%5,dummy_p6@raylibhsp
-return_value=0
-return_size=struct_gettotal(rl_Vector2)
-callfuncex_func _rl_GetSplinePointBezierCubic@raylibhsp,CALLFUNCEX_RETURN_STRUCT,return_size
-if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
-	#ifndef __hsp64__@
-	callfuncex_p_value varptr(return_var),struct_typesize(pointer)
-	#else
-	callfuncex_p_value varptr64(return_var),struct_typesize(pointer)
-	#endif
-}
-callfuncex_p p_p1,struct_gettotal(rl_Vector2)*1
-callfuncex_p p_c2,struct_gettotal(rl_Vector2)*1
-callfuncex_p p_c3,struct_gettotal(rl_Vector2)*1
-callfuncex_p p_p4,struct_gettotal(rl_Vector2)*1
-callfuncex_p_value p_t,struct_typesize(float)*1
-if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
-	callfuncex_call return_value
-} else {
-	callfuncex_call return_var
-}
-return
-
 #func _rl_CheckCollisionRecs "CheckCollisionRecs"
 #deffunc local __rl_CheckCollisionRecs var p_rec1,var p_rec2,local return_value,local return_size
 #define global rl_CheckCollisionRecs(%1,%2) __rl_CheckCollisionRecs@raylibhsp %1,%2
@@ -4676,29 +4241,6 @@ if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
 }
 return
 
-#func _rl_LoadImageSvg "LoadImageSvg"
-#deffunc local __rl_LoadImageSvg var return_var,var p_fileNameOrString,var p_width,var p_height,local return_value,local return_size
-#define global rl_LoadImageSvg(%1,%2,%3,%4) dummy_p2@raylibhsp=%2:dummy_p3@raylibhsp=%3:dummy_p4@raylibhsp=%4:__rl_LoadImageSvg@raylibhsp %1,dummy_p2@raylibhsp,dummy_p3@raylibhsp,dummy_p4@raylibhsp
-return_value=0
-return_size=struct_gettotal(rl_Image)
-callfuncex_func _rl_LoadImageSvg@raylibhsp,CALLFUNCEX_RETURN_STRUCT,return_size
-if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
-	#ifndef __hsp64__@
-	callfuncex_p_value varptr(return_var),struct_typesize(pointer)
-	#else
-	callfuncex_p_value varptr64(return_var),struct_typesize(pointer)
-	#endif
-}
-callfuncex_p_value p_fileNameOrString,struct_typesize(pointer)*1
-callfuncex_p_value p_width,struct_typesize(int)*1
-callfuncex_p_value p_height,struct_typesize(int)*1
-if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
-	callfuncex_call return_value
-} else {
-	callfuncex_call return_var
-}
-return
-
 #func _rl_LoadImageAnim "LoadImageAnim"
 #deffunc local __rl_LoadImageAnim var return_var,var p_fileName,var p_frames,local return_value,local return_size
 #define global rl_LoadImageAnim(%1,%2,%3) dummy_p2@raylibhsp=%2:dummy_p3@raylibhsp=%3:__rl_LoadImageAnim@raylibhsp %1,dummy_p2@raylibhsp,dummy_p3@raylibhsp
@@ -4816,18 +4358,6 @@ callfuncex_p_value p_fileName,struct_typesize(pointer)*1
 callfuncex_call return_value
 return return_value
 
-#func _rl_ExportImageToMemory "ExportImageToMemory"
-#deffunc local __rl_ExportImageToMemory var return_var,var p_image,var p_fileType,var p_fileSize,local return_value,local return_size
-#define global rl_ExportImageToMemory(%1,%2,%3,%4) dummy_p3@raylibhsp=%3:dummy_p4@raylibhsp=%4:__rl_ExportImageToMemory@raylibhsp %1,%2,dummy_p3@raylibhsp,dummy_p4@raylibhsp
-return_value=0
-return_size=struct_typesize(pointer)
-callfuncex_func _rl_ExportImageToMemory@raylibhsp,CALLFUNCEX_RETURN_POINTER,return_size
-callfuncex_p p_image,struct_gettotal(rl_Image)*1
-callfuncex_p_value p_fileType,struct_typesize(pointer)*1
-callfuncex_p_value p_fileSize,struct_typesize(pointer)*1
-callfuncex_call return_var
-return
-
 #func _rl_ExportImageAsCode "ExportImageAsCode"
 #deffunc local __rl_ExportImageAsCode var p_image,var p_fileName,local return_value,local return_size
 #define global rl_ExportImageAsCode(%1,%2) dummy_p2@raylibhsp=%2:__rl_ExportImageAsCode@raylibhsp %1,dummy_p2@raylibhsp
@@ -4862,12 +4392,12 @@ if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
 }
 return
 
-#func _rl_GenImageGradientLinear "GenImageGradientLinear"
-#deffunc local __rl_GenImageGradientLinear var return_var,var p_width,var p_height,var p_direction,var p_start,var p_end,local return_value,local return_size
-#define global rl_GenImageGradientLinear(%1,%2,%3,%4,%5,%6) dummy_p2@raylibhsp=%2:dummy_p3@raylibhsp=%3:dummy_p4@raylibhsp=%4:__rl_GenImageGradientLinear@raylibhsp %1,dummy_p2@raylibhsp,dummy_p3@raylibhsp,dummy_p4@raylibhsp,%5,%6
+#func _rl_GenImageGradientV "GenImageGradientV"
+#deffunc local __rl_GenImageGradientV var return_var,var p_width,var p_height,var p_top,var p_bottom,local return_value,local return_size
+#define global rl_GenImageGradientV(%1,%2,%3,%4,%5) dummy_p2@raylibhsp=%2:dummy_p3@raylibhsp=%3:__rl_GenImageGradientV@raylibhsp %1,dummy_p2@raylibhsp,dummy_p3@raylibhsp,%4,%5
 return_value=0
 return_size=struct_gettotal(rl_Image)
-callfuncex_func _rl_GenImageGradientLinear@raylibhsp,CALLFUNCEX_RETURN_STRUCT,return_size
+callfuncex_func _rl_GenImageGradientV@raylibhsp,CALLFUNCEX_RETURN_STRUCT,return_size
 if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
 	#ifndef __hsp64__@
 	callfuncex_p_value varptr(return_var),struct_typesize(pointer)
@@ -4877,9 +4407,32 @@ if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
 }
 callfuncex_p_value p_width,struct_typesize(int)*1
 callfuncex_p_value p_height,struct_typesize(int)*1
-callfuncex_p_value p_direction,struct_typesize(int)*1
-callfuncex_p p_start,struct_gettotal(rl_Color)*1
-callfuncex_p p_end,struct_gettotal(rl_Color)*1
+callfuncex_p p_top,struct_gettotal(rl_Color)*1
+callfuncex_p p_bottom,struct_gettotal(rl_Color)*1
+if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
+	callfuncex_call return_value
+} else {
+	callfuncex_call return_var
+}
+return
+
+#func _rl_GenImageGradientH "GenImageGradientH"
+#deffunc local __rl_GenImageGradientH var return_var,var p_width,var p_height,var p_left,var p_right,local return_value,local return_size
+#define global rl_GenImageGradientH(%1,%2,%3,%4,%5) dummy_p2@raylibhsp=%2:dummy_p3@raylibhsp=%3:__rl_GenImageGradientH@raylibhsp %1,dummy_p2@raylibhsp,dummy_p3@raylibhsp,%4,%5
+return_value=0
+return_size=struct_gettotal(rl_Image)
+callfuncex_func _rl_GenImageGradientH@raylibhsp,CALLFUNCEX_RETURN_STRUCT,return_size
+if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
+	#ifndef __hsp64__@
+	callfuncex_p_value varptr(return_var),struct_typesize(pointer)
+	#else
+	callfuncex_p_value varptr64(return_var),struct_typesize(pointer)
+	#endif
+}
+callfuncex_p_value p_width,struct_typesize(int)*1
+callfuncex_p_value p_height,struct_typesize(int)*1
+callfuncex_p p_left,struct_gettotal(rl_Color)*1
+callfuncex_p p_right,struct_gettotal(rl_Color)*1
 if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
 	callfuncex_call return_value
 } else {
@@ -4893,31 +4446,6 @@ return
 return_value=0
 return_size=struct_gettotal(rl_Image)
 callfuncex_func _rl_GenImageGradientRadial@raylibhsp,CALLFUNCEX_RETURN_STRUCT,return_size
-if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
-	#ifndef __hsp64__@
-	callfuncex_p_value varptr(return_var),struct_typesize(pointer)
-	#else
-	callfuncex_p_value varptr64(return_var),struct_typesize(pointer)
-	#endif
-}
-callfuncex_p_value p_width,struct_typesize(int)*1
-callfuncex_p_value p_height,struct_typesize(int)*1
-callfuncex_p_value p_density,struct_typesize(float)*1
-callfuncex_p p_inner,struct_gettotal(rl_Color)*1
-callfuncex_p p_outer,struct_gettotal(rl_Color)*1
-if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
-	callfuncex_call return_value
-} else {
-	callfuncex_call return_var
-}
-return
-
-#func _rl_GenImageGradientSquare "GenImageGradientSquare"
-#deffunc local __rl_GenImageGradientSquare var return_var,var p_width,var p_height,var p_density,var p_inner,var p_outer,local return_value,local return_size
-#define global rl_GenImageGradientSquare(%1,%2,%3,%4,%5,%6) dummy_p2@raylibhsp=%2:dummy_p3@raylibhsp=%3:dummy_p4@raylibhsp=%4:__rl_GenImageGradientSquare@raylibhsp %1,dummy_p2@raylibhsp,dummy_p3@raylibhsp,dummy_p4@raylibhsp,%5,%6
-return_value=0
-return_size=struct_gettotal(rl_Image)
-callfuncex_func _rl_GenImageGradientSquare@raylibhsp,CALLFUNCEX_RETURN_STRUCT,return_size
 if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
 	#ifndef __hsp64__@
 	callfuncex_p_value varptr(return_var),struct_typesize(pointer)
@@ -5316,17 +4844,6 @@ return_value=0
 return_size=struct_typesize(void)
 callfuncex_func _rl_ImageFlipHorizontal@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
 callfuncex_p_value p_image,struct_typesize(pointer)*1
-callfuncex_call return_value
-return return_value
-
-#func _rl_ImageRotate "ImageRotate"
-#deffunc local __rl_ImageRotate var p_image,var p_degrees,local return_value,local return_size
-#define global rl_ImageRotate(%1,%2) dummy_p1@raylibhsp=%1:dummy_p2@raylibhsp=%2:__rl_ImageRotate@raylibhsp dummy_p1@raylibhsp,dummy_p2@raylibhsp
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_ImageRotate@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_p_value p_image,struct_typesize(pointer)*1
-callfuncex_p_value p_degrees,struct_typesize(int)*1
 callfuncex_call return_value
 return return_value
 
@@ -6319,7 +5836,7 @@ if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
 return
 
 #func _rl_LoadFontEx "LoadFontEx"
-#deffunc local __rl_LoadFontEx var return_var,var p_fileName,var p_fontSize,var p_codepoints,var p_codepointCount,local return_value,local return_size
+#deffunc local __rl_LoadFontEx var return_var,var p_fileName,var p_fontSize,var p_fontChars,var p_glyphCount,local return_value,local return_size
 #define global rl_LoadFontEx(%1,%2,%3,%4,%5) dummy_p2@raylibhsp=%2:dummy_p3@raylibhsp=%3:dummy_p4@raylibhsp=%4:dummy_p5@raylibhsp=%5:__rl_LoadFontEx@raylibhsp %1,dummy_p2@raylibhsp,dummy_p3@raylibhsp,dummy_p4@raylibhsp,dummy_p5@raylibhsp
 return_value=0
 return_size=struct_gettotal(rl_Font)
@@ -6333,8 +5850,8 @@ if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
 }
 callfuncex_p_value p_fileName,struct_typesize(pointer)*1
 callfuncex_p_value p_fontSize,struct_typesize(int)*1
-callfuncex_p_value p_codepoints,struct_typesize(pointer)*1
-callfuncex_p_value p_codepointCount,struct_typesize(int)*1
+callfuncex_p_value p_fontChars,struct_typesize(pointer)*1
+callfuncex_p_value p_glyphCount,struct_typesize(int)*1
 if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
 	callfuncex_call return_value
 } else {
@@ -6366,7 +5883,7 @@ if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
 return
 
 #func _rl_LoadFontFromMemory "LoadFontFromMemory"
-#deffunc local __rl_LoadFontFromMemory var return_var,var p_fileType,var p_fileData,var p_dataSize,var p_fontSize,var p_codepoints,var p_codepointCount,local return_value,local return_size
+#deffunc local __rl_LoadFontFromMemory var return_var,var p_fileType,var p_fileData,var p_dataSize,var p_fontSize,var p_fontChars,var p_glyphCount,local return_value,local return_size
 #define global rl_LoadFontFromMemory(%1,%2,%3,%4,%5,%6,%7) dummy_p2@raylibhsp=%2:dummy_p3@raylibhsp=%3:dummy_p4@raylibhsp=%4:dummy_p5@raylibhsp=%5:dummy_p6@raylibhsp=%6:dummy_p7@raylibhsp=%7:__rl_LoadFontFromMemory@raylibhsp %1,dummy_p2@raylibhsp,dummy_p3@raylibhsp,dummy_p4@raylibhsp,dummy_p5@raylibhsp,dummy_p6@raylibhsp,dummy_p7@raylibhsp
 return_value=0
 return_size=struct_gettotal(rl_Font)
@@ -6382,8 +5899,8 @@ callfuncex_p_value p_fileType,struct_typesize(pointer)*1
 callfuncex_p_value p_fileData,struct_typesize(pointer)*1
 callfuncex_p_value p_dataSize,struct_typesize(int)*1
 callfuncex_p_value p_fontSize,struct_typesize(int)*1
-callfuncex_p_value p_codepoints,struct_typesize(pointer)*1
-callfuncex_p_value p_codepointCount,struct_typesize(int)*1
+callfuncex_p_value p_fontChars,struct_typesize(pointer)*1
+callfuncex_p_value p_glyphCount,struct_typesize(int)*1
 if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
 	callfuncex_call return_value
 } else {
@@ -6402,7 +5919,7 @@ callfuncex_call return_value
 return return_value
 
 #func _rl_LoadFontData "LoadFontData"
-#deffunc local __rl_LoadFontData var return_var,var p_fileData,var p_dataSize,var p_fontSize,var p_codepoints,var p_codepointCount,var p_type,local return_value,local return_size
+#deffunc local __rl_LoadFontData var return_var,var p_fileData,var p_dataSize,var p_fontSize,var p_fontChars,var p_glyphCount,var p_type,local return_value,local return_size
 #define global rl_LoadFontData(%1,%2,%3,%4,%5,%6,%7) dummy_p2@raylibhsp=%2:dummy_p3@raylibhsp=%3:dummy_p4@raylibhsp=%4:dummy_p5@raylibhsp=%5:dummy_p6@raylibhsp=%6:dummy_p7@raylibhsp=%7:__rl_LoadFontData@raylibhsp %1,dummy_p2@raylibhsp,dummy_p3@raylibhsp,dummy_p4@raylibhsp,dummy_p5@raylibhsp,dummy_p6@raylibhsp,dummy_p7@raylibhsp
 return_value=0
 return_size=struct_typesize(pointer)
@@ -6410,14 +5927,14 @@ callfuncex_func _rl_LoadFontData@raylibhsp,CALLFUNCEX_RETURN_POINTER,return_size
 callfuncex_p_value p_fileData,struct_typesize(pointer)*1
 callfuncex_p_value p_dataSize,struct_typesize(int)*1
 callfuncex_p_value p_fontSize,struct_typesize(int)*1
-callfuncex_p_value p_codepoints,struct_typesize(pointer)*1
-callfuncex_p_value p_codepointCount,struct_typesize(int)*1
+callfuncex_p_value p_fontChars,struct_typesize(pointer)*1
+callfuncex_p_value p_glyphCount,struct_typesize(int)*1
 callfuncex_p_value p_type,struct_typesize(int)*1
 callfuncex_call return_var
 return
 
 #func _rl_GenImageFontAtlas "GenImageFontAtlas"
-#deffunc local __rl_GenImageFontAtlas var return_var,var p_glyphs,var p_glyphRecs,var p_glyphCount,var p_fontSize,var p_padding,var p_packMethod,local return_value,local return_size
+#deffunc local __rl_GenImageFontAtlas var return_var,var p_chars,var p_recs,var p_glyphCount,var p_fontSize,var p_padding,var p_packMethod,local return_value,local return_size
 #define global rl_GenImageFontAtlas(%1,%2,%3,%4,%5,%6,%7) dummy_p2@raylibhsp=%2:dummy_p3@raylibhsp=%3:dummy_p4@raylibhsp=%4:dummy_p5@raylibhsp=%5:dummy_p6@raylibhsp=%6:dummy_p7@raylibhsp=%7:__rl_GenImageFontAtlas@raylibhsp %1,dummy_p2@raylibhsp,dummy_p3@raylibhsp,dummy_p4@raylibhsp,dummy_p5@raylibhsp,dummy_p6@raylibhsp,dummy_p7@raylibhsp
 return_value=0
 return_size=struct_gettotal(rl_Image)
@@ -6429,8 +5946,8 @@ if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
 	callfuncex_p_value varptr64(return_var),struct_typesize(pointer)
 	#endif
 }
-callfuncex_p_value p_glyphs,struct_typesize(pointer)*1
-callfuncex_p_value p_glyphRecs,struct_typesize(pointer)*1
+callfuncex_p_value p_chars,struct_typesize(pointer)*1
+callfuncex_p_value p_recs,struct_typesize(pointer)*1
 callfuncex_p_value p_glyphCount,struct_typesize(int)*1
 callfuncex_p_value p_fontSize,struct_typesize(int)*1
 callfuncex_p_value p_padding,struct_typesize(int)*1
@@ -6443,12 +5960,12 @@ if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
 return
 
 #func _rl_UnloadFontData "UnloadFontData"
-#deffunc local __rl_UnloadFontData var p_glyphs,var p_glyphCount,local return_value,local return_size
+#deffunc local __rl_UnloadFontData var p_chars,var p_glyphCount,local return_value,local return_size
 #define global rl_UnloadFontData(%1,%2) dummy_p1@raylibhsp=%1:dummy_p2@raylibhsp=%2:__rl_UnloadFontData@raylibhsp dummy_p1@raylibhsp,dummy_p2@raylibhsp
 return_value=0
 return_size=struct_typesize(void)
 callfuncex_func _rl_UnloadFontData@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_p_value p_glyphs,struct_typesize(pointer)*1
+callfuncex_p_value p_chars,struct_typesize(pointer)*1
 callfuncex_p_value p_glyphCount,struct_typesize(int)*1
 callfuncex_call return_value
 return return_value
@@ -6546,28 +6063,18 @@ callfuncex_call return_value
 return return_value
 
 #func _rl_DrawTextCodepoints "DrawTextCodepoints"
-#deffunc local __rl_DrawTextCodepoints var p_font,var p_codepoints,var p_codepointCount,var p_position,var p_fontSize,var p_spacing,var p_tint,local return_value,local return_size
+#deffunc local __rl_DrawTextCodepoints var p_font,var p_codepoints,var p_count,var p_position,var p_fontSize,var p_spacing,var p_tint,local return_value,local return_size
 #define global rl_DrawTextCodepoints(%1,%2,%3,%4,%5,%6,%7) dummy_p2@raylibhsp=%2:dummy_p3@raylibhsp=%3:dummy_p5@raylibhsp=%5:dummy_p6@raylibhsp=%6:__rl_DrawTextCodepoints@raylibhsp %1,dummy_p2@raylibhsp,dummy_p3@raylibhsp,%4,dummy_p5@raylibhsp,dummy_p6@raylibhsp,%7
 return_value=0
 return_size=struct_typesize(void)
 callfuncex_func _rl_DrawTextCodepoints@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
 callfuncex_p p_font,struct_gettotal(rl_Font)*1
 callfuncex_p_value p_codepoints,struct_typesize(pointer)*1
-callfuncex_p_value p_codepointCount,struct_typesize(int)*1
+callfuncex_p_value p_count,struct_typesize(int)*1
 callfuncex_p p_position,struct_gettotal(rl_Vector2)*1
 callfuncex_p_value p_fontSize,struct_typesize(float)*1
 callfuncex_p_value p_spacing,struct_typesize(float)*1
 callfuncex_p p_tint,struct_gettotal(rl_Color)*1
-callfuncex_call return_value
-return return_value
-
-#func _rl_SetTextLineSpacing "SetTextLineSpacing"
-#deffunc local __rl_SetTextLineSpacing var p_spacing,local return_value,local return_size
-#define global rl_SetTextLineSpacing(%1) dummy_p1@raylibhsp=%1:__rl_SetTextLineSpacing@raylibhsp dummy_p1@raylibhsp
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_SetTextLineSpacing@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_p_value p_spacing,struct_typesize(int)*1
 callfuncex_call return_value
 return return_value
 
@@ -7862,13 +7369,13 @@ callfuncex_call return_value
 return return_value
 
 #func _rl_UnloadModelAnimations "UnloadModelAnimations"
-#deffunc local __rl_UnloadModelAnimations var p_animations,var p_animCount,local return_value,local return_size
+#deffunc local __rl_UnloadModelAnimations var p_animations,var p_count,local return_value,local return_size
 #define global rl_UnloadModelAnimations(%1,%2) dummy_p1@raylibhsp=%1:dummy_p2@raylibhsp=%2:__rl_UnloadModelAnimations@raylibhsp dummy_p1@raylibhsp,dummy_p2@raylibhsp
 return_value=0
 return_size=struct_typesize(void)
 callfuncex_func _rl_UnloadModelAnimations@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
 callfuncex_p_value p_animations,struct_typesize(pointer)*1
-callfuncex_p_value p_animCount,struct_typesize(int)*1
+callfuncex_p_value p_count,struct_typesize(unsigned_int)*1
 callfuncex_call return_value
 return return_value
 
@@ -8073,15 +7580,6 @@ callfuncex_p_value p_volume,struct_typesize(float)*1
 callfuncex_call return_value
 return return_value
 
-#func _rl_GetMasterVolume "GetMasterVolume"
-#deffunc local __rl_GetMasterVolume local return_value,local return_size
-#define global rl_GetMasterVolume __rl_GetMasterVolume@raylibhsp
-return_value=0
-return_size=struct_typesize(float)
-callfuncex_func _rl_GetMasterVolume@raylibhsp,CALLFUNCEX_RETURN_FLOAT,return_size
-callfuncex_call return_value
-return return_value
-
 #func _rl_LoadWave "LoadWave"
 #deffunc local __rl_LoadWave var return_var,var p_fileName,local return_value,local return_size
 #define global rl_LoadWave(%1,%2) dummy_p2@raylibhsp=%2:__rl_LoadWave@raylibhsp %1,dummy_p2@raylibhsp
@@ -8178,27 +7676,6 @@ if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
 }
 return
 
-#func _rl_LoadSoundAlias "LoadSoundAlias"
-#deffunc local __rl_LoadSoundAlias var return_var,var p_source,local return_value,local return_size
-#define global rl_LoadSoundAlias(%1,%2) __rl_LoadSoundAlias@raylibhsp %1,%2
-return_value=0
-return_size=struct_gettotal(rl_Sound)
-callfuncex_func _rl_LoadSoundAlias@raylibhsp,CALLFUNCEX_RETURN_STRUCT,return_size
-if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
-	#ifndef __hsp64__@
-	callfuncex_p_value varptr(return_var),struct_typesize(pointer)
-	#else
-	callfuncex_p_value varptr64(return_var),struct_typesize(pointer)
-	#endif
-}
-callfuncex_p p_source,struct_gettotal(rl_Sound)*1
-if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
-	callfuncex_call return_value
-} else {
-	callfuncex_call return_var
-}
-return
-
 #func _rl_IsSoundReady "IsSoundReady"
 #deffunc local __rl_IsSoundReady var p_sound,local return_value,local return_size
 #define global rl_IsSoundReady(%1) __rl_IsSoundReady@raylibhsp %1
@@ -8238,16 +7715,6 @@ return_value=0
 return_size=struct_typesize(void)
 callfuncex_func _rl_UnloadSound@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
 callfuncex_p p_sound,struct_gettotal(rl_Sound)*1
-callfuncex_call return_value
-return return_value
-
-#func _rl_UnloadSoundAlias "UnloadSoundAlias"
-#deffunc local __rl_UnloadSoundAlias var p_alias,local return_value,local return_size
-#define global rl_UnloadSoundAlias(%1) __rl_UnloadSoundAlias@raylibhsp %1
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rl_UnloadSoundAlias@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_p p_alias,struct_gettotal(rl_Sound)*1
 callfuncex_call return_value
 return return_value
 
@@ -9280,24 +8747,6 @@ callfuncex_p_value p_count,struct_typesize(int)*1
 callfuncex_call return_value
 return return_value
 
-#func _rlgl_rlBlitFramebuffer "rlBlitFramebuffer"
-#deffunc local __rlgl_rlBlitFramebuffer var p_srcX,var p_srcY,var p_srcWidth,var p_srcHeight,var p_dstX,var p_dstY,var p_dstWidth,var p_dstHeight,var p_bufferMask,local return_value,local return_size
-#define global rlgl_rlBlitFramebuffer(%1,%2,%3,%4,%5,%6,%7,%8,%9) dummy_p1@raylibhsp=%1:dummy_p2@raylibhsp=%2:dummy_p3@raylibhsp=%3:dummy_p4@raylibhsp=%4:dummy_p5@raylibhsp=%5:dummy_p6@raylibhsp=%6:dummy_p7@raylibhsp=%7:dummy_p8@raylibhsp=%8:dummy_p9@raylibhsp=%9:__rlgl_rlBlitFramebuffer@raylibhsp dummy_p1@raylibhsp,dummy_p2@raylibhsp,dummy_p3@raylibhsp,dummy_p4@raylibhsp,dummy_p5@raylibhsp,dummy_p6@raylibhsp,dummy_p7@raylibhsp,dummy_p8@raylibhsp,dummy_p9@raylibhsp
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rlgl_rlBlitFramebuffer@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_p_value p_srcX,struct_typesize(int)*1
-callfuncex_p_value p_srcY,struct_typesize(int)*1
-callfuncex_p_value p_srcWidth,struct_typesize(int)*1
-callfuncex_p_value p_srcHeight,struct_typesize(int)*1
-callfuncex_p_value p_dstX,struct_typesize(int)*1
-callfuncex_p_value p_dstY,struct_typesize(int)*1
-callfuncex_p_value p_dstWidth,struct_typesize(int)*1
-callfuncex_p_value p_dstHeight,struct_typesize(int)*1
-callfuncex_p_value p_bufferMask,struct_typesize(int)*1
-callfuncex_call return_value
-return return_value
-
 #func _rlgl_rlEnableColorBlend "rlEnableColorBlend"
 #deffunc local __rlgl_rlEnableColorBlend local return_value,local return_size
 #define global rlgl_rlEnableColorBlend __rlgl_rlEnableColorBlend@raylibhsp
@@ -9417,15 +8866,6 @@ return return_value
 return_value=0
 return_size=struct_typesize(void)
 callfuncex_func _rlgl_rlEnableWireMode@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
-callfuncex_call return_value
-return return_value
-
-#func _rlgl_rlEnablePointMode "rlEnablePointMode"
-#deffunc local __rlgl_rlEnablePointMode local return_value,local return_size
-#define global rlgl_rlEnablePointMode __rlgl_rlEnablePointMode@raylibhsp
-return_value=0
-return_size=struct_typesize(void)
-callfuncex_func _rlgl_rlEnablePointMode@raylibhsp,CALLFUNCEX_RETURN_VOID,return_size
 callfuncex_call return_value
 return return_value
 
@@ -11399,50 +10839,6 @@ if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
 }
 return
 
-#func _raymath_Vector3Project "Vector3Project"
-#deffunc local __raymath_Vector3Project var return_var,var p_v1,var p_v2,local return_value,local return_size
-#define global raymath_Vector3Project(%1,%2,%3) __raymath_Vector3Project@raylibhsp %1,%2,%3
-return_value=0
-return_size=struct_gettotal(raymath_Vector3)
-callfuncex_func _raymath_Vector3Project@raylibhsp,CALLFUNCEX_RETURN_STRUCT,return_size
-if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
-	#ifndef __hsp64__@
-	callfuncex_p_value varptr(return_var),struct_typesize(pointer)
-	#else
-	callfuncex_p_value varptr64(return_var),struct_typesize(pointer)
-	#endif
-}
-callfuncex_p p_v1,struct_gettotal(raymath_Vector3)*1
-callfuncex_p p_v2,struct_gettotal(raymath_Vector3)*1
-if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
-	callfuncex_call return_value
-} else {
-	callfuncex_call return_var
-}
-return
-
-#func _raymath_Vector3Reject "Vector3Reject"
-#deffunc local __raymath_Vector3Reject var return_var,var p_v1,var p_v2,local return_value,local return_size
-#define global raymath_Vector3Reject(%1,%2,%3) __raymath_Vector3Reject@raylibhsp %1,%2,%3
-return_value=0
-return_size=struct_gettotal(raymath_Vector3)
-callfuncex_func _raymath_Vector3Reject@raylibhsp,CALLFUNCEX_RETURN_STRUCT,return_size
-if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
-	#ifndef __hsp64__@
-	callfuncex_p_value varptr(return_var),struct_typesize(pointer)
-	#else
-	callfuncex_p_value varptr64(return_var),struct_typesize(pointer)
-	#endif
-}
-callfuncex_p p_v1,struct_gettotal(raymath_Vector3)*1
-callfuncex_p p_v2,struct_gettotal(raymath_Vector3)*1
-if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
-	callfuncex_call return_value
-} else {
-	callfuncex_call return_var
-}
-return
-
 #func _raymath_Vector3OrthoNormalize "Vector3OrthoNormalize"
 #deffunc local __raymath_Vector3OrthoNormalize var p_v1,var p_v2,local return_value,local return_size
 #define global raymath_Vector3OrthoNormalize(%1,%2) dummy_p1@raylibhsp=%1:dummy_p2@raylibhsp=%2:__raymath_Vector3OrthoNormalize@raylibhsp dummy_p1@raylibhsp,dummy_p2@raylibhsp
@@ -12127,7 +11523,7 @@ if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
 return
 
 #func _raymath_MatrixPerspective "MatrixPerspective"
-#deffunc local __raymath_MatrixPerspective var return_var,var p_fovY,var p_aspect,var p_nearPlane,var p_farPlane,local return_value,local return_size
+#deffunc local __raymath_MatrixPerspective var return_var,var p_fovy,var p_aspect,var p_near,var p_far,local return_value,local return_size
 #define global raymath_MatrixPerspective(%1,%2,%3,%4,%5) dummy_p2@raylibhsp=%2:dummy_p3@raylibhsp=%3:dummy_p4@raylibhsp=%4:dummy_p5@raylibhsp=%5:__raymath_MatrixPerspective@raylibhsp %1,dummy_p2@raylibhsp,dummy_p3@raylibhsp,dummy_p4@raylibhsp,dummy_p5@raylibhsp
 return_value=0
 return_size=struct_gettotal(raymath_Matrix)
@@ -12139,10 +11535,10 @@ if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
 	callfuncex_p_value varptr64(return_var),struct_typesize(pointer)
 	#endif
 }
-callfuncex_p_value p_fovY,struct_typesize(double)*1
+callfuncex_p_value p_fovy,struct_typesize(double)*1
 callfuncex_p_value p_aspect,struct_typesize(double)*1
-callfuncex_p_value p_nearPlane,struct_typesize(double)*1
-callfuncex_p_value p_farPlane,struct_typesize(double)*1
+callfuncex_p_value p_near,struct_typesize(double)*1
+callfuncex_p_value p_far,struct_typesize(double)*1
 if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
 	callfuncex_call return_value
 } else {
@@ -12151,7 +11547,7 @@ if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
 return
 
 #func _raymath_MatrixOrtho "MatrixOrtho"
-#deffunc local __raymath_MatrixOrtho var return_var,var p_left,var p_right,var p_bottom,var p_top,var p_nearPlane,var p_farPlane,local return_value,local return_size
+#deffunc local __raymath_MatrixOrtho var return_var,var p_left,var p_right,var p_bottom,var p_top,var p_near,var p_far,local return_value,local return_size
 #define global raymath_MatrixOrtho(%1,%2,%3,%4,%5,%6,%7) dummy_p2@raylibhsp=%2:dummy_p3@raylibhsp=%3:dummy_p4@raylibhsp=%4:dummy_p5@raylibhsp=%5:dummy_p6@raylibhsp=%6:dummy_p7@raylibhsp=%7:__raymath_MatrixOrtho@raylibhsp %1,dummy_p2@raylibhsp,dummy_p3@raylibhsp,dummy_p4@raylibhsp,dummy_p5@raylibhsp,dummy_p6@raylibhsp,dummy_p7@raylibhsp
 return_value=0
 return_size=struct_gettotal(raymath_Matrix)
@@ -12167,8 +11563,8 @@ callfuncex_p_value p_left,struct_typesize(double)*1
 callfuncex_p_value p_right,struct_typesize(double)*1
 callfuncex_p_value p_bottom,struct_typesize(double)*1
 callfuncex_p_value p_top,struct_typesize(double)*1
-callfuncex_p_value p_nearPlane,struct_typesize(double)*1
-callfuncex_p_value p_farPlane,struct_typesize(double)*1
+callfuncex_p_value p_near,struct_typesize(double)*1
+callfuncex_p_value p_far,struct_typesize(double)*1
 if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{
 	callfuncex_call return_value
 } else {

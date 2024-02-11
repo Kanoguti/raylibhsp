@@ -1,5 +1,51 @@
 #ifndef callfuncex_module
 
+#module callfuncex_data sys_pointer,sys_param_size,sys_param_data,sys_return_type,sys_return_size
+
+#enum global CALLFUNCEX_DATA_POINTER=0
+#enum global CALLFUNCEX_DATA_PARAM_SIZE
+#enum global CALLFUNCEX_DATA_PARAM_DATA
+#enum global CALLFUNCEX_DATA_RETURN_TYPE
+#enum global CALLFUNCEX_DATA_RETURN_SIZE
+
+#modinit
+    callfuncex_data_init thismod
+    return
+
+#modfunc callfuncex_data_init
+    #ifdef __hsp64__@
+    sys_pointer=int64(0)
+    #else
+    sys_pointer=int(0)
+    #endif
+    sys_param_size=0
+    sdim sys_param_data
+    sys_return_type=-1
+    sys_return_size=0
+    return
+
+#modfunc callfuncex_data_get int p_type,var p_var
+    switch p_type
+    case CALLFUNCEX_DATA_POINTER:p_var=sys_pointer:swbreak
+    case CALLFUNCEX_DATA_PARAM_SIZE:p_var=sys_param_size:swbreak
+    case CALLFUNCEX_DATA_PARAM_DATA:sdim p_var,varsize(sys_param_data):memcpy p_var,sys_param_data,varsize(sys_param_data),0,0:swbreak
+    case CALLFUNCEX_DATA_RETURN_TYPE:p_var=sys_return_type:swbreak
+    case CALLFUNCEX_DATA_RETURN_SIZE:p_var=sys_return_size:swbreak
+    swend
+    return
+
+#modfunc callfuncex_data_set int p_type,var p_data
+    switch p_type
+    case CALLFUNCEX_DATA_POINTER:memcpy sys_pointer,p_data,varsize(p_data),0,0:swbreak
+    case CALLFUNCEX_DATA_PARAM_SIZE:memcpy sys_param_size,p_data,varsize(p_data),0,0:swbreak
+    case CALLFUNCEX_DATA_PARAM_DATA:memcpy sys_param_data,p_data,varsize(p_data),0,0:swbreak
+    case CALLFUNCEX_DATA_RETURN_TYPE:memcpy sys_return_type,p_data,varsize(p_data),0,0:swbreak
+    case CALLFUNCEX_DATA_RETURN_SIZE:memcpy sys_return_size,p_data,varsize(p_data),0,0:swbreak
+    swend
+    return
+
+#global
+
 #module callfuncex_module
 
 #ifndef __hsp64__@
@@ -15,18 +61,32 @@
 #enum global CALLFUNCEX_RETURN_POINTER
 #enum global CALLFUNCEX_RETURN_STRUCT
 
-#deffunc callfuncex_init
-    #ifdef __hsp64__@
-    sys_pointer=int64(0)
-    #else
-    sys_pointer=int(0)
+#deffunc callfuncex_setup
+    #ifndef __hsp64__@
     sys_getdouble_code=$0424448b,$04c218dd,$00000000
     sys_getdouble_res=0
     #endif
-    sys_param_size=0
-    sdim sys_param_data
-    sys_return_type=-1
-    sys_return_size=0
+    dimtype sys_struct,vartype("struct"),32
+    repeat length(sys_struct)
+        newmod sys_struct,callfuncex_data
+    loop
+    sys_struct_index=-1
+    return
+
+#deffunc local callfuncex_get_struct var p_struct
+    callfuncex_data_get p_struct,CALLFUNCEX_DATA_POINTER,sys_pointer
+    callfuncex_data_get p_struct,CALLFUNCEX_DATA_PARAM_SIZE,sys_param_size
+    callfuncex_data_get p_struct,CALLFUNCEX_DATA_PARAM_DATA,sys_param_data
+    callfuncex_data_get p_struct,CALLFUNCEX_DATA_RETURN_TYPE,sys_return_type
+    callfuncex_data_get p_struct,CALLFUNCEX_DATA_RETURN_SIZE,sys_return_size
+    return
+
+#deffunc local callfuncex_set_struct var p_struct
+    callfuncex_data_set p_struct,CALLFUNCEX_DATA_POINTER,sys_pointer
+    callfuncex_data_set p_struct,CALLFUNCEX_DATA_PARAM_SIZE,sys_param_size
+    callfuncex_data_set p_struct,CALLFUNCEX_DATA_PARAM_DATA,sys_param_data
+    callfuncex_data_set p_struct,CALLFUNCEX_DATA_RETURN_TYPE,sys_return_type
+    callfuncex_data_set p_struct,CALLFUNCEX_DATA_RETURN_SIZE,sys_return_size
     return
 
 #ifndef __hsp64__@
@@ -61,11 +121,14 @@
 	#endif
     return temp_return
 
-#deffunc local callfuncex_func var p_pointer,int p_return_type,int p_return_size
+#define callfuncex_begin sys_struct_index@callfuncex_module++:callfuncex_data_init sys_struct@callfuncex_module(sys_struct_index@callfuncex_module)
+#define callfuncex_end callfuncex_data_init sys_struct@callfuncex_module(sys_struct_index@callfuncex_module):sys_struct_index@callfuncex_module--
+
+#deffunc local callfuncex_func var p_struct,var p_pointer,int p_return_type,int p_return_size
 #ifdef __hsp64__@
-#define global callfuncex_func(%1,%2=CALLFUNCEX_RETURN_VOID@,%3=0) dummy@callfuncex_module=varptr64(%1):callfuncex_func@callfuncex_module dummy@callfuncex_module,%2,%3
+#define global callfuncex_func(%1,%2=CALLFUNCEX_RETURN_VOID@,%3=0) callfuncex_begin@callfuncex_module:dummy@callfuncex_module=varptr64(%1):callfuncex_func@callfuncex_module sys_struct@callfuncex_module(sys_struct_index@callfuncex_module),dummy@callfuncex_module,%2,%3
 #else
-#define global callfuncex_func(%1,%2=CALLFUNCEX_RETURN_VOID@,%3=0) dummy@callfuncex_module=varptr(%1):callfuncex_func@callfuncex_module dummy@callfuncex_module,%2,%3
+#define global callfuncex_func(%1,%2=CALLFUNCEX_RETURN_VOID@,%3=0) callfuncex_begin@callfuncex_module:dummy@callfuncex_module=varptr(%1):callfuncex_func@callfuncex_module sys_struct@callfuncex_module(sys_struct_index@callfuncex_module),dummy@callfuncex_module,%2,%3
 #endif
 #define global callfuncex_func_void(%1,%2=0) callfuncex_func@ %1,CALLFUNCEX_RETURN_VOID@,%2
 #define global callfuncex_func_int(%1,%2=0) callfuncex_func@ %1,CALLFUNCEX_RETURN_INT@,%2
@@ -74,7 +137,8 @@
 #define global callfuncex_func_float(%1,%2=0) callfuncex_func@ %1,CALLFUNCEX_RETURN_FLOAT@,%2
 #define global callfuncex_func_pointer(%1,%2=0) callfuncex_func@ %1,CALLFUNCEX_RETURN_POINTER@,%2
 #define global callfuncex_func_struct(%1,%2=0) callfuncex_func@ %1,CALLFUNCEX_RETURN_STRUCT@,%2
-    callfuncex_init
+    callfuncex_get_struct p_struct
+
     #ifdef __hsp64__@
     sys_pointer=int64(p_pointer)
     #else
@@ -98,11 +162,15 @@
         default:sys_return_size=0:swbreak
         swend
     }
+
+    callfuncex_set_struct p_struct
     return
 
-#deffunc local callfuncex_p var p_data,int p_size, local temp_size,local temp_pointer
-#define global callfuncex_p(%1,%2=0) callfuncex_p@callfuncex_module %1,%2
-#define global callfuncex_p_value(%1,%2=0) dummy@callfuncex_module=%1:callfuncex_p@callfuncex_module dummy@callfuncex_module,%2
+#deffunc local callfuncex_p var p_struct,var p_data,int p_size, local temp_size,local temp_pointer
+#define global callfuncex_p(%1,%2=0) callfuncex_p@callfuncex_module sys_struct@callfuncex_module(sys_struct_index@callfuncex_module),%1,%2
+#define global callfuncex_p_value(%1,%2=0) dummy@callfuncex_module=%1:callfuncex_p@callfuncex_module sys_struct@callfuncex_module(sys_struct_index@callfuncex_module),dummy@callfuncex_module,%2
+    callfuncex_get_struct p_struct
+
     temp_size=0
     if p_size<=0:{
         temp_size=varsize(p_data)
@@ -127,9 +195,14 @@
         sys_param_size+=temp_size/4*4+4
     }
     #endif
+
+    callfuncex_set_struct p_struct
     return
 
-#deffunc callfuncex_call var p_return, local temp_return,local temp_count,local temp_param,local temp_param_with_struct
+#deffunc local callfuncex_call var p_struct,var p_return, local temp_return,local temp_count,local temp_param,local temp_param_with_struct
+#define global callfuncex_call(%1) callfuncex_call@callfuncex_module sys_struct@callfuncex_module(sys_struct_index@callfuncex_module),%1:callfuncex_end@callfuncex_module
+    callfuncex_get_struct p_struct
+    
     temp_return=0
     #ifdef __hsp64__@
     if sys_pointer!=int64(0):{
@@ -219,10 +292,10 @@
         swend
     swend
 
-    callfuncex_init
+    callfuncex_set_struct p_struct
     return
 
 #global
-callfuncex_init
+callfuncex_setup
 
 #endif

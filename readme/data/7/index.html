@@ -140,13 +140,14 @@
                 <iframe src="2.txt" class="text"></iframe>
             </div>
             <div class="frame">
-                <h2><code>struct_make p1,p2[,p3]</code></h2>
+                <h2><code>struct_make p1,p2[,p3[,p4[,p5[,p6,[,p7]]]]]</code></h2>
                 <h3><span class="mark">定義済みの構造体のサイズと同じサイズの、中身が空の変数を作成します</span>。</h3>
                 <hr>
                 <h3>
                     p1=構造体の名前<br>
                     p2=作成する変数名<br>
                     p3=p1で指定した構造体の何個分メモリを確保するか(省略すると1になります)
+                    p4,p5,p6,p7=sdim命令のp3以降の引数と同じように、要素の最大数を指定(p4は省略すると1になり、p5からp7までは省略すると0になります)
                 </h3>
                 <hr>
                 <p>既に<span class="mark">定義されている構造体のサイズと同じサイズの、中身が空の変数を作成</span>します。<span class="mark">作成する変数は文字列型</span>のデータとなります。<span class="mark">内部でsdim命令を使っています</span>。<span class="mark">構造体の正確なサイズを取得する際には、struct_gettotal関数を使用</span>してください。</p>

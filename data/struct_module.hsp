@@ -47,7 +47,7 @@
 #define global struct_dupdata(%1,%2,%3,%4,%5="str") dupptr %4,varptr(%3)+struct_getoffset(%1,%2),struct_getsize(%1,%2),vartype(%5)
 #endif
 #define global struct_setvalue(%1,%2,%3,%4) dummy@struct_module=%4:struct_setdata %1,%2,%3,dummy@struct_module
-#define global struct_make(%1,%2,%3=1) sdim %2,%1__total@*%3
+#define global struct_make(%1,%2,%3=1,%4=1,%5=0,%6=0,%7=0) sdim %2,%1__total@*%3,%4,%5,%6,%7
 
 #define global ctype struct_typesize(%1) (struct_gettotal(type_%1))
 

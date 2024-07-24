@@ -257,7 +257,7 @@ return temp_return
 
 #global
 
-title "raylibhsp - Header maker - 2023 Kanoguti"
+title "raylibhsp - Header maker - 2023-2024 Kanoguti"
 
 cls 3
 
@@ -1034,6 +1034,16 @@ export_txt+="#module raylibhsp"+"\n"
 
 export_txt+="\n"
 
+export_txt+="#ifndef __hsp64__@"+"\n"
+export_txt+="#define global raylibhsp_pointer int"+"\n"
+export_txt+="#define global raylibhsp_int64 double"+"\n"
+export_txt+="#else"+"\n"
+export_txt+="#define global raylibhsp_pointer int64"+"\n"
+export_txt+="#define global raylibhsp_int64 int64"+"\n"
+export_txt+="#endif"+"\n"
+
+export_txt+="\n"
+
 export_txt+="#uselib \"raylib.dll\""+"\n"
 
 export_txt+="\n"
@@ -1113,12 +1123,33 @@ repeat parser_functions_count
 
             temp=""
             repeat length(temp_params_type)
+                temp_type_cast=primitive_manager_getrealtype(temp_params_type(cnt))
+                switch temp_type_cast
+                case "void"
+                temp_type_cast=""
+                swbreak
+                case "float"
+                temp_type_cast="int"
+                swbreak
+                case "pointer"
+                temp_type_cast="raylibhsp_pointer"
+                swbreak
+                case "int64"
+                temp_type_cast="raylibhsp_int64"
+                swbreak
+                swend
                 switch temp_dummy_mode(cnt)
                 case 0
                 if temp_return_flag==0:{
-                    temp+="dummy_p"+ (cnt+1) +"@raylibhsp=%"+ (cnt+1) +""
+                    temp+="dummy_p"+ (cnt+1) +"@raylibhsp="
+                    if temp_type_cast!="":temp+=""+ temp_type_cast +"("
+                    temp+="%"+ (cnt+1) +""
+                    if temp_type_cast!="":temp+=")"
                 } else {
-                    temp+="dummy_p"+ (cnt+2) +"@raylibhsp=%"+ (cnt+2) +""
+                    temp+="dummy_p"+ (cnt+2) +"@raylibhsp="
+                    if temp_type_cast!="":temp+=""+ temp_type_cast +"("
+                    temp+="%"+ (cnt+2) +""
+                    if temp_type_cast!="":temp+=")"
                 }
                 temp+=":"
                 swbreak

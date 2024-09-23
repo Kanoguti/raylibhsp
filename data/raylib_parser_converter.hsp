@@ -1,0 +1,1304 @@
+#include "data/struct_module.hsp"
+
+#module
+
+#deffunc primitive_manager_init
+    sdim type_list
+    type_list(0)="unsigned_int"
+    type_list(length(type_list))="unsigned"
+    type_list(length(type_list))="__int8"
+    type_list(length(type_list))="char"
+    type_list(length(type_list))="unsigned___int8"
+    type_list(length(type_list))="unsigned_char"
+    type_list(length(type_list))="__int16"
+    type_list(length(type_list))="short"
+    type_list(length(type_list))="short_int"
+    type_list(length(type_list))="signed_short_int"
+    type_list(length(type_list))="unsigned___int16"
+    type_list(length(type_list))="unsigned_short"
+    type_list(length(type_list))="unsigned_short_int"
+    type_list(length(type_list))="__int32"
+    type_list(length(type_list))="signed"
+    type_list(length(type_list))="signed_int"
+    type_list(length(type_list))="int"
+    type_list(length(type_list))="unsigned___int32"
+    type_list(length(type_list))="__int64"
+    type_list(length(type_list))="long_long"
+    type_list(length(type_list))="signed_long_long"
+    type_list(length(type_list))="unsigned___int64"
+    type_list(length(type_list))="unsigned_long_long"
+    type_list(length(type_list))="bool"
+    type_list(length(type_list))="signed_char"
+    type_list(length(type_list))="long"
+    type_list(length(type_list))="long_int"
+    type_list(length(type_list))="signed_long_int"
+    type_list(length(type_list))="unsigned_long"
+    type_list(length(type_list))="unsigned_long_int"
+    type_list(length(type_list))="float"
+    type_list(length(type_list))="double"
+    type_list(length(type_list))="long_double"
+    type_list(length(type_list))="wchar_t"
+    type_list(length(type_list))="__wchar_t"
+    type_list(length(type_list))="void"
+    type_list(length(type_list))="pointer"
+
+    dim type_list_size
+    type_list_size(0)=struct_typesize(unsigned_int)
+    type_list_size(length(type_list_size))=struct_typesize(unsigned)
+    type_list_size(length(type_list_size))=struct_typesize(__int8)
+    type_list_size(length(type_list_size))=struct_typesize(char)
+    type_list_size(length(type_list_size))=struct_typesize(unsigned___int8)
+    type_list_size(length(type_list_size))=struct_typesize(unsigned_char)
+    type_list_size(length(type_list_size))=struct_typesize(__int16)
+    type_list_size(length(type_list_size))=struct_typesize(short)
+    type_list_size(length(type_list_size))=struct_typesize(short_int)
+    type_list_size(length(type_list_size))=struct_typesize(signed_short_int)
+    type_list_size(length(type_list_size))=struct_typesize(unsigned___int16)
+    type_list_size(length(type_list_size))=struct_typesize(unsigned_short)
+    type_list_size(length(type_list_size))=struct_typesize(unsigned_short_int)
+    type_list_size(length(type_list_size))=struct_typesize(__int32)
+    type_list_size(length(type_list_size))=struct_typesize(signed)
+    type_list_size(length(type_list_size))=struct_typesize(signed_int)
+    type_list_size(length(type_list_size))=struct_typesize(int)
+    type_list_size(length(type_list_size))=struct_typesize(unsigned___int32)
+    type_list_size(length(type_list_size))=struct_typesize(__int64)
+    type_list_size(length(type_list_size))=struct_typesize(long_long)
+    type_list_size(length(type_list_size))=struct_typesize(signed_long_long)
+    type_list_size(length(type_list_size))=struct_typesize(unsigned___int64)
+    type_list_size(length(type_list_size))=struct_typesize(unsigned_long_long)
+    type_list_size(length(type_list_size))=struct_typesize(bool)
+    type_list_size(length(type_list_size))=struct_typesize(signed_char)
+    type_list_size(length(type_list_size))=struct_typesize(long)
+    type_list_size(length(type_list_size))=struct_typesize(long_int)
+    type_list_size(length(type_list_size))=struct_typesize(signed_long_int)
+    type_list_size(length(type_list_size))=struct_typesize(unsigned_long)
+    type_list_size(length(type_list_size))=struct_typesize(unsigned_long_int)
+    type_list_size(length(type_list_size))=struct_typesize(float)
+    type_list_size(length(type_list_size))=struct_typesize(double)
+    type_list_size(length(type_list_size))=struct_typesize(long_double)
+    type_list_size(length(type_list_size))=struct_typesize(wchar_t)
+    type_list_size(length(type_list_size))=struct_typesize(__wchar_t)
+    type_list_size(length(type_list_size))=struct_typesize(void)
+    type_list_size(length(type_list_size))=struct_typesize(pointer)
+
+    sdim type_list_add_original
+    sdim type_list_add
+    dim type_list_add_size
+    dim type_list_add_count
+return
+
+#deffunc primitive_manager_copyprimitive str p_type,str p_name
+    type_list_add_original(type_list_add_count)=p_type
+    type_list_add(type_list_add_count)=p_name
+    repeat type_list_add_count
+        if type_list_add_original(type_list_add_count)==type_list_add(cnt):{
+            type_list_add_original(type_list_add_count)=type_list_add_original(cnt)
+            continue 0
+        }
+    loop
+    repeat length(type_list)
+        if type_list_add_original(type_list_add_count)==type_list(cnt):{
+            type_list_add_size(type_list_add_count)=primitive_manager_getsize(type_list_add_original(type_list_add_count))
+            type_list_add_count++
+            break
+        }
+    loop
+return
+
+#defcfunc primitive_manager_isprimitive str p_type, local temp_return
+    temp_return=primitive_manager_issystemprimitive(p_type)
+    if temp_return==0:{
+        repeat type_list_add_count
+            if p_type==type_list_add(cnt):{
+                temp_return=1
+                break
+            }
+        loop
+    }
+return temp_return
+
+#defcfunc primitive_manager_issystemprimitive str p_type, local temp_return
+    temp_return=0
+    repeat length(type_list)
+        if p_type==type_list(cnt):{
+            temp_return=1
+            break
+        }
+    loop
+return temp_return
+
+#defcfunc primitive_manager_getsize str p_type, local temp_return
+    temp_return=0
+    repeat length(type_list)
+        if p_type==type_list(cnt):{
+            temp_return=type_list_size(cnt)
+            break
+        }
+    loop
+    if temp_return==0:{
+        repeat type_list_add_count
+            if p_type==type_list_add(cnt):{
+                temp_return=type_list_add_size(cnt)
+                break
+            }
+        loop
+    }
+    return temp_return
+
+#defcfunc primitive_manager_getrealtype str p_type, local temp_return
+    temp_return=p_type
+    repeat type_list_add_count
+        if temp_return==type_list_add(cnt):{
+            temp_return=type_list_add_original(cnt)
+            break
+        }
+    loop
+    switch temp_return
+    case "float"
+    temp_return="float"
+    swbreak
+    case "double"
+    case "long_double"
+    temp_return="double"
+    swbreak
+    case "void"
+    temp_return="void"
+    swbreak
+    case "pointer"
+    temp_return="pointer"
+    swbreak
+    default
+    if primitive_manager_getsize(p_type)<=4:{
+        temp_return="int"
+    } else {
+        temp_return="int64"
+    }
+    swbreak
+    swend
+return temp_return
+
+#global
+primitive_manager_init
+
+#module
+
+#defcfunc string_number_check str p_str, local temp_return,local temp_str
+    temp_str=p_str
+    temp_return=0
+    repeat 10
+        if instr(temp_str,0,""+ cnt +"")!=-1:{
+            temp_return=1
+            break
+        }
+    loop
+return temp_return
+
+#defcfunc string_alphabet_check str p_str, local temp_return,local temp_str,local temp_word
+    temp_str=p_str
+    temp_return=0
+    sdim temp_word,2
+    repeat 'z'-'a'+1,'a'
+        poke temp_word,0,cnt
+        if instr(temp_str,0,temp_word)!=-1:{
+            temp_return=1
+            break
+        }
+    loop
+    if temp_return==0:{
+        repeat 'Z'-'A'+1,'A'
+            poke temp_word,0,cnt
+            if instr(temp_str,0,temp_word)!=-1:{
+                temp_return=1
+                break
+            }
+        loop
+    }
+return temp_return
+
+#defcfunc string_check str p_str,str p_words, local temp_return,local temp_str,local temp_words
+    temp_return=0
+    temp_str=p_str
+    temp_words=p_words
+    repeat strlen(temp_words)
+        if instr(temp_str,0,strmid(temp_words,cnt,1))!=-1:{
+            temp_return=1
+            break
+        }
+    loop
+    return temp_return
+
+#deffunc string_separate_colon str p_string,array p_return, local temp_str,local temp_word,local temp_flag,local temp_colon
+    sdim p_return,,2
+    temp_str=p_string
+    temp_flag=0
+    repeat strlen(temp_str)
+        sdim temp_word,2
+        getstr temp_word,temp_str,cnt,0,1
+        switch temp_word
+        case "\""
+        if temp_flag==0:{
+            temp_flag=1
+        } else {
+            temp_flag=0
+        }
+        if temp_colon==0:{
+            p_return(0)+=temp_word
+        } else {
+            p_return(1)+=temp_word
+        }
+        swbreak
+        case " "
+        if temp_flag==1:{
+            if temp_colon==0:{
+                p_return(0)+=temp_word
+            } else {
+                p_return(1)+=temp_word
+            }
+        }
+        swbreak
+        case ":"
+        temp_colon=1
+        swbreak
+        default
+        if temp_colon==0:{
+            p_return(0)+=temp_word
+        } else {
+            p_return(1)+=temp_word
+        }
+        swbreak
+        swend
+    loop
+    return
+
+#global
+
+#module
+
+#deffunc raylib_parser_converter var p_export_txt,str p_dll_name,str p_module_name,str p_input
+
+primitive_manager_init
+
+temp_input=p_input
+sdim temp_input_result
+split temp_input,"|",temp_input_result
+sdim parser_txt_path
+sdim parser_txt_head
+repeat length(temp_input_result)
+    sdim temp_input_result_div,,2
+    split temp_input_result(cnt),">>",temp_input_result_div
+
+    parser_txt_path(cnt)=temp_input_result_div(0)
+    parser_txt_head(cnt)=temp_input_result_div(1)
+loop
+
+sdim export_txt
+
+export_txt+="#ifndef "+ p_module_name +"\n"
+
+export_txt+="\n"
+
+temp=""
+
+export_txt+="/* callfuncex_module.hsp */"+"\n"
+
+export_txt+="\n"
+
+notesel temp
+noteload "data/callfuncex_module.hsp"
+export_txt+=""+temp+"\n"
+
+export_txt+="\n"
+
+export_txt+="/* struct_module.hsp */"+"\n"
+
+export_txt+="\n"
+
+noteload "data/struct_module.hsp"
+export_txt+=""+temp+"\n"
+noteunsel
+
+export_txt+="\n"
+
+dim parser_defines_count
+sdim parser_defines_name
+sdim parser_defines_type
+sdim parser_defines_value
+
+dim parser_enums_count
+sdim parser_enums_name
+sdim parser_enums_values
+
+dim parser_structs_count
+sdim parser_structs_name
+sdim parser_structs_fields_type
+sdim parser_structs_fields_name
+
+dim parser_aliases_count
+sdim parser_aliases_type
+sdim parser_aliases_name
+
+dim parser_functions_count
+sdim parser_functions_name
+sdim parser_functions_name_original
+sdim parser_functions_return
+sdim parser_functions_params_type
+sdim parser_functions_params_name
+
+repeat length(parser_txt_path)
+
+    sdim parser_txt
+    sdim parser_txt_original
+    notesel parser_txt_original
+    exist ""+ parser_txt_path(cnt) +""
+    if strsize!=-1:noteload parser_txt_path(cnt)
+    noteunsel
+    sdim temp_cr,2
+    sdim temp_lf,2
+    poke temp_cr,0,0x0D
+    poke temp_lf,0,0x0A
+    strrep parser_txt_original,temp_cr,temp_lf
+    strrep parser_txt_original,temp_lf,"\n"
+    strrep parser_txt_original,"\n",""
+
+    temp_string_flag=0
+    temp_colon_flag=0
+    repeat strlen(parser_txt_original)
+        sdim temp_word,2
+        getstr temp_word,parser_txt_original,cnt,0,1
+        switch temp_word
+        case "\""
+        if temp_string_flag==0:{
+            temp_string_flag=1
+        } else {
+            temp_string_flag=0
+        }
+        parser_txt+=temp_word
+        swbreak
+
+        case " "
+        if temp_string_flag==1:{
+            parser_txt+=temp_word
+        }
+        swbreak
+
+        case ":"
+        temp_colon_flag=1
+        parser_txt+=temp_word
+        swbreak
+
+        case ","
+        temp_colon_flag=0
+        parser_txt+=temp_word
+        swbreak
+
+        case "}"
+        case "]"
+        if temp_string_flag==0:{
+            if temp_colon_flag==1:{
+                temp_colon_flag=0
+                parser_txt+=","
+            }
+        }
+        parser_txt+=temp_word
+        swbreak
+
+        default
+        parser_txt+=temp_word
+        swbreak
+        swend
+        await
+    loop
+
+    parser_txt_current_head=parser_txt_head(cnt)
+    
+    sdim parser_txt_array,,128
+    dim parser_txt_array_index
+
+    dim parser_txt_string_flag
+
+    sdim parser_txt_brackets_array,,128
+    dim parser_txt_brackets_array_index
+
+    repeat strlen(parser_txt)
+        sdim parser_txt_word,2
+        getstr parser_txt_word,parser_txt,cnt,0,1
+
+        switch parser_txt_word
+
+        case "{"
+        if parser_txt_string_flag==0:{
+            parser_txt_array_index++
+            parser_txt_array(parser_txt_array_index)=""
+
+            parser_txt_brackets_array_index++
+            parser_txt_brackets_array(parser_txt_brackets_array_index)=parser_txt_word
+
+            switch parser_txt_array(1)
+            case "\"defines\":"
+            if parser_txt_brackets_array_index==3:{
+                parser_defines_name(parser_defines_count)=""
+                parser_defines_type(parser_defines_count)=""
+                parser_defines_value(parser_defines_count)=""
+            }
+            swbreak
+            case "\"enums\":"
+            if parser_txt_brackets_array_index==3:{
+                parser_enums_name(parser_enums_count)=""
+                parser_enums_values(parser_enums_count)=""
+            }
+            swbreak
+            case "\"structs\":"
+            if parser_txt_brackets_array_index==3:{
+                parser_structs_name(parser_structs_count)=""
+                parser_structs_fields_type(parser_structs_count)=""
+                parser_structs_fields_name(parser_structs_count)=""
+            }
+            swbreak
+            case "\"aliases\":"
+            if parser_txt_brackets_array_index==3:{
+                parser_aliases_type(parser_aliases_count)=""
+                parser_aliases_name(parser_aliases_count)=""
+            }
+            swbreak
+            case "\"functions\":"
+            if parser_txt_brackets_array_index==3:{
+                parser_functions_name(parser_functions_count)=""
+                parser_functions_name_original(parser_functions_count)=""
+                parser_functions_return(parser_functions_count)=""
+                parser_functions_params_type(parser_functions_count)=""
+                parser_functions_params_name(parser_functions_count)=""
+            }
+            swbreak
+            swend
+        } else {
+            parser_txt_array(parser_txt_array_index)+=parser_txt_word
+        }
+        swbreak
+
+        case "}"
+        if parser_txt_string_flag==0:{
+            switch parser_txt_array(1)
+            case "\"defines\":"
+            if parser_txt_brackets_array_index==3:{
+                if parser_defines_type(parser_defines_count)!="GUARD" && string_check(parser_defines_name(parser_defines_count),"(){},")==0:{
+                    parser_defines_count++
+                }
+
+                parser_defines_name(parser_defines_count)=""
+                parser_defines_type(parser_defines_count)=""
+                parser_defines_value(parser_defines_count)=""
+            }
+            swbreak
+            
+            case "\"enums\":"
+            if parser_txt_brackets_array_index==3:{
+                if strlen(parser_enums_values(parser_enums_count))>=1:{
+                    if strmid(parser_enums_values(parser_enums_count),-1,1)==",":{
+                        parser_enums_values(parser_enums_count)=strmid( parser_enums_values(parser_enums_count) , 0 , strlen(parser_enums_values(parser_enums_count))-1 )
+                    }
+                }
+
+                parser_enums_count++
+
+                parser_enums_name(parser_enums_count)=""
+                parser_enums_values(parser_enums_count)=""
+            }
+            swbreak
+
+            case "\"structs\":"
+            if parser_txt_brackets_array_index==3:{
+                if strlen(parser_structs_fields_type(parser_structs_count))>=1:{
+                    if strmid(parser_structs_fields_type(parser_structs_count),-1,1)==",":{
+                        parser_structs_fields_type(parser_structs_count)=strmid( parser_structs_fields_type(parser_structs_count) , 0 , strlen(parser_structs_fields_type(parser_structs_count))-1 )
+                    }
+                }
+                if strlen(parser_structs_fields_name(parser_structs_count))>=1:{
+                    if strmid(parser_structs_fields_name(parser_structs_count),-1,1)==",":{
+                        parser_structs_fields_name(parser_structs_count)=strmid( parser_structs_fields_name(parser_structs_count) , 0 , strlen(parser_structs_fields_name(parser_structs_count))-1 )
+                    }
+                }
+
+                parser_structs_count++
+
+                parser_structs_name(parser_structs_count)=""
+                parser_structs_fields_type(parser_structs_count)=""
+                parser_structs_fields_name(parser_structs_count)=""
+            }
+            swbreak
+
+            case "\"aliases\":"
+            if parser_txt_brackets_array_index==3:{
+                parser_aliases_count++
+                parser_aliases_type(parser_aliases_count)=""
+                parser_aliases_name(parser_aliases_count)=""
+            }
+            swbreak
+
+            case "\"functions\":"
+            if parser_txt_brackets_array_index==3:{
+                if strlen(parser_functions_params_type(parser_functions_count))>=1:{
+                    if strmid(parser_functions_params_type(parser_functions_count),-1,1)==",":{
+                        parser_functions_params_type(parser_functions_count)=strmid( parser_functions_params_type(parser_functions_count) , 0 , strlen(parser_functions_params_type(parser_functions_count))-1 )
+                    }
+                }
+                if strlen(parser_functions_params_name(parser_functions_count))>=1:{
+                    if strmid(parser_functions_params_name(parser_functions_count),-1,1)==",":{
+                        parser_functions_params_name(parser_functions_count)=strmid( parser_functions_params_name(parser_functions_count) , 0 , strlen(parser_functions_params_name(parser_functions_count))-1 )
+                    }
+                }
+                
+                parser_functions_count++
+
+                parser_functions_name(parser_functions_count)=""
+                parser_functions_name_original(parser_functions_count)=""
+                parser_functions_return(parser_functions_count)=""
+                parser_functions_params_type(parser_functions_count)=""
+                parser_functions_params_name(parser_functions_count)=""
+            }
+            swbreak
+            swend
+
+            parser_txt_array(parser_txt_array_index)=""
+            parser_txt_array_index--
+
+            parser_txt_brackets_array(parser_txt_brackets_array_index)=""
+            parser_txt_brackets_array_index--
+        } else {
+            parser_txt_array(parser_txt_array_index)+=parser_txt_word
+        }
+        swbreak
+
+        case "["
+        if parser_txt_string_flag==0:{
+            parser_txt_array_index++
+            parser_txt_array(parser_txt_array_index)="0"
+            parser_txt_array_index++
+            parser_txt_array(parser_txt_array_index)=""
+
+            parser_txt_brackets_array_index++
+            parser_txt_brackets_array(parser_txt_brackets_array_index)=parser_txt_word
+        } else {
+            parser_txt_array(parser_txt_array_index)+=parser_txt_word
+        }
+        swbreak
+
+        case "]"
+        if parser_txt_string_flag==0:{
+            parser_txt_array(parser_txt_array_index)=""
+            parser_txt_array_index--
+            parser_txt_array(parser_txt_array_index)=""
+            parser_txt_array_index--
+
+            parser_txt_brackets_array(parser_txt_brackets_array_index)=""
+            parser_txt_brackets_array_index--
+        } else {
+            parser_txt_array(parser_txt_array_index)+=parser_txt_word
+        }
+        swbreak
+        
+        case "\""
+        if parser_txt_string_flag==0:{
+            parser_txt_string_flag=1
+        } else {
+            parser_txt_string_flag=0
+        }
+        parser_txt_array(parser_txt_array_index)+=parser_txt_word
+        swbreak
+
+        case ":"
+        if parser_txt_string_flag==0:{
+        } else {
+        }
+        parser_txt_array(parser_txt_array_index)+=parser_txt_word
+        swbreak
+
+        case ","
+        if parser_txt_string_flag==0:{
+            /*
+            if parser_txt_array(1)=="\"enums\":":{
+                temp=""
+                repeat parser_txt_array_index+1
+                    temp+="<"+ cnt +">="+ parser_txt_array(cnt) +"\n"
+                loop
+                dialog temp
+            }
+            */
+
+            sdim temp_value
+            string_separate_colon parser_txt_array(parser_txt_array_index),temp_value
+            
+            switch parser_txt_array(1)
+
+            case "\"defines\":"
+            if parser_txt_array_index==4:{
+                switch temp_value(0)
+                case "\"name\""
+                parser_defines_name(parser_defines_count)=temp_value(1)
+                strrep parser_defines_name(parser_defines_count),"\"",""
+                parser_defines_name(parser_defines_count)=""+ parser_txt_current_head +""+ parser_defines_name(parser_defines_count) +""
+                swbreak
+                case "\"type\""
+                parser_defines_type(parser_defines_count)=temp_value(1)
+                strrep parser_defines_type(parser_defines_count),"\"",""
+                swbreak
+                case "\"value\""
+                temp_value=temp_value(1)
+
+                if parser_defines_type(parser_defines_count)!="STRING":{
+                    strrep temp_value,"\"",""
+                }
+
+                temp_number_flag=0
+                temp_alphabet_flag=0
+                temp_string_flag=0
+                repeat strlen(temp_value)
+                    sdim temp,2
+                    getstr temp,temp_value,cnt,0,1
+                    if string_check(temp,"\"")==1:{
+                        temp_string_flag=1
+                    } else {
+                        temp_string_flag=0
+                    }
+                    if temp_string_flag==0:{
+                        if string_number_check(temp)==1:{
+                            if temp_number_flag==0:{
+                                temp_number_flag=1
+                            }
+                            temp_alphabet_flag=0
+                        } else {
+                            if string_alphabet_check(temp)==1 || string_check(temp,"_")==1:{
+                                if string_check(temp,"f")==1:{
+                                    if temp_number_flag==0:{
+                                        if temp_alphabet_flag==0:{
+                                            temp_alphabet_flag=1
+                                            parser_defines_value(parser_defines_count)+=""+ parser_txt_current_head +""
+                                        }
+                                    } else {
+                                        temp_number_flag=0
+                                    }
+                                } else {
+                                    if temp_alphabet_flag==0:{
+                                        temp_alphabet_flag=1
+                                        parser_defines_value(parser_defines_count)+=""+ parser_txt_current_head +""
+                                    }
+                                    if temp_number_flag==1:{
+                                        temp_number_flag=0
+                                    }
+                                }
+                            } else {
+                                if string_check(temp,".")==1:{
+                                    if temp_number_flag==0:{
+                                        temp_alphabet_flag=0
+                                    }
+                                } else {
+                                    temp_alphabet_flag=0
+                                }
+                            }
+                        }
+                    }
+                    parser_defines_value(parser_defines_count)+=""+ temp +""
+                loop
+                swbreak
+                swend
+            }
+            swbreak
+
+            case "\"enums\":"
+            if parser_txt_array_index==4:{
+                switch temp_value(0)
+                case "\"name\""
+                parser_enums_name(parser_enums_count)=temp_value(1)
+                strrep parser_enums_name(parser_enums_count),"\"",""
+                parser_enums_name(parser_enums_count)=""+ parser_txt_current_head +""+ parser_enums_name(parser_enums_count) +""
+                swbreak
+                swend
+            }
+            if parser_txt_array_index==7:{
+                switch parser_txt_array(4)
+                case "\"values\":"
+                
+                switch temp_value(0)
+                case "\"name\""
+                temp=temp_value(1)
+                strrep temp,"\"",""
+                temp=""+ parser_txt_current_head +""+ temp +""
+                parser_enums_values(parser_enums_count)+=""+ temp +""
+                swbreak
+                case "\"value\""
+                if strlen(temp_value(1))>0:{
+                    parser_enums_values(parser_enums_count)+=" = "+ temp_value(1) +""
+                }
+                parser_enums_values(parser_enums_count)+=","
+                swbreak
+                swend
+
+                swbreak
+                swend
+            }
+            swbreak
+
+            case "\"structs\":"
+            if parser_txt_array_index==4:{
+                switch temp_value(0)
+                case "\"name\""
+                parser_structs_name(parser_structs_count)=""+ temp_value(1) +""
+                strrep parser_structs_name(parser_structs_count),"\"",""
+                parser_structs_name(parser_structs_count)=""+ parser_txt_current_head +""+ parser_structs_name(parser_structs_count) +""
+                swbreak
+                swend
+            }
+            if parser_txt_array_index==7:{
+                switch parser_txt_array(4)
+                case "\"fields\":"
+
+                switch temp_value(0)
+                case "\"type\""
+                temp=temp_value(1)
+                strrep temp,"\"",""
+                while (instr(temp,0," *")!=-1 || instr(temp,0,"* ")!=-1)
+                    strrep temp," *","*"
+                    strrep temp,"* ","*"
+                wend
+                while (instr(temp,0," const")!=-1 || instr(temp,0,"const ")!=-1)
+                    strrep temp," const",""
+                    strrep temp,"const ",""
+                wend
+                if instr(temp,0,"*")!=-1 || string_check(temp,".")==1:{
+                    temp="pointer"
+                    if instr(temp_value(1),0,"[")!=-1:{
+                        temp+=strmid(temp_value(1),-1,strlen(temp_value(1))-instr(temp_value(1),0,"["))
+                    }
+                }
+                strrep temp," ","_"
+                temp2=temp
+                if instr(temp2,0,"[")!=-1:{
+                    temp2=strmid(temp,0,instr(temp2,0,"["))
+                }
+                if primitive_manager_isprimitive(temp2)==1:{
+                    parser_structs_fields_type(parser_structs_count)+=""+ temp +","
+                } else {
+                    parser_structs_fields_type(parser_structs_count)+=""+ parser_txt_current_head +""+ temp +","
+                }
+                swbreak
+                case "\"name\""
+                temp=temp_value(1)
+                strrep temp,"\"",""
+                parser_structs_fields_name(parser_structs_count)+=""+ temp +","
+                swbreak
+                swend
+                
+                swbreak
+                swend
+            }
+            swbreak
+
+            case "\"aliases\":"
+            if parser_txt_array_index==4:{
+                switch temp_value(0)
+                case "\"type\""
+                parser_aliases_type(parser_aliases_count)=temp_value(1)
+                strrep parser_aliases_type(parser_aliases_count),"\"",""
+                if primitive_manager_isprimitive(parser_aliases_type(parser_aliases_count))==0:{
+                    parser_aliases_type(parser_aliases_count)=""+ parser_txt_current_head +""+ parser_aliases_type(parser_aliases_count) +""
+                }
+                swbreak
+                case "\"name\""
+                parser_aliases_name(parser_aliases_count)=temp_value(1)
+                strrep parser_aliases_name(parser_aliases_count),"\"",""
+                parser_aliases_name(parser_aliases_count)=""+ parser_txt_current_head +""+ parser_aliases_name(parser_aliases_count) +""
+                swbreak
+                swend
+            }
+            swbreak
+
+            case "\"functions\":"
+            if parser_txt_array_index==4:{
+                switch temp_value(0)
+                case "\"name\""
+                parser_functions_name_original(parser_functions_count)=temp_value(1)
+                strrep parser_functions_name_original(parser_functions_count),"\"",""
+                parser_functions_name(parser_functions_count)=""+ parser_txt_current_head +""+ parser_functions_name_original(parser_functions_count) +""
+                swbreak
+
+                case "\"returnType\""
+                parser_functions_return(parser_functions_count)=temp_value(1)
+                strrep parser_functions_return(parser_functions_count),"\"",""
+                while (instr(parser_functions_return(parser_functions_count),0," *")!=-1 || instr(parser_functions_return(parser_functions_count),0,"* ")!=-1)
+                    strrep parser_functions_return(parser_functions_count)," *","*"
+                    strrep parser_functions_return(parser_functions_count),"* ","*"
+                wend
+                while (instr(parser_functions_return(parser_functions_count),0," const")!=-1 || instr(parser_functions_return(parser_functions_count),0,"const ")!=-1)
+                    strrep parser_functions_return(parser_functions_count)," const",""
+                    strrep parser_functions_return(parser_functions_count),"const ",""
+                wend
+                if instr(parser_functions_return(parser_functions_count),0,"*")!=-1 || string_check(parser_functions_return(parser_functions_count),".")==1:{
+                    parser_functions_return(parser_functions_count)="pointer"
+                    if instr(temp_value(1),0,"[")!=-1:{
+                        parser_functions_return(parser_functions_count)+=strmid(temp_value(1),-1,strlen(temp_value(1))-instr(temp_value(1),0,"["))
+                    }
+                }
+                strrep parser_functions_return(parser_functions_count)," ","_"
+                if primitive_manager_isprimitive(parser_functions_return(parser_functions_count))==0:{
+                    parser_functions_return(parser_functions_count)=""+ parser_txt_current_head +""+ parser_functions_return(parser_functions_count) +""
+                }
+                swbreak
+                swend
+            }
+            if parser_txt_array_index==7:{
+                switch parser_txt_array(4)
+                case "\"params\":"
+
+                switch temp_value(0)
+                case "\"type\""
+                temp=temp_value(1)
+                strrep temp,"\"",""
+                while (instr(temp,0," *")!=-1 || instr(temp,0,"* ")!=-1)
+                    strrep temp," *","*"
+                    strrep temp,"* ","*"
+                wend
+                while (instr(temp,0," const")!=-1 || instr(temp,0,"const ")!=-1)
+                    strrep temp," const",""
+                    strrep temp,"const ",""
+                wend
+                if instr(temp,0,"*")!=-1 || string_check(temp,".")==1:{
+                    temp="pointer"
+                    if instr(temp_value(1),0,"[")!=-1:{
+                        temp+=strmid(temp_value(1),-1,strlen(temp_value(1))-instr(temp_value(1),0,"["))
+                    }
+                }
+                strrep temp," ","_"
+                temp2=temp
+                if instr(temp2,0,"[")!=-1:{
+                    temp2=strmid(temp,0,instr(temp2,0,"["))
+                }
+                if primitive_manager_isprimitive(temp2)==1:{
+                    parser_functions_params_type(parser_functions_count)+=""+ temp +","
+                } else {
+                    parser_functions_params_type(parser_functions_count)+=""+ parser_txt_current_head +""+ temp +","
+                }
+                swbreak
+                case "\"name\""
+                temp=temp_value(1)
+                strrep temp,"\"",""
+                parser_functions_params_name(parser_functions_count)+=""+ temp +","
+                swbreak
+                swend
+
+                swbreak
+                swend
+            }
+            swbreak
+            swend
+
+            switch parser_txt_brackets_array(parser_txt_brackets_array_index)
+            case "{"
+            swbreak
+            case "["
+            parser_txt_array(parser_txt_array_index-1)=""+ (int(parser_txt_array(parser_txt_array_index-1))+1) +""
+            swbreak
+            swend
+            parser_txt_array(parser_txt_array_index)=""
+        } else {
+            parser_txt_array(parser_txt_array_index)+=parser_txt_word
+        }
+        swbreak
+
+        case " "
+        if parser_txt_string_flag==0:{
+        } else {
+            parser_txt_array(parser_txt_array_index)+=parser_txt_word
+        }
+        swbreak
+
+        default
+        parser_txt_array(parser_txt_array_index)+=parser_txt_word
+        swbreak
+
+        swend
+        await
+    loop
+    await
+loop
+
+export_txt+="\n"
+
+export_txt+="/* defines */"+"\n"
+
+export_txt+="\n"
+
+repeat parser_defines_count
+    export_txt+="#define global "+ parser_defines_name(cnt) +" "+ parser_defines_value(cnt) +"\n"
+loop
+
+export_txt+="\n"
+
+export_txt+="/* enums */"+"\n"
+
+export_txt+="\n"
+
+repeat parser_enums_count
+    export_txt+="struct_init "+ parser_enums_name(cnt) +"\n"
+    export_txt+="struct_member "+ parser_enums_name(cnt) +",value,struct_typesize(int)"+"\n"
+    export_txt+="struct_done "+ parser_enums_name(cnt) +"\n"
+    sdim temp
+    split parser_enums_values(cnt),",",temp
+    if strlen(temp(0))>=1:{
+        repeat length(temp)
+            if cnt==0:{
+                export_txt+="#enum global "+ temp(cnt) +"\n"
+                if instr(temp(cnt),0,"=")==-1:{
+                    export_txt+=" = 0"
+                }
+            } else {
+                export_txt+="#enum global "+ temp(cnt) +"\n"
+            }
+        loop
+    }
+    export_txt+="\n"
+loop
+
+export_txt+="\n"
+
+export_txt+="/* structs */"+"\n"
+
+export_txt+="\n"
+
+repeat parser_aliases_count
+    temp=parser_aliases_type(cnt)
+    temp_size="1"
+    if instr(parser_aliases_type(cnt),0,"[")!=-1:{
+        temp=strmid(parser_aliases_type(cnt),0,instr(parser_aliases_type(cnt),0,"["))
+        temp=strmid(parser_aliases_type(cnt),0,instr(parser_aliases_type(cnt),0,"["))
+        temp2=strmid(parser_aliases_type(cnt),instr(parser_aliases_type(cnt),0,"["),strlen(parser_aliases_type(cnt))-instr(parser_aliases_type(cnt),0,"["))
+        strrep temp2,"][","*"
+        strrep temp2,"[",""
+        strrep temp2,"]",""
+        temp_size=temp2
+    }
+
+    if primitive_manager_isprimitive(temp)==1:{
+        export_txt+="struct_init type_"+ parser_aliases_name(cnt) +"\n"
+        export_txt+="struct_member type_"+ parser_aliases_name(cnt) +",value,struct_typesize("+ temp +")*"+ temp_size +",struct_typesize("+ temp +")"+"\n"
+        export_txt+="struct_done type_"+ parser_aliases_name(cnt) +"\n"
+
+        if instr(parser_aliases_type(cnt),0,"[")==-1 && temp!="pointer":{
+            primitive_manager_copyprimitive temp,parser_aliases_name(cnt)
+        }
+    }
+loop
+
+export_txt+="\n"
+
+repeat parser_structs_count
+    temp_struct_name=parser_structs_name(cnt)
+    sdim temp_type
+    sdim temp_name
+    split parser_structs_fields_type(cnt),",",temp_type
+    split parser_structs_fields_name(cnt),",",temp_name
+
+    repeat 2
+        export_txt+="struct_init "+ temp_struct_name +"\n"
+
+        if strlen(temp_type(0))>=1 && strlen(temp_name(0))>=1 && length(temp_type)==length(temp_name):{
+            repeat length(temp_type)
+                temp=temp_type(cnt)
+                temp_size="1"
+                if instr(temp_type(cnt),0,"[")!=-1:{
+                    temp=strmid(temp_type(cnt),0,instr(temp_type(cnt),0,"["))
+                    temp2=strmid(temp_type(cnt),instr(temp_type(cnt),0,"["),strlen(temp_type(cnt))-instr(temp_type(cnt),0,"["))
+                    strrep temp2,"][","*"
+                    strrep temp2,"[",""
+                    strrep temp2,"]",""
+                    temp_size=temp2
+                }
+                if primitive_manager_isprimitive(temp)==1:{
+                    export_txt+="struct_member "+ temp_struct_name +","+ temp_name(cnt) +",struct_typesize("+ temp +")*"+ temp_size +",struct_typesize("+ temp +")"+"\n"
+                } else {
+                    export_txt+="struct_member "+ temp_struct_name +","+ temp_name(cnt) +",struct_gettotal("+ temp +")*"+ temp_size +",struct_getmaxalignment("+ temp +")"+"\n"
+                }
+            loop
+        }
+
+        export_txt+="struct_done "+ temp_struct_name +"\n"
+
+        if cnt==0:{
+            temp=0
+            repeat parser_aliases_count
+                if primitive_manager_isprimitive(parser_aliases_type(cnt))==0:{
+                    if temp_struct_name==parser_aliases_type(cnt):{
+                        temp_struct_name=parser_aliases_name(cnt)
+                        temp=1
+                    }
+                }
+            loop
+            if temp==0:break
+        }
+    loop
+    export_txt+="\n"
+loop
+
+export_txt+="\n"
+
+export_txt+="/* functions */"+"\n"
+
+export_txt+="\n"
+
+export_txt+="#module "+ p_module_name +"\n"
+
+export_txt+="\n"
+
+export_txt+="#ifndef __hsp64__@"+"\n"
+export_txt+="#define global "+ p_module_name +"_pointer int"+"\n"
+export_txt+="#define global "+ p_module_name +"_int64 double"+"\n"
+export_txt+="#else"+"\n"
+export_txt+="#define global "+ p_module_name +"_pointer int64"+"\n"
+export_txt+="#define global "+ p_module_name +"_int64 int64"+"\n"
+export_txt+="#endif"+"\n"
+
+export_txt+="\n"
+
+export_txt+="#uselib \""+ p_dll_name +"\""+"\n"
+
+export_txt+="\n"
+
+repeat parser_functions_count
+    temp_return_flag=0
+    temp_return_type=parser_functions_return(cnt)
+    temp_return_type_real=primitive_manager_getrealtype(temp_return_type)
+    if primitive_manager_isprimitive(temp_return_type)==0:{
+        temp_return_flag=1
+    } else {
+        if temp_return_type_real=="pointer" || temp_return_type_real=="int64":{
+            temp_return_flag=1
+        }
+    }
+    
+    temp_params_flag=0
+    sdim temp_params_type
+    sdim temp_params_name
+    split parser_functions_params_type(cnt),",",temp_params_type
+    split parser_functions_params_name(cnt),",",temp_params_name
+    if strlen(temp_params_type(0))>=1 && strlen(temp_params_name(0))>=1 && length(temp_params_type)==length(temp_params_name):{
+        temp_params_flag=1
+    }
+
+    export_txt+="#func _"+ parser_functions_name(cnt) +" \""+ parser_functions_name_original(cnt) +"\""+"\n"
+    export_txt+="#deffunc local __"+ parser_functions_name(cnt) +" "
+    if temp_return_flag==1:{
+        export_txt+="var return_var"
+        export_txt+=","
+    }
+    if temp_params_flag==1:{
+        repeat length(temp_params_type)
+            export_txt+="var p_"+ temp_params_name(cnt) +""
+            if cnt<length(temp_params_type)-1:export_txt+=","
+        loop
+        export_txt+=","
+    }
+    export_txt+="local return_value,local return_size"+"\n"
+    export_txt+="#define global "+ parser_functions_name(cnt) +""
+    if temp_return_flag==0 && temp_params_flag==0:{
+        export_txt+=" __"+ parser_functions_name(cnt) +"@"+ p_module_name +""
+    } else {
+        temp=0
+        if temp_return_flag==1:{
+            temp++
+        }
+        if temp_params_flag==1:{
+            temp+=length(temp_params_type)
+        }
+
+        export_txt+="("
+        repeat temp
+            export_txt+="%"+ (cnt+1) +""
+            if cnt<temp-1:export_txt+=","
+        loop
+        export_txt+=")"
+
+        export_txt+=" "
+
+        if temp_params_flag==1:{
+            dim temp_dummy_mode,length(temp_params_type)
+            repeat length(temp_params_type)
+                temp_dummy_mode(cnt)=0
+                if instr(temp_params_type(cnt),0,"[")!=-1:{
+                    temp_dummy_mode(cnt)=1
+                } else {
+                    if primitive_manager_isprimitive(temp_params_type(cnt))==0:{
+                        temp_dummy_mode(cnt)=1
+                    } else {
+                        if primitive_manager_getrealtype(temp_params_type(cnt))=="int64":{
+                            temp_dummy_mode(cnt)=1
+                        }
+                    }
+                }
+            loop
+
+            temp=""
+            repeat length(temp_params_type)
+                temp_type_cast=primitive_manager_getrealtype(temp_params_type(cnt))
+                switch temp_type_cast
+                case "void"
+                temp_type_cast=""
+                swbreak
+                case "float"
+                temp_type_cast="int"
+                swbreak
+                case "pointer"
+                temp_type_cast=""+ p_module_name +"_pointer"
+                swbreak
+                case "int64"
+                temp_type_cast=""+ p_module_name +"_int64"
+                swbreak
+                swend
+                switch temp_dummy_mode(cnt)
+                case 0
+                if temp_return_flag==0:{
+                    temp+="dummy_p"+ (cnt+1) +"@"+ p_module_name +"="
+                    if temp_type_cast!="":temp+=""+ temp_type_cast +"("
+                    temp+="%"+ (cnt+1) +""
+                    if temp_type_cast!="":temp+=")"
+                } else {
+                    temp+="dummy_p"+ (cnt+2) +"@"+ p_module_name +"="
+                    if temp_type_cast!="":temp+=""+ temp_type_cast +"("
+                    temp+="%"+ (cnt+2) +""
+                    if temp_type_cast!="":temp+=")"
+                }
+                temp+=":"
+                swbreak
+                swend
+            loop
+            export_txt+=""+ temp +""
+            if strlen(temp)>=1:{
+                if strmid(temp,-1,1)!=":":export_txt+=":"
+            }
+
+            export_txt+="__"+ parser_functions_name(cnt) +"@"+ p_module_name +""
+            
+            export_txt+=" "
+
+            if temp_return_flag==1:{
+                export_txt+="%1"
+                export_txt+=","
+            }
+
+            repeat length(temp_params_type)
+                switch temp_dummy_mode(cnt)
+                case 0
+                if temp_return_flag==0:{
+                    export_txt+="dummy_p"+ (cnt+1) +"@"+ p_module_name +""
+                } else {
+                    export_txt+="dummy_p"+ (cnt+2) +"@"+ p_module_name +""
+                }
+                swbreak
+                case 1
+                if temp_return_flag==0:{
+                    export_txt+="%"+ (cnt+1) +""
+                } else {
+                    export_txt+="%"+ (cnt+2) +""
+                }
+                swbreak
+                swend
+                if cnt<length(temp_params_type)-1:export_txt+=","
+            loop
+        } else {
+            export_txt+=" __"+ parser_functions_name(cnt) +"@"+ p_module_name +" %1"
+        }
+    }
+    export_txt+="\n"
+    export_txt+="return_value=0"+"\n"
+    if primitive_manager_isprimitive(temp_return_type)==1:{
+        export_txt+="return_size=struct_typesize("+ temp_return_type +")"+"\n"
+    } else {
+        export_txt+="return_size=struct_gettotal("+ temp_return_type +")"+"\n"
+    }
+    export_txt+="callfuncex_func _"+ parser_functions_name(cnt) +"@"+ p_module_name +","
+    if primitive_manager_isprimitive(temp_return_type)==1:{
+        switch temp_return_type_real
+        case "float"
+        export_txt+="CALLFUNCEX_RETURN_FLOAT"
+        swbreak
+        case "double"
+        export_txt+="CALLFUNCEX_RETURN_DOUBLE"
+        swbreak
+        case "void"
+        export_txt+="CALLFUNCEX_RETURN_VOID"
+        swbreak
+        case "pointer"
+        export_txt+="CALLFUNCEX_RETURN_POINTER"
+        swbreak
+        case "int"
+        export_txt+="CALLFUNCEX_RETURN_INT"
+        swbreak
+        case "int64"
+        export_txt+="CALLFUNCEX_RETURN_INT64"
+        swbreak
+        swend
+    } else {
+        export_txt+="CALLFUNCEX_RETURN_STRUCT"
+    }
+    export_txt+=",return_size"
+    export_txt+="\n"
+    if temp_return_flag==1:{
+        if primitive_manager_isprimitive(temp_return_type)==0:{
+            export_txt+="if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{"+"\n"
+            export_txt+="\t#ifndef __hsp64__@"+"\n"
+            export_txt+="\tcallfuncex_p_value varptr(return_var),struct_typesize(pointer)"+"\n"
+            export_txt+="\t#else"+"\n"
+            export_txt+="\tcallfuncex_p_value varptr64(return_var),struct_typesize(pointer)"+"\n"
+            export_txt+="\t#endif"+"\n"
+            export_txt+="}"+"\n"
+        }
+    }
+    if temp_params_flag==1:{
+        repeat length(temp_params_type)
+            temp=temp_params_type(cnt)
+            temp_size="1"
+            if instr(temp_params_type(cnt),0,"[")!=-1:{
+                temp=strmid(temp_params_type(cnt),0,instr(temp_params_type(cnt),0,"["))
+                temp_size=strmid(temp_params_type(cnt),-1,strlen(temp_params_type(cnt))-instr(temp_params_type(cnt),0,"["))
+                strrep temp_size,"][","*"
+                strrep temp_size,"[",""
+                strrep temp_size,"]",""
+            }
+
+            if primitive_manager_isprimitive(temp_params_type(cnt))==0:{
+                export_txt+="callfuncex_p p_"+ temp_params_name(cnt) +",struct_gettotal("+ temp_params_type(cnt) +")*"+ temp_size +"\n"
+            } else {
+                export_txt+="callfuncex_p_value p_"+ temp_params_name(cnt) +",struct_typesize("+ temp_params_type(cnt) +")*"+ temp_size +"\n"
+            }
+        loop
+    }
+    if temp_return_type_real=="pointer" || temp_return_type_real=="int64":{
+        export_txt+="callfuncex_call return_var"+"\n"
+        export_txt+="return"+"\n"
+    } else {
+        if temp_return_flag==1:{
+            export_txt+="if return_size!=1 && return_size!=2 && return_size!=4 && return_size!=8:{"+"\n"
+            export_txt+="\tcallfuncex_call return_value"+"\n"
+            export_txt+="} else {"+"\n"
+            export_txt+="\tcallfuncex_call return_var"+"\n"
+            export_txt+="}"+"\n"
+            export_txt+="return"+"\n"
+        } else {
+            export_txt+="callfuncex_call return_value"+"\n"
+            export_txt+="return return_value"+"\n"
+        }
+    }
+    export_txt+="\n"
+loop
+
+export_txt+="\n"
+
+export_txt+="#global"+"\n"
+
+export_txt+="\n"
+
+export_txt+="#endif"+"\n"
+
+p_export_txt=export_txt
+export_txt=""
+
+return
+
+#global

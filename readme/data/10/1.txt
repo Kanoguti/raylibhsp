@@ -1,0 +1,1 @@
+raylib_parser_converter export_txt,"raylib.dll","raylibhsp","data/raylib_api.json>>rl_|data/rlgl_api.json>>rlgl_|data/raymath_api.json>>raymath_|data/rcamera_api.json>>rcamera_"

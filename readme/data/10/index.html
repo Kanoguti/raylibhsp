@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+
+        <link rel="stylesheet" href="../style.css">
+        <script src="../scripts.js"></script>
+        <style>
+            body {
+                padding: 1em;
+            }
+        </style>
+    </head>
+    <body>
+        <span style="text-align: center;">
+            <h1>10.「raylib_parser_converter.hsp」ファイルについて</h1>
+        </span>
+        <hr>
+        <div class="frame">
+            <p>
+                raylibhspの<span class="mark">「data」フォルダに含まれている「raylib_parser_converter.hsp」ファイル</span>は、raylibに同梱されているC言語のプログラムの「raylib_parser.c」をビルドした際に生成される<span class="mark">「raylib_parser.exe」実行ファイルを使用して生成されたJSONファイルの内容をHSP3言語のヘッダーファイルに変換</span>するためのHSP3言語用モジュールです。<span class="mark">モジュール内では、先述した「data」フォルダに入っている「callfuncex_module.hsp」ファイルと「struct_module.hsp」ファイルを使用</span>します。
+            </p>
+            <p>
+                モジュール内に含まれている<span class="mark">「raylib_parser_converter」命令の使い方</span>は以下の通りです。
+            </p>
+            <div class="frame">
+                <h2><code>raylib_parser_converter p1,p2,p3,p4</code></h2>
+                <h3>「raylib_parser.exe」によって生成された<span class="mark">JSONファイルをもとに、HSP3言語用ヘッダーファイルの文字列を取得</span>します。</h3>
+                <hr>
+                <h3>
+                    p1=最終的に生成される文字列を代入させる文字列型変数<br>
+                    p2=DLLファイル名<br>
+                    p3=生成されるヘッダーファイルのモジュール名<br>
+                    p4=読み込むJSONファイルの情報
+                </h3>
+                <hr>
+                <p>
+                    <span class="mark">p4で指定したJSONファイルの情報をもとに、HSP3言語用ヘッダーファイルの文字列を取得</span>します。<span class="mark">p4の基本的な書式</span>は以下の通りです。
+                </p>
+                <div class="frame">
+                    <h3><code>(JSONファイル名)>>(指定したJSONファイル内の関数名等の頭につく文字列)</code></h3>
+                </div>
+                <p>
+                    <span class="mark">「|」記号で区切る</span>ことで<span class="mark">複数のJSONファイルを指定することが可能</span>です。
+                </p>
+                <p>
+                    例として以下の条件でraylib_parser_converter命令を使用するとします。
+                </p>
+                <div class="frame">
+                    <p>
+                        <ul>
+                            <li>生成されたヘッダーファイルの文字列を「export_txt」変数に代入させる。</li>
+                            <li>DLLファイル名は「raylib.dll」。</li>
+                            <li>ヘッダーファイルのモジュール名は「raylibhsp」。</li>
+                            <li>
+                                読み込むJSONファイルは以下の通りとする。
+                                <ul>
+                                    <li>「data/raylib_api.json」ファイル(ファイル内の関数等の頭には「rl_」をつける)</li>
+                                    <li>「data/rlgl_api.json」ファイル(ファイル内の関数等の頭には「rlgl_」をつける)</li>
+                                    <li>「data/raymath_api.json」ファイル(ファイル内の関数等の頭には「raymath_」をつける)</li>
+                                    <li>「data/rcamera_api.json」ファイル(ファイル内の関数等の頭には「rcamera_」をつける)</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </p>
+                </div>
+                <p>
+                    この例の場合、「raylib_parser_converter」命令の記述は以下のようになります。
+                </p>
+                <div class="frame">
+                    <img src="1.png" class="image" style="width: 90%;">
+                    <iframe src="1.txt" class="text" style="width: 90%;"></iframe>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

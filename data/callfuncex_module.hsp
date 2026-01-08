@@ -38,7 +38,7 @@
     switch p_type
     case CALLFUNCEX_DATA_POINTER:memcpy sys_pointer,p_data,varsize(p_data),0,0:swbreak
     case CALLFUNCEX_DATA_PARAM_SIZE:memcpy sys_param_size,p_data,varsize(p_data),0,0:swbreak
-    case CALLFUNCEX_DATA_PARAM_DATA:memcpy sys_param_data,p_data,varsize(p_data),0,0:swbreak
+    case CALLFUNCEX_DATA_PARAM_DATA:memexpand sys_param_data,varsize(p_data):memcpy sys_param_data,p_data,varsize(p_data),0,0:swbreak
     case CALLFUNCEX_DATA_RETURN_TYPE:memcpy sys_return_type,p_data,varsize(p_data),0,0:swbreak
     case CALLFUNCEX_DATA_RETURN_SIZE:memcpy sys_return_size,p_data,varsize(p_data),0,0:swbreak
     swend
